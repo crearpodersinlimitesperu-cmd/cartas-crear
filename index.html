@@ -49,22 +49,17 @@
         </div>
         
         <div class="flex flex-wrap items-center gap-3">
-            <!-- Ejemplos -->
-            <button onclick="loadExample('mildred')" class="px-3 py-1.5 rounded-lg bg-crearCard border border-crearBorder hover:border-crearBlueLight/30 text-xs text-gray-300 transition-all">
-                Cargar Mildred (C2)
-            </button>
-            <button onclick="loadExample('andres')" class="px-3 py-1.5 rounded-lg bg-crearCard border border-crearBorder hover:border-crearBlueLight/30 text-xs text-gray-300 transition-all">
-                Cargar Andrés (MJ)
-            </button>
-            <div class="h-6 w-px bg-crearBorder/80"></div>
-            <!-- Acciones de Datos -->
-            <button onclick="document.getElementById('importFile').click()" class="px-3 py-1.5 rounded-lg bg-crearCard border border-crearBorder hover:border-crearBlue/50 text-xs text-gray-300 transition-all">
-                Importar JSON
-            </button>
-            <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
-            <button onclick="exportData()" class="px-3 py-1.5 rounded-lg bg-crearCard border border-crearBorder hover:border-crearBlue/50 text-xs text-gray-300 transition-all">
-                Exportar JSON
-            </button>
+            <div class="flex items-center space-x-3 hidden">
+                <button onclick="loadExample('mildred')" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Cargar Mildred (C2)</button>
+                <button onclick="loadExample('andres')" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Cargar Andrés (MJ)</button>
+                <div class="w-px h-4 bg-gray-700"></div>
+                <button onclick="document.getElementById('importFile').click()" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Importar JSON</button>
+                <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
+                <button onclick="exportData()" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Exportar JSON</button>
+                <button onclick="openPublishModal()" class="px-4 py-2 bg-crearBlue hover:bg-crearBlue/80 text-white font-bold rounded-lg transition-all text-sm ml-2 flex items-center space-x-2">
+                    <span>PUBLICAR A GITHUB</span>
+                </button>
+            </div>
             <!-- Publicar -->
             <button onclick="openPublishModal()" class="px-5 py-1.5 rounded-lg bg-gradient-to-r from-crearBlue to-crearCyan hover:opacity-90 text-xs font-bold text-white uppercase tracking-wider transition-all shadow-lg shadow-crearBlue/20">
                 Publicar a GitHub 🚀

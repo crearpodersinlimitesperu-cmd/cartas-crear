@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -51,7 +51,7 @@
         <div class="flex flex-wrap items-center gap-3">
             <div class="flex items-center space-x-3 hidden">
                 <button onclick="loadExample('mildred')" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Cargar Mildred (C2)</button>
-                <button onclick="loadExample('andres')" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Cargar Andrés (MJ)</button>
+                <button onclick="loadExample('andres')" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Cargar AndrÃ©s (MJ)</button>
                 <div class="w-px h-4 bg-gray-700"></div>
                 <button onclick="document.getElementById('importFile').click()" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 rounded transition-colors">Importar JSON</button>
                 <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
@@ -62,7 +62,7 @@
             </div>
             <!-- Publicar -->
             <button onclick="openPublishModal()" class="px-5 py-1.5 rounded-lg bg-gradient-to-r from-crearBlue to-crearCyan hover:opacity-90 text-xs font-bold text-white uppercase tracking-wider transition-all shadow-lg shadow-crearBlue/20">
-                Publicar a GitHub 🚀
+                Publicar a GitHub ðŸš€
             </button>
         </div>
     </header>
@@ -75,25 +75,25 @@
             <!-- Tabs Header -->
             <div class="flex border-b border-crearBorder/50 bg-crearCard/80 overflow-x-auto custom-scrollbar">
                 <button onclick="switchTab('tab-ia')" id="btn-tab-ia" class="tab-btn px-4 py-3 border-b-2 border-crearBlue text-white text-xs font-semibold uppercase tracking-wider flex-shrink-0">
-                    ⚡ Texto Libre / IA
+                    âš¡ Texto Libre / IA
                 </button>
                 <button onclick="switchTab('tab-general')" id="btn-tab-general" class="tab-btn px-4 py-3 border-b-2 border-transparent text-gray-400 hover:text-white text-xs font-semibold uppercase tracking-wider flex-shrink-0">
-                    👤 Info General
+                    ðŸ‘¤ Info General
                 </button>
                 <button onclick="switchTab('tab-misiones')" id="btn-tab-misiones" class="tab-btn px-4 py-3 border-b-2 border-transparent text-gray-400 hover:text-white text-xs font-semibold uppercase tracking-wider flex-shrink-0">
-                    🔥 Misiones
+                    ðŸ”¥ Misiones
                 </button>
                 <button onclick="switchTab('tab-vuelos')" id="btn-tab-vuelos" class="tab-btn px-4 py-3 border-b-2 border-transparent text-gray-400 hover:text-white text-xs font-semibold uppercase tracking-wider flex-shrink-0">
-                    ✈️ Vuelos
+                    âœˆï¸ Vuelos
                 </button>
                 <button onclick="switchTab('tab-logistica')" id="btn-tab-logistica" class="tab-btn px-4 py-3 border-b-2 border-transparent text-gray-400 hover:text-white text-xs font-semibold uppercase tracking-wider flex-shrink-0">
-                    🏨 Locación y Traslado
+                    ðŸ¨ LocaciÃ³n y Traslado
                 </button>
                 <button onclick="switchTab('tab-clima')" id="btn-tab-clima" class="tab-btn px-4 py-3 border-b-2 border-transparent text-gray-400 hover:text-white text-xs font-semibold uppercase tracking-wider flex-shrink-0">
-                    🌥️ Clima y Reglas
+                    ðŸŒ¥ï¸ Clima y Reglas
                 </button>
                 <button onclick="switchTab('tab-soporte')" id="btn-tab-soporte" class="tab-btn px-4 py-3 border-b-2 border-transparent text-gray-400 hover:text-white text-xs font-semibold uppercase tracking-wider flex-shrink-0">
-                    👥 Soporte
+                    ðŸ‘¥ Soporte
                 </button>
             </div>
 
@@ -104,7 +104,7 @@
                 <div id="contradictionsCard" class="hidden bg-red-950/20 border border-red-500/30 rounded-xl p-4 space-y-2">
                     <div class="flex items-center space-x-2 text-red-400 font-bold text-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        <span>Advertencias de Logística / Consistencia</span>
+                        <span>Advertencias de LogÃ­stica / Consistencia</span>
                     </div>
                     <ul id="contradictionsList" class="list-disc pl-5 text-xs text-gray-400 space-y-1"></ul>
                 </div>
@@ -113,16 +113,16 @@
                 <div id="tab-ia" class="tab-content space-y-6">
                     <div class="glass p-5 rounded-xl space-y-4 hidden">
                         <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center space-x-2">
-                            <span>🔑 Configuración Inteligencia Artificial</span>
+                            <span>ðŸ”‘ ConfiguraciÃ³n Inteligencia Artificial</span>
                         </h3>
                         <p class="text-xs text-gray-400 leading-relaxed">
-                            Selecciona el motor de IA y asegúrate de tener la API Key. Las claves se guardan localmente en tu navegador de forma segura.
+                            Selecciona el motor de IA y asegÃºrate de tener la API Key. Las claves se guardan localmente en tu navegador de forma segura.
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Motor de IA</label>
                                 <select id="aiEngine" class="w-full px-4 py-2 bg-crearDark border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80">
-                                    <option value="groq">Groq Llama 3 (Gratis y Rápido)</option>
+                                    <option value="groq">Groq Llama 3 (Gratis y RÃ¡pido)</option>
                                     <option value="gemini">Gemini 2.5 Flash (Google)</option>
                                 </select>
                             </div>
@@ -136,21 +136,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="apiKeyStatus" class="text-[10px] text-green-400 hidden">✓ API Keys cargadas localmente</div>
+                        <div id="apiKeyStatus" class="text-[10px] text-green-400 hidden">âœ“ API Keys cargadas localmente</div>
                     </div>
 
                     <div class="space-y-3">
-                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">📋 Pegar Texto de Logística</h3>
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">ðŸ“‹ Pegar Texto de LogÃ­stica</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">
-                            Pega el correo o el chat de WhatsApp con los vuelos, fechas de entrenamiento, datos del hotel y contactos. La IA los estructurará automáticamente en las pestañas y actualizará la vista previa.
+                            Pega el correo o el chat de WhatsApp con los vuelos, fechas de entrenamiento, datos del hotel y contactos. La IA los estructurarÃ¡ automÃ¡ticamente en las pestaÃ±as y actualizarÃ¡ la vista previa.
                         </p>
                         <textarea id="rawTextarea" class="w-full h-80 px-4 py-3 bg-crearCard border border-crearBorder rounded-xl text-sm text-gray-300 focus:outline-none focus:border-crearBlue/80 custom-scrollbar" placeholder="Ej: 
-Para: Mildred Muñoz
+Para: Mildred MuÃ±oz
 Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                         
                         <button onclick="parseWithIA()" id="btnParse" class="w-full py-3 bg-gradient-to-r from-crearBlue to-crearCyan hover:opacity-90 text-sm font-bold text-white uppercase tracking-widest rounded-xl transition-all shadow-md flex items-center justify-center space-x-2">
                             <span id="spinnerIA" class="hidden animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></span>
-                            <span id="textIA">Procesar con IA ⚡</span>
+                            <span id="textIA">Procesar con IA âš¡</span>
                         </button>
                     </div>
                 </div>
@@ -171,15 +171,15 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                             <input type="text" id="trainer_nationality" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Número de visitas a Lima</label>
+                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">NÃºmero de visitas a Lima</label>
                             <input type="text" id="visits_count" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: 14 visitas o primera">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Tipo de Entrenamiento</label>
                             <select id="tipo_entrenamiento" onchange="updateTrainingType(this.value)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80">
-                                <option value="C1">Capítulo Uno (C1)</option>
-                                <option value="C2">Capítulo Dos (C2)</option>
-                                <option value="MJ">Maestría del Juego (MJ)</option>
+                                <option value="C1">CapÃ­tulo Uno (C1)</option>
+                                <option value="C2">CapÃ­tulo Dos (C2)</option>
+                                <option value="MJ">MaestrÃ­a del Juego (MJ)</option>
                                 <option value="El Viaje">El Viaje</option>
                             </select>
                         </div>
@@ -188,11 +188,11 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                             <input type="text" id="equipo" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: E29">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Fecha de Emisión</label>
+                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Fecha de EmisiÃ³n</label>
                             <input type="text" id="fecha_emision" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: 18 de Julio, 2026">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Fecha de Expiración</label>
+                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Fecha de ExpiraciÃ³n</label>
                             <input type="datetime-local" id="fecha_expiracion_raw" onchange="updateExpirationDate(this.value)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80">
                         </div>
                     </div>
@@ -201,12 +201,12 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                         <input type="text" id="asunto" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Párrafo de Apertura (Bienvenida)</label>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">PÃ¡rrafo de Apertura (Bienvenida)</label>
                         <textarea id="mensaje_bienvenida" oninput="updateField(this)" class="w-full h-32 px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80 custom-scrollbar"></textarea>
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Frase de Cierre (Empoderamiento)</label>
-                        <input type="text" id="cierre_empoderamiento" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Párate en tu poder absoluto...">
+                        <input type="text" id="cierre_empoderamiento" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: PÃ¡rate en tu poder absoluto...">
                     </div>
                 </div>
 
@@ -215,19 +215,19 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                     <div class="flex items-center justify-between">
                         <h3 class="text-sm font-bold text-white uppercase tracking-wider">Misiones Programadas</h3>
                         <button onclick="addMission()" class="px-3 py-1 bg-crearBlue hover:bg-crearBlueDark text-white text-xs font-bold rounded-lg transition-colors">
-                            + Añadir Misión
+                            + AÃ±adir MisiÃ³n
                         </button>
                     </div>
                     
                     <div id="missionsContainer" class="space-y-4">
-                        <!-- Generado dinámicamente -->
+                        <!-- Generado dinÃ¡micamente -->
                     </div>
                 </div>
 
                 <!-- TAB: VUELOS -->
                 <div id="tab-vuelos" class="tab-content hidden space-y-6">
                     <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Código de Reserva (PNR)</label>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">CÃ³digo de Reserva (PNR)</label>
                         <input type="text" id="pnr" oninput="updateField(this)" class="w-full px-4 py-2 bg-crearCard border border-crearBorder rounded-lg text-sm text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: IRKDAM">
                     </div>
                     <div>
@@ -237,23 +237,23 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 
                     <!-- Llegada -->
                     <div class="glass p-5 rounded-xl space-y-3">
-                        <h4 class="text-xs font-bold text-green-400 uppercase tracking-widest">✈️ Vuelo de Llegada a Lima</h4>
+                        <h4 class="text-xs font-bold text-green-400 uppercase tracking-widest">âœˆï¸ Vuelo de Llegada a Lima</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Día y Fecha</label>
-                                <input type="text" id="vuelo_llegada_fecha" oninput="updateFlight('llegada', 'fecha', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Miércoles 22 de Julio">
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">DÃ­a y Fecha</label>
+                                <input type="text" id="vuelo_llegada_fecha" oninput="updateFlight('llegada', 'fecha', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: MiÃ©rcoles 22 de Julio">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Hora</label>
                                 <input type="text" id="vuelo_llegada_hora" oninput="updateFlight('llegada', 'hora', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: 21:25 PM">
                             </div>
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Vuelo y Aerolínea</label>
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Vuelo y AerolÃ­nea</label>
                                 <input type="text" id="vuelo_llegada_vuelo" oninput="updateFlight('llegada', 'vuelo', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: LATAM LA 2393">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Ruta</label>
-                                <input type="text" id="vuelo_llegada_ruta" oninput="updateFlight('llegada', 'ruta', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Medellín (MDE) → Lima (LIM)">
+                                <input type="text" id="vuelo_llegada_ruta" oninput="updateFlight('llegada', 'ruta', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: MedellÃ­n (MDE) â†’ Lima (LIM)">
                             </div>
                         </div>
                         <div>
@@ -264,10 +264,10 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 
                     <!-- Salida -->
                     <div class="glass p-5 rounded-xl space-y-3">
-                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest">✈️ Vuelo de Salida de Lima</h4>
+                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest">âœˆï¸ Vuelo de Salida de Lima</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Día y Fecha</label>
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">DÃ­a y Fecha</label>
                                 <input type="text" id="vuelo_salida_fecha" oninput="updateFlight('salida', 'fecha', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Lunes 27 de Julio">
                             </div>
                             <div>
@@ -275,12 +275,12 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                                 <input type="text" id="vuelo_salida_hora" oninput="updateFlight('salida', 'hora', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: 13:10 PM">
                             </div>
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Vuelo y Aerolínea</label>
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Vuelo y AerolÃ­nea</label>
                                 <input type="text" id="vuelo_salida_vuelo" oninput="updateFlight('salida', 'vuelo', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: LATAM LA 2392">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Ruta</label>
-                                <input type="text" id="vuelo_salida_ruta" oninput="updateFlight('salida', 'ruta', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Lima (LIM) → Medellín (MDE)">
+                                <input type="text" id="vuelo_salida_ruta" oninput="updateFlight('salida', 'ruta', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Lima (LIM) â†’ MedellÃ­n (MDE)">
                             </div>
                         </div>
                         <div>
@@ -294,14 +294,14 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 <div id="tab-logistica" class="tab-content hidden space-y-6">
                     <!-- Hotel -->
                     <div class="glass p-5 rounded-xl space-y-3">
-                        <h4 class="text-xs font-bold text-white uppercase tracking-widest">🏨 Hotel Sede</h4>
+                        <h4 class="text-xs font-bold text-white uppercase tracking-widest">ðŸ¨ Hotel Sede</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Nombre</label>
                                 <input type="text" id="hotel_nombre" oninput="updateField(this)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Hotel Jose Antonio Deluxe">
                             </div>
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Dirección / Distrito</label>
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">DirecciÃ³n / Distrito</label>
                                 <input type="text" id="hotel_direccion" oninput="updateField(this)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Calle Bellavista 133, Miraflores">
                             </div>
                         </div>
@@ -314,20 +314,20 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                     <!-- Traslados (Lobby Pickups) -->
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xs font-bold text-white uppercase tracking-widest">🚗 Cronograma de Traslados (Lobby Pickups)</h4>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-widest">ðŸš— Cronograma de Traslados (Lobby Pickups)</h4>
                             <button onclick="addLobbyPickup()" class="px-2.5 py-1 bg-crearBlue hover:bg-crearBlueDark text-white text-[10px] font-bold rounded transition-colors">
-                                + Añadir Día
+                                + AÃ±adir DÃ­a
                             </button>
                         </div>
                         <div id="lobbyContainer" class="space-y-3">
-                            <!-- Generado dinámicamente -->
+                            <!-- Generado dinÃ¡micamente -->
                         </div>
                     </div>
 
                     <!-- Lugar Fuego (Opcional) -->
                     <div class="glass p-5 rounded-xl space-y-3">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xs font-bold text-white uppercase tracking-widest">🔥 Lugar de Caminata sobre Fuego (Opcional)</h4>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-widest">ðŸ”¥ Lugar de Caminata sobre Fuego (Opcional)</h4>
                             <input type="checkbox" id="has_firewalk" onchange="toggleFirewalk(this.checked)" class="h-4 w-4 bg-crearCard border-crearBorder rounded text-crearBlue">
                         </div>
                         <div id="firewalkFields" class="hidden space-y-3 pt-2">
@@ -337,12 +337,12 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                                     <input type="text" id="firewalk_name" oninput="updateFirewalkField('name', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Casona Blanca, Huachipa">
                                 </div>
                                 <div>
-                                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Dirección</label>
+                                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">DirecciÃ³n</label>
                                     <input type="text" id="firewalk_address" oninput="updateFirewalkField('address', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Teléfono de Emergencia / Lugar</label>
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">TelÃ©fono de Emergencia / Lugar</label>
                                 <input type="text" id="firewalk_phone" oninput="updateFirewalkField('phone', this.value)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: +51 996 138 171">
                             </div>
                         </div>
@@ -353,37 +353,37 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 <div id="tab-clima" class="tab-content hidden space-y-6">
                     <!-- Clima -->
                     <div class="glass p-5 rounded-xl space-y-3">
-                        <h4 class="text-xs font-bold text-white uppercase tracking-widest">🌥️ Clima y Ropa</h4>
+                        <h4 class="text-xs font-bold text-white uppercase tracking-widest">ðŸŒ¥ï¸ Clima y Ropa</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Estación / Región</label>
-                                <input type="text" id="clima_temporada" oninput="updateField(this)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Lima · Temporada de Invierno">
+                                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">EstaciÃ³n / RegiÃ³n</label>
+                                <input type="text" id="clima_temporada" oninput="updateField(this)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Lima Â· Temporada de Invierno">
                             </div>
                             <div>
                                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Temperatura promedio</label>
-                                <input type="text" id="clima_temperatura" oninput="updateField(this)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: 14° — 18°C">
+                                <input type="text" id="clima_temperatura" oninput="updateField(this)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: 14Â° â€” 18Â°C">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Condición Climática</label>
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">CondiciÃ³n ClimÃ¡tica</label>
                             <input type="text" id="clima_condicion" oninput="updateField(this)" class="w-full px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80" placeholder="Ej: Nublado y de alta humedad">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Consejos del Clima (Líneas independientes)</label>
-                            <textarea id="clima_consejos" oninput="updateClimaConsejos(this.value)" class="w-full h-24 px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80 custom-scrollbar" placeholder="Una recomendación por línea..."></textarea>
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Consejos del Clima (LÃ­neas independientes)</label>
+                            <textarea id="clima_consejos" oninput="updateClimaConsejos(this.value)" class="w-full h-24 px-3 py-1.5 bg-crearCard border border-crearBorder rounded-lg text-xs text-white focus:outline-none focus:border-crearBlue/80 custom-scrollbar" placeholder="Una recomendaciÃ³n por lÃ­nea..."></textarea>
                         </div>
                     </div>
 
                     <!-- Reglas de Sede -->
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xs font-bold text-white uppercase tracking-widest">⚠️ Reglas de Sede y Límites</h4>
+                            <h4 class="text-xs font-bold text-white uppercase tracking-widest">âš ï¸ Reglas de Sede y LÃ­mites</h4>
                             <button onclick="addRule()" class="px-2.5 py-1 bg-crearBlue hover:bg-crearBlueDark text-white text-[10px] font-bold rounded transition-colors">
-                                + Añadir Regla
+                                + AÃ±adir Regla
                             </button>
                         </div>
                         <div id="rulesContainer" class="space-y-3">
-                            <!-- Generado dinámicamente -->
+                            <!-- Generado dinÃ¡micamente -->
                         </div>
                     </div>
                 </div>
@@ -391,14 +391,14 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 <!-- TAB: SOPORTE -->
                 <div id="tab-soporte" class="tab-content hidden space-y-4">
                     <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Tu Escuadrón de Soporte</h3>
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Tu EscuadrÃ³n de Soporte</h3>
                         <button onclick="addStaff()" class="px-3 py-1 bg-crearBlue hover:bg-crearBlueDark text-white text-xs font-bold rounded-lg transition-colors">
-                            + Añadir Personal
+                            + AÃ±adir Personal
                         </button>
                     </div>
 
                     <div id="staffContainer" class="space-y-3">
-                        <!-- Generado dinámicamente -->
+                        <!-- Generado dinÃ¡micamente -->
                     </div>
                 </div>
 
@@ -410,10 +410,10 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             <!-- Tabs Preview Header -->
             <div class="flex border-b border-crearBorder/50 bg-crearCard/80">
                 <button onclick="switchPreviewTab('preview-live')" id="btn-preview-live" class="preview-tab-btn px-6 py-4 border-b-2 border-crearBlue text-white text-xs font-semibold uppercase tracking-wider">
-                    👁️ Vista Previa en Vivo
+                    ðŸ‘ï¸ Vista Previa en Vivo
                 </button>
                 <button onclick="switchPreviewTab('preview-code')" id="btn-preview-code" class="preview-tab-btn px-6 py-4 border-b-2 border-transparent text-gray-400 hover:text-white text-xs font-semibold uppercase tracking-wider">
-                    💻 Código HTML
+                    ðŸ’» CÃ³digo HTML
                 </button>
             </div>
 
@@ -425,9 +425,9 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             <!-- Preview Source Code -->
             <div id="preview-code" class="preview-content hidden flex-1 p-6 overflow-hidden flex flex-col bg-crearDarker">
                 <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs text-gray-500">Copia el código e incorpóralo en tu sitio web.</span>
+                    <span class="text-xs text-gray-500">Copia el cÃ³digo e incorpÃ³ralo en tu sitio web.</span>
                     <button onclick="copyCode()" class="px-4 py-1.5 bg-crearCard border border-crearBorder hover:border-crearBlue text-xs font-semibold rounded-lg text-white transition-all">
-                        Copiar Código
+                        Copiar CÃ³digo
                     </button>
                 </div>
                 <textarea id="sourceCode" readonly class="flex-1 w-full p-4 bg-crearCard border border-crearBorder rounded-xl font-mono text-xs text-gray-400 focus:outline-none custom-scrollbar select-all"></textarea>
@@ -445,7 +445,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 </div>
                 <h3 class="text-lg font-bold text-white">Publicar Carta a GitHub</h3>
                 <p class="text-xs text-gray-400">
-                    Se creará un nuevo archivo HTML en tu repositorio local y se subirá directamente a producción mediante Git.
+                    Se crearÃ¡ un nuevo archivo HTML en tu repositorio local y se subirÃ¡ directamente a producciÃ³n mediante Git.
                 </p>
             </div>
 
@@ -460,7 +460,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 </div>
                 
                 <div class="p-4 bg-crearDark/50 border border-crearBorder rounded-xl text-xs text-gray-400 space-y-1">
-                    <p><strong>Entrenador:</strong> <span id="confirmTrainerName" class="text-white">Mildred Muñoz</span></p>
+                    <p><strong>Entrenador:</strong> <span id="confirmTrainerName" class="text-white">Mildred MuÃ±oz</span></p>
                     <p><strong>Entrenamiento:</strong> <span id="confirmTraining" class="text-white">C2 E29</span></p>
                     <p><strong>Git Branch:</strong> <span class="text-crearBlue">main</span></p>
                 </div>
@@ -473,7 +473,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             </div>
 
             <div id="publishResult" class="hidden p-4 rounded-xl text-xs space-y-2">
-                <!-- Mostrado dinámicamente -->
+                <!-- Mostrado dinÃ¡micamente -->
             </div>
 
             <div class="flex items-center gap-3" id="publishModalActions">
@@ -516,10 +516,10 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             clima_condicion: "",
             clima_consejos: [],
             reglas: [],
-            honorarios_texto: "Mantenemos el acuerdo estándar. Si tus datos bancarios de siempre (Banco, Cuenta, SWIFT) siguen siendo los mismos, el proceso administrativo se iniciará de forma automática tras concluir los entrenamientos. Cualquier actualización, por favor avísale con tiempo a José Sánchez.",
+            honorarios_texto: "Mantenemos el acuerdo estÃ¡ndar. Si tus datos bancarios de siempre (Banco, Cuenta, SWIFT) siguen siendo los mismos, el proceso administrativo se iniciarÃ¡ de forma automÃ¡tica tras concluir los entrenamientos. Cualquier actualizaciÃ³n, por favor avÃ­sale con tiempo a JosÃ© SÃ¡nchez.",
             facturacion_razon_social: "CREACION CUANTICA E.I.R.L.",
             facturacion_ruc: "20612592811",
-            facturacion_direccion: "Calle Berlín 965, Int. 302, Miraflores, Lima, Perú",
+            facturacion_direccion: "Calle BerlÃ­n 965, Int. 302, Miraflores, Lima, PerÃº",
             whatsapp_contacto: "+51919563284",
             whatsapp_mensaje: "",
             soporte: [],
@@ -532,7 +532,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 fechas_evento: "",
                 hotel_nombre: "",
                 hotel_distrito: "",
-                contacto_nombre: "José Sánchez",
+                contacto_nombre: "JosÃ© SÃ¡nchez",
                 contacto_telefono: "+51 919 563 284"
             },
             alertas: []
@@ -550,7 +550,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 
         // On Page Load
         document.addEventListener("DOMContentLoaded", async () => {
-            // 1. Intentar cargar las API Keys automáticamente desde el servidor (.env)
+            // 1. Intentar cargar las API Keys automÃ¡ticamente desde el servidor (.env)
             try {
                 const resp = await fetch('/api/config');
                 if (resp.ok) {
@@ -559,12 +559,12 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                         document.getElementById('geminiApiKey').value = cfg.google_api_key;
                         localStorage.setItem('gemini_api_key', cfg.google_api_key);
                         document.getElementById('apiKeyStatus').classList.remove('hidden');
-                        console.log('✅ API Key (Gemini) cargada automáticamente desde el servidor (.env)');
+                        console.log('âœ… API Key (Gemini) cargada automÃ¡ticamente desde el servidor (.env)');
                     }
                     if (cfg.kie_api_key) {
                         kieApiKeyGlobal = cfg.kie_api_key;
                         localStorage.setItem('kie_api_key', cfg.kie_api_key);
-                        console.log('✅ API Key (Kie) cargada automáticamente desde el servidor (.env)');
+                        console.log('âœ… API Key (Kie) cargada automÃ¡ticamente desde el servidor (.env)');
                     }
                 }
             } catch (e) {
@@ -580,7 +580,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 }
             }
 
-            // Cambiar input key según motor seleccionado
+            // Cambiar input key segÃºn motor seleccionado
             document.getElementById('aiEngine').addEventListener('change', (e) => {
                 if (e.target.value === 'groq') {
                     document.getElementById('geminiApiKey').value = localStorage.getItem('groq_api_key') || "";
@@ -589,9 +589,9 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 }
             });
 
-            // Load Mildred Muñoz as the default test case on startup
+            // Load Mildred MuÃ±oz as the default test case on startup
             loadExample('mildred');
-            // Pequeño delay para asegurar que el iframe esté listo en el DOM
+            // PequeÃ±o delay para asegurar que el iframe estÃ© listo en el DOM
             setTimeout(() => updatePreview(), 300);
         });
 
@@ -607,7 +607,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                     localStorage.setItem('gemini_api_key', key);
                 }
                 document.getElementById('apiKeyStatus').classList.remove('hidden');
-                alert("✓ API Key guardada con éxito en tu navegador local.");
+                alert("âœ“ API Key guardada con Ã©xito en tu navegador local.");
             } else {
                 if (engine === 'groq') {
                     localStorage.removeItem('groq_api_key');
@@ -654,174 +654,174 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             if (type === 'mildred') {
                 appData = {
                     nombre_entrenador: "Mildred",
-                    nombre_completo: "Mildred Muñoz Vásquez",
+                    nombre_completo: "Mildred MuÃ±oz VÃ¡squez",
                     nacionalidad: "colombiana",
                     visitas_count: "primera",
                     tipo_entrenamiento: "C2",
                     equipo: "E29",
                     fecha_emision: "18 de Julio, 2026",
                     fecha_expiracion: "2026-07-28T04:59:59Z",
-                    asunto: "¡Bienvenida a casa, Mildred! – Tu radar para el C2 del E29 💥",
-                    mensaje_bienvenida: "Querida Mildred,\n\nQué alegría inmensa recibirte en nuestra casa. El Capítulo Dos es el espacio donde el Equipo 29 se enfrentará a sus quiebres más profundos y tomará la decisión de pararse en su verdadero poder. Nos da una tranquilidad enorme saber que tu impecable presencia y contención guiarán la sala en este fin de semana tan determinante.",
+                    asunto: "Â¡Bienvenida a casa, Mildred! â€“ Tu radar para el C2 del E29 ðŸ’¥",
+                    mensaje_bienvenida: "Querida Mildred,\n\nQuÃ© alegrÃ­a inmensa recibirte en nuestra casa. El CapÃ­tulo Dos es el espacio donde el Equipo 29 se enfrentarÃ¡ a sus quiebres mÃ¡s profundos y tomarÃ¡ la decisiÃ³n de pararse en su verdadero poder. Nos da una tranquilidad enorme saber que tu impecable presencia y contenciÃ³n guiarÃ¡n la sala en este fin de semana tan determinante.",
                     misiones: [
                         {
-                            titulo_mision: "📅 Misión 1: Capítulo Dos (E29)",
+                            titulo_mision: "ðŸ“… MisiÃ³n 1: CapÃ­tulo Dos (E29)",
                             eventos: [
-                                { fecha_hora: "Jueves 23 de Julio · 12:00 PM", descripcion: "Grounding con Aliados directo en el salón del Hotel.", color: "yellow" },
-                                { fecha_hora: "Jueves 23 de Julio · 13:00 PM", descripcion: "Mesa de registro de participantes activa.", color: "cyan" },
-                                { fecha_hora: "Jueves 23 de Julio · 14:00 PM", descripcion: "Apertura de puertas e inicio oficial del C2 E29.", color: "red" }
+                                { fecha_hora: "Jueves 23 de Julio Â· 12:00 PM", descripcion: "Grounding con Aliados directo en el salÃ³n del Hotel.", color: "yellow" },
+                                { fecha_hora: "Jueves 23 de Julio Â· 13:00 PM", descripcion: "Mesa de registro de participantes activa.", color: "cyan" },
+                                { fecha_hora: "Jueves 23 de Julio Â· 14:00 PM", descripcion: "Apertura de puertas e inicio oficial del C2 E29.", color: "red" }
                             ]
                         }
                     ],
                     pnr: "IRKDAM",
                     boleto_nombre: "Mildred Munoz Vasquez",
                     vuelo_llegada: {
-                        fecha: "Miércoles 22 de Julio",
+                        fecha: "MiÃ©rcoles 22 de Julio",
                         hora: "21:25 PM",
                         vuelo: "LATAM LA 2393",
-                        ruta: "Medellín (MDE) → Lima (LIM)",
+                        ruta: "MedellÃ­n (MDE) â†’ Lima (LIM)",
                         tracker_url: "https://www.flightradar24.com/data/flights/la2393"
                     },
                     vuelo_salida: {
                         fecha: "Lunes 27 de Julio",
                         hora: "13:10 PM",
                         vuelo: "LATAM LA 2392",
-                        ruta: "Lima (LIM) → Medellín (MDE)",
+                        ruta: "Lima (LIM) â†’ MedellÃ­n (MDE)",
                         tracker_url: "https://www.flightradar24.com/data/flights/la2392"
                     },
                     traslados: "Nosotros nos encargamos de moverte entre el Aeropuerto y el Hotel Sede.",
                     lobby_pickups: [
-                        { dia: "Miércoles 22 (Llegada)", descripcion: "Te recogemos a tu llegada a las 21:25 PM para llevarte al hotel." },
+                        { dia: "MiÃ©rcoles 22 (Llegada)", descripcion: "Te recogemos a tu llegada a las 21:25 PM para llevarte al hotel." },
                         { dia: "Lunes 27 (Salida)", descripcion: "Te recogemos en el lobby a las 10:10 AM en punto para llevarte al aeropuerto." }
                     ],
                     hotel_nombre: "Hotel Jose Antonio Deluxe",
                     hotel_direccion: "Calle Bellavista 133, Miraflores, Lima 15074",
                     hotel_maps_url: "https://www.google.com/maps/place/Hotel+Jose+Antonio+Deluxe/@-12.1197,-77.0311,17z",
-                    clima_temporada: "Lima · Temporada de Invierno",
-                    clima_temperatura: "14° — 18°C",
+                    clima_temporada: "Lima Â· Temporada de Invierno",
+                    clima_temperatura: "14Â° â€” 18Â°C",
                     clima_condicion: "Nublado y de alta humedad",
                     clima_consejos: [
-                        "Los días son grises, húmedos y fríos.",
-                        "Te recomendamos traer abrigos cómodos para el salón y tus salidas."
+                        "Los dÃ­as son grises, hÃºmedos y frÃ­os.",
+                        "Te recomendamos traer abrigos cÃ³modos para el salÃ³n y tus salidas."
                     ],
                     reglas: [
-                        { numero: 1, titulo: "Hora límite 11:00 PM", descripcion: "Hora de salida innegociable los 4 días por normas de la sede." },
+                        { numero: 1, titulo: "Hora lÃ­mite 11:00 PM", descripcion: "Hora de salida innegociable los 4 dÃ­as por normas de la sede." },
                         { numero: 2, titulo: "El Espacio", descripcion: "Cero comida dentro de los salones y decibeles moderados." }
                     ],
-                    honorarios_texto: "Mantenemos el acuerdo estándar. Si tus datos bancarios de siempre (Banco, Cuenta, SWIFT) siguen siendo los mismos, el proceso administrativo se iniciará de forma automática tras concluir los entrenamientos. Cualquier actualización, por favor avísale con tiempo a José Sánchez.",
+                    honorarios_texto: "Mantenemos el acuerdo estÃ¡ndar. Si tus datos bancarios de siempre (Banco, Cuenta, SWIFT) siguen siendo los mismos, el proceso administrativo se iniciarÃ¡ de forma automÃ¡tica tras concluir los entrenamientos. Cualquier actualizaciÃ³n, por favor avÃ­sale con tiempo a JosÃ© SÃ¡nchez.",
                     facturacion_razon_social: "CREACION CUANTICA E.I.R.L.",
                     facturacion_ruc: "20612592811",
-                    facturacion_direccion: "Calle Berlín 965, Int. 302, Miraflores, Lima, Perú",
+                    facturacion_direccion: "Calle BerlÃ­n 965, Int. 302, Miraflores, Lima, PerÃº",
                     whatsapp_contacto: "51919563284",
-                    whatsapp_mensaje: "Hola José, te envío mis datos bancarios para el pago de honorarios de C2 E29.",
+                    whatsapp_mensaje: "Hola JosÃ©, te envÃ­o mis datos bancarios para el pago de honorarios de C2 E29.",
                     soporte: [
                         { grupo: "Coordinacion", nombre: "Diana Moscoso", rol: "Oficina Soporte C2", telefono: "+51 912 379 744" },
-                        { grupo: "Coordinacion", nombre: "Joyce Marín", rol: "Oficina Soporte C2", telefono: "+51 933 599 903" },
-                        { grupo: "Gerencia", nombre: "José Sánchez", rol: "Gerencia General Soporte", telefono: "+51 919 563 284" }
+                        { grupo: "Coordinacion", nombre: "Joyce MarÃ­n", rol: "Oficina Soporte C2", telefono: "+51 933 599 903" },
+                        { grupo: "Gerencia", nombre: "JosÃ© SÃ¡nchez", rol: "Gerencia General Soporte", telefono: "+51 919 563 284" }
                     ],
-                    cierre_empoderamiento: "Párate en tu poder absoluto, Mildred. Ven a detonar la sala del E29. Nos vemos muy pronto.",
+                    cierre_empoderamiento: "PÃ¡rate en tu poder absoluto, Mildred. Ven a detonar la sala del E29. Nos vemos muy pronto.",
                     migracion: {
                         fecha_emision: "18 de Julio de 2026",
-                        nombres: "Mildred Muñoz Vásquez",
+                        nombres: "Mildred MuÃ±oz VÃ¡squez",
                         nacionalidad: "colombiana",
-                        programa_completo: "Capítulo Dos — E29",
+                        programa_completo: "CapÃ­tulo Dos â€” E29",
                         fechas_evento: "23 al 26 de Julio de 2026",
                         hotel_nombre: "Hotel Jose Antonio Deluxe",
-                        hotel_distrito: "distrito de Miraflores, Lima, Perú",
-                        contacto_nombre: "José Sánchez",
+                        hotel_distrito: "distrito de Miraflores, Lima, PerÃº",
+                        contacto_nombre: "JosÃ© SÃ¡nchez",
                         contacto_telefono: "+51 919 563 284"
                     },
                     alertas: []
                 };
             } else if (type === 'andres') {
                 appData = {
-                    nombre_entrenador: "Andrés",
-                    nombre_completo: "Carlos Andrés Gómez Gómez",
+                    nombre_entrenador: "AndrÃ©s",
+                    nombre_completo: "Carlos AndrÃ©s GÃ³mez GÃ³mez",
                     nacionalidad: "colombiana",
                     visitas_count: "14 visitas",
                     tipo_entrenamiento: "MJ",
                     equipo: "E27",
                     fecha_emision: "10 de Julio, 2026",
                     fecha_expiracion: "2026-07-06T04:59:59Z",
-                    asunto: "¡Bienvenido a casa, Andrés! – Tu radar para MJ Relación E27 💥",
-                    mensaje_bienvenida: "¡Andrés, qué felicidad tenerte nuevamente en Lima! Con esta sumas ya 14 visitas a nuestra tierra, lo que te convierte en una parte fundamental de esta gran familia. Este fin de semana es sumamente especial: liderarás la Caminata sobre Fuego para los Equipos 26, 27 y 28 el jueves, y desde el viernes guiarás al Equipo 27 en su Maestría del Juego de Relación. Sabemos la entrega y el amor que pones en cada sala, y estamos listos para acompañarte en cada paso. ¡Bienvenido a casa!",
+                    asunto: "Â¡Bienvenido a casa, AndrÃ©s! â€“ Tu radar para MJ RelaciÃ³n E27 ðŸ’¥",
+                    mensaje_bienvenida: "Â¡AndrÃ©s, quÃ© felicidad tenerte nuevamente en Lima! Con esta sumas ya 14 visitas a nuestra tierra, lo que te convierte en una parte fundamental de esta gran familia. Este fin de semana es sumamente especial: liderarÃ¡s la Caminata sobre Fuego para los Equipos 26, 27 y 28 el jueves, y desde el viernes guiarÃ¡s al Equipo 27 en su MaestrÃ­a del Juego de RelaciÃ³n. Sabemos la entrega y el amor que pones en cada sala, y estamos listos para acompaÃ±arte en cada paso. Â¡Bienvenido a casa!",
                     misiones: [
                         {
-                            titulo_mision: "🔥 Misión 1: Caminata sobre Fuego (E26, E27, E28)",
+                            titulo_mision: "ðŸ”¥ MisiÃ³n 1: Caminata sobre Fuego (E26, E27, E28)",
                             eventos: [
-                                { fecha_hora: "Jueves 25 de Junio · 18:00 PM", descripcion: "Grounding con el Staff de la Caminata en Casona Blanca, Huachipa.", color: "yellow" },
-                                { fecha_hora: "Jueves 25 de Junio · 19:00 PM", descripcion: "Arranque e inicio oficial de la Caminata sobre Fuego.", color: "red" }
+                                { fecha_hora: "Jueves 25 de Junio Â· 18:00 PM", descripcion: "Grounding con el Staff de la Caminata en Casona Blanca, Huachipa.", color: "yellow" },
+                                { fecha_hora: "Jueves 25 de Junio Â· 19:00 PM", descripcion: "Arranque e inicio oficial de la Caminata sobre Fuego.", color: "red" }
                             ]
                         },
                         {
-                            titulo_mision: "📅 Misión 2: Maestría del Juego - Relación (E27)",
+                            titulo_mision: "ðŸ“… MisiÃ³n 2: MaestrÃ­a del Juego - RelaciÃ³n (E27)",
                             eventos: [
-                                { fecha_hora: "Viernes 26 de Junio · 14:00 PM", descripcion: "Grounding con la Coordinación MJ en el salón del Hotel.", color: "blue" },
-                                { fecha_hora: "Viernes 26 de Junio · 15:00 PM", descripcion: "Apertura de puertas e inicio de Maestría Relación E27.", color: "cyan" }
+                                { fecha_hora: "Viernes 26 de Junio Â· 14:00 PM", descripcion: "Grounding con la CoordinaciÃ³n MJ en el salÃ³n del Hotel.", color: "blue" },
+                                { fecha_hora: "Viernes 26 de Junio Â· 15:00 PM", descripcion: "Apertura de puertas e inicio de MaestrÃ­a RelaciÃ³n E27.", color: "cyan" }
                             ]
                         }
                     ],
                     pnr: "LRDHAV",
                     boleto_nombre: "Carlos Andres Gomez Gomez",
                     vuelo_llegada: {
-                        fecha: "Miércoles 24 de Junio",
+                        fecha: "MiÃ©rcoles 24 de Junio",
                         hora: "21:25 PM",
                         vuelo: "LATAM LA 2393",
-                        ruta: "Medellín (MDE) → Lima (LIM)",
+                        ruta: "MedellÃ­n (MDE) â†’ Lima (LIM)",
                         tracker_url: "https://www.flightradar24.com/data/flights/la2393"
                     },
                     vuelo_salida: {
                         fecha: "Lunes 29 de Junio",
                         hora: "13:10 PM",
                         vuelo: "LATAM LA 2392",
-                        ruta: "Lima (LIM) → Medellín (MDE)",
+                        ruta: "Lima (LIM) â†’ MedellÃ­n (MDE)",
                         tracker_url: "https://www.flightradar24.com/data/flights/la2392"
                     },
                     traslados: "Te movemos a tu llegada del aeropuerto, a tu traslado a la Caminata, y al retorno.",
                     lobby_pickups: [
-                        { dia: "Miércoles 24", descripcion: "Te recogemos a tu llegada en el aeropuerto a las 21:25 PM para llevarte al hotel." },
+                        { dia: "MiÃ©rcoles 24", descripcion: "Te recogemos a tu llegada en el aeropuerto a las 21:25 PM para llevarte al hotel." },
                         { dia: "Jueves 25 (Fuego)", descripcion: "Te recogemos en el lobby a las 15:00 PM en punto para ir a Casona Blanca, Huachipa." },
                         { dia: "Lunes 29", descripcion: "Te recogemos en el lobby a las 10:10 AM en punto para llevarte al aeropuerto." }
                     ],
                     hotel_nombre: "Hotel Jose Antonio Deluxe",
                     hotel_direccion: "Calle Bellavista 133, Miraflores, Lima 15074",
                     hotel_maps_url: "https://www.google.com/maps/place/Hotel+Jose+Antonio+Deluxe/@-12.1197,-77.0311,17z",
-                    clima_temporada: "Lima · Temporada de Invierno",
-                    clima_temperatura: "14° — 18°C",
+                    clima_temporada: "Lima Â· Temporada de Invierno",
+                    clima_temperatura: "14Â° â€” 18Â°C",
                     clima_condicion: "Nublado y de alta humedad",
                     clima_consejos: [
-                        "Llevar abrigo ligero para el día y casaca gruesa para la noche.",
-                        "En Huachipa (Fuego): El clima es más seco de día, pero desciende drásticamente de noche. Lleva casaca muy abrigadora."
+                        "Llevar abrigo ligero para el dÃ­a y casaca gruesa para la noche.",
+                        "En Huachipa (Fuego): El clima es mÃ¡s seco de dÃ­a, pero desciende drÃ¡sticamente de noche. Lleva casaca muy abrigadora."
                     ],
                     reglas: [
-                        { numero: 1, titulo: "Jueves: Límite 10:30 PM", descripcion: "Hora de desocupar Casona Blanca en Huachipa." },
-                        { numero: 2, titulo: "Viernes a Domingo: Límite 11:00 PM", descripcion: "Hora de desocupar el salón del Hotel." },
+                        { numero: 1, titulo: "Jueves: LÃ­mite 10:30 PM", descripcion: "Hora de desocupar Casona Blanca en Huachipa." },
+                        { numero: 2, titulo: "Viernes a Domingo: LÃ­mite 11:00 PM", descripcion: "Hora de desocupar el salÃ³n del Hotel." },
                         { numero: 3, titulo: "El Espacio", descripcion: "Cero comida adentro y decibeles moderados." }
                     ],
-                    honorarios_texto: "Mantenemos el acuerdo estándar. Si tus datos bancarios de siempre (Banco, Cuenta, SWIFT) siguen siendo los mismos, el proceso administrativo se iniciará de forma automática tras concluir los entrenamientos. Cualquier actualización, por favor avísale con tiempo a José Sánchez.",
+                    honorarios_texto: "Mantenemos el acuerdo estÃ¡ndar. Si tus datos bancarios de siempre (Banco, Cuenta, SWIFT) siguen siendo los mismos, el proceso administrativo se iniciarÃ¡ de forma automÃ¡tica tras concluir los entrenamientos. Cualquier actualizaciÃ³n, por favor avÃ­sale con tiempo a JosÃ© SÃ¡nchez.",
                     facturacion_razon_social: "CREACION CUANTICA E.I.R.L.",
                     facturacion_ruc: "20612592811",
-                    facturacion_direccion: "Calle Berlín 965, Int. 302, Miraflores, Lima, Perú",
+                    facturacion_direccion: "Calle BerlÃ­n 965, Int. 302, Miraflores, Lima, PerÃº",
                     whatsapp_contacto: "51919563284",
-                    whatsapp_mensaje: "Hola José, te envío mis datos bancarios para el pago de honorarios de Caminata y MJ E27.",
+                    whatsapp_mensaje: "Hola JosÃ©, te envÃ­o mis datos bancarios para el pago de honorarios de Caminata y MJ E27.",
                     soporte: [
-                        { grupo: "Managers", nombre: "Gina Cárdenas López", rol: "Manager Líder E27", telefono: "+51 999 699 649" },
-                        { grupo: "Managers", nombre: "Grezia Jolly Vera", rol: "Manager Líder E27", telefono: "+51 920 738 765" },
-                        { grupo: "Coordinacion", nombre: "Linid Valencia", rol: "Coordinación MJ", telefono: "+51 912 379 686" },
-                        { grupo: "Coordinacion", nombre: "Leyla Pasquel", rol: "Coordinación MJ", telefono: "+51 996 820 944" },
-                        { grupo: "Coordinacion", nombre: "Diana Moscoso", rol: "Logística Campo (Fuego)", telefono: "+51 912 379 744" },
-                        { grupo: "Gerencia", nombre: "José Sánchez", rol: "Gerencia General Soporte", telefono: "+51 919 563 284" }
+                        { grupo: "Managers", nombre: "Gina CÃ¡rdenas LÃ³pez", rol: "Manager LÃ­der E27", telefono: "+51 999 699 649" },
+                        { grupo: "Managers", nombre: "Grezia Jolly Vera", rol: "Manager LÃ­der E27", telefono: "+51 920 738 765" },
+                        { grupo: "Coordinacion", nombre: "Linid Valencia", rol: "CoordinaciÃ³n MJ", telefono: "+51 912 379 686" },
+                        { grupo: "Coordinacion", nombre: "Leyla Pasquel", rol: "CoordinaciÃ³n MJ", telefono: "+51 996 820 944" },
+                        { grupo: "Coordinacion", nombre: "Diana Moscoso", rol: "LogÃ­stica Campo (Fuego)", telefono: "+51 912 379 744" },
+                        { grupo: "Gerencia", nombre: "JosÃ© SÃ¡nchez", rol: "Gerencia General Soporte", telefono: "+51 919 563 284" }
                     ],
-                    cierre_empoderamiento: "¡Ven con todo tu poder, Andrés! Lima te espera.",
+                    cierre_empoderamiento: "Â¡Ven con todo tu poder, AndrÃ©s! Lima te espera.",
                     migracion: {
                         fecha_emision: "10 de Julio de 2026",
-                        nombres: "Carlos Andrés Gómez Gómez",
+                        nombres: "Carlos AndrÃ©s GÃ³mez GÃ³mez",
                         nacionalidad: "colombiana",
-                        programa_completo: "Maestría del Juego de Relación — Equipo 27 y Caminata sobre Fuego",
+                        programa_completo: "MaestrÃ­a del Juego de RelaciÃ³n â€” Equipo 27 y Caminata sobre Fuego",
                         fechas_evento: "25 al 28 de Junio de 2026",
                         hotel_nombre: "Hotel Jose Antonio Deluxe",
-                        hotel_distrito: "distrito de Miraflores, Lima, Perú",
-                        contacto_nombre: "José Sánchez",
+                        hotel_distrito: "distrito de Miraflores, Lima, PerÃº",
+                        contacto_nombre: "JosÃ© SÃ¡nchez",
                         contacto_telefono: "+51 919 563 284"
                     },
                     alertas: []
@@ -914,10 +914,10 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             appData.tipo_entrenamiento = val;
             
             // Update migration program format
-            const cleanTraining = val === 'MJ' ? 'Maestría del Juego' : 
-                                  val === 'C1' ? 'Capítulo Uno' : 
-                                  val === 'C2' ? 'Capítulo Dos' : val;
-            appData.migracion.programa_completo = `${cleanTraining} — ${appData.equipo}`;
+            const cleanTraining = val === 'MJ' ? 'MaestrÃ­a del Juego' : 
+                                  val === 'C1' ? 'CapÃ­tulo Uno' : 
+                                  val === 'C2' ? 'CapÃ­tulo Dos' : val;
+            appData.migracion.programa_completo = `${cleanTraining} â€” ${appData.equipo}`;
             
             runConsistencyChecks();
             updatePreview();
@@ -976,16 +976,16 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 const card = document.createElement('div');
                 card.className = "glass p-4 rounded-xl space-y-3 relative";
                 card.innerHTML = `
-                    <button onclick="removeMission(${mIndex})" class="absolute top-2 right-2 text-red-400 hover:text-red-500 font-bold text-xs">✕</button>
+                    <button onclick="removeMission(${mIndex})" class="absolute top-2 right-2 text-red-400 hover:text-red-500 font-bold text-xs">âœ•</button>
                     <div>
-                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Título de la Misión</label>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">TÃ­tulo de la MisiÃ³n</label>
                         <input type="text" value="${m.titulo_mision}" oninput="updateMissionTitle(${mIndex}, this.value)" class="w-[85%] px-3 py-1 bg-crearCard border border-crearBorder rounded text-xs text-white">
                     </div>
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-gray-400 uppercase">Sub-eventos (Línea de tiempo)</span>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase">Sub-eventos (LÃ­nea de tiempo)</span>
                             <button onclick="addEvent(${mIndex})" class="px-2 py-0.5 bg-crearBlue/20 border border-crearBlue/30 text-crearBlueLight text-[9px] font-bold rounded">
-                                + Añadir Evento
+                                + AÃ±adir Evento
                             </button>
                         </div>
                         <div id="events-container-${mIndex}" class="space-y-2 pl-3 border-l border-crearBorder/50">
@@ -1017,8 +1017,8 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                         ${selectOptions}
                     </select>
                     <input type="text" value="${e.fecha_hora}" oninput="updateEventTime(${mIndex}, ${eIndex}, this.value)" class="w-1/3 px-2 py-1 bg-crearCard border border-crearBorder rounded text-[11px] text-white" placeholder="Fecha y Hora">
-                    <input type="text" value="${e.descripcion}" oninput="updateEventDesc(${mIndex}, ${eIndex}, this.value)" class="flex-1 px-2 py-1 bg-crearCard border border-crearBorder rounded text-[11px] text-white" placeholder="Descripción del hito">
-                    <button onclick="removeEvent(${mIndex}, ${eIndex})" class="text-red-400 text-xs">✕</button>
+                    <input type="text" value="${e.descripcion}" oninput="updateEventDesc(${mIndex}, ${eIndex}, this.value)" class="flex-1 px-2 py-1 bg-crearCard border border-crearBorder rounded text-[11px] text-white" placeholder="DescripciÃ³n del hito">
+                    <button onclick="removeEvent(${mIndex}, ${eIndex})" class="text-red-400 text-xs">âœ•</button>
                 `;
                 container.appendChild(evRow);
             });
@@ -1026,9 +1026,9 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 
         function addMission() {
             appData.misiones.push({
-                titulo_mision: "📅 Misión N: Nueva Misión",
+                titulo_mision: "ðŸ“… MisiÃ³n N: Nueva MisiÃ³n",
                 eventos: [
-                    { fecha_hora: "Jueves · 12:00 PM", descripcion: "Ejemplo de hito logístico.", color: "blue" }
+                    { fecha_hora: "Jueves Â· 12:00 PM", descripcion: "Ejemplo de hito logÃ­stico.", color: "blue" }
                 ]
             });
             renderMissions();
@@ -1047,7 +1047,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
         }
 
         function addEvent(mIndex) {
-            appData.misiones[mIndex].eventos.push({ fecha_hora: "Día · Hora", descripcion: "Hito nuevo", color: "blue" });
+            appData.misiones[mIndex].eventos.push({ fecha_hora: "DÃ­a Â· Hora", descripcion: "Hito nuevo", color: "blue" });
             renderMissions();
             updatePreview();
         }
@@ -1081,16 +1081,16 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 const row = document.createElement('div');
                 row.className = "flex items-center gap-2 text-xs relative bg-crearCard border border-crearBorder p-3 rounded-lg";
                 row.innerHTML = `
-                    <input type="text" value="${lp.dia}" oninput="updateLobbyDay(${idx}, this.value)" class="w-1/3 px-2 py-1 bg-crearDark border border-crearBorder rounded text-xs text-white" placeholder="Día/Hito">
-                    <input type="text" value="${lp.descripcion}" oninput="updateLobbyDesc(${idx}, this.value)" class="flex-1 px-2 py-1 bg-crearDark border border-crearBorder rounded text-xs text-white" placeholder="Descripción">
-                    <button onclick="removeLobbyPickup(${idx})" class="text-red-400 font-bold px-1 hover:text-red-500">✕</button>
+                    <input type="text" value="${lp.dia}" oninput="updateLobbyDay(${idx}, this.value)" class="w-1/3 px-2 py-1 bg-crearDark border border-crearBorder rounded text-xs text-white" placeholder="DÃ­a/Hito">
+                    <input type="text" value="${lp.descripcion}" oninput="updateLobbyDesc(${idx}, this.value)" class="flex-1 px-2 py-1 bg-crearDark border border-crearBorder rounded text-xs text-white" placeholder="DescripciÃ³n">
+                    <button onclick="removeLobbyPickup(${idx})" class="text-red-400 font-bold px-1 hover:text-red-500">âœ•</button>
                 `;
                 container.appendChild(row);
             });
         }
 
         function addLobbyPickup() {
-            appData.lobby_pickups.push({ dia: "Día X", descripcion: "Nueva recogida planificada." });
+            appData.lobby_pickups.push({ dia: "DÃ­a X", descripcion: "Nueva recogida planificada." });
             renderLobbyPickups();
             updatePreview();
         }
@@ -1119,10 +1119,10 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 const row = document.createElement('div');
                 row.className = "flex flex-col gap-2 relative bg-crearCard border border-crearBorder p-3 rounded-lg";
                 row.innerHTML = `
-                    <button onclick="removeRule(${idx})" class="absolute top-2 right-2 text-red-400 hover:text-red-500">✕</button>
+                    <button onclick="removeRule(${idx})" class="absolute top-2 right-2 text-red-400 hover:text-red-500">âœ•</button>
                     <div class="flex gap-2">
                         <span class="text-xs font-bold text-gray-500 self-center">#${idx+1}</span>
-                        <input type="text" value="${r.titulo}" oninput="updateRuleTitle(${idx}, this.value)" class="flex-1 px-2 py-1 bg-crearDark border border-crearBorder rounded text-xs text-white font-bold" placeholder="Límite o Título">
+                        <input type="text" value="${r.titulo}" oninput="updateRuleTitle(${idx}, this.value)" class="flex-1 px-2 py-1 bg-crearDark border border-crearBorder rounded text-xs text-white font-bold" placeholder="LÃ­mite o TÃ­tulo">
                     </div>
                     <input type="text" value="${r.descripcion}" oninput="updateRuleDesc(${idx}, this.value)" class="w-full px-2 py-1 bg-crearDark border border-crearBorder rounded text-xs text-white" placeholder="Detalle de la regla">
                 `;
@@ -1131,7 +1131,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
         }
 
         function addRule() {
-            appData.reglas.push({ numero: appData.reglas.length + 1, titulo: "Límite XX:00 PM", descripcion: "Detalle de la nueva regla comunitaria." });
+            appData.reglas.push({ numero: appData.reglas.length + 1, titulo: "LÃ­mite XX:00 PM", descripcion: "Detalle de la nueva regla comunitaria." });
             renderRules();
             updatePreview();
         }
@@ -1162,10 +1162,10 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 const row = document.createElement('div');
                 row.className = "flex flex-wrap md:flex-nowrap items-center gap-2 bg-crearCard border border-crearBorder p-3 rounded-lg text-xs relative";
                 row.innerHTML = `
-                    <button onclick="removeStaff(${idx})" class="absolute top-2 right-2 text-red-400 hover:text-red-500 md:relative md:top-0 md:right-0">✕</button>
+                    <button onclick="removeStaff(${idx})" class="absolute top-2 right-2 text-red-400 hover:text-red-500 md:relative md:top-0 md:right-0">âœ•</button>
                     <select onchange="updateStaffGroup(${idx}, this.value)" class="bg-crearDark border border-crearBorder text-[10px] text-white p-1 rounded">
                         <option value="Managers" ${s.grupo==='Managers'?'selected':''}>Managers</option>
-                        <option value="Coordinacion" ${s.grupo==='Coordinacion'?'selected':''}>Coordinación</option>
+                        <option value="Coordinacion" ${s.grupo==='Coordinacion'?'selected':''}>CoordinaciÃ³n</option>
                         <option value="Gerencia" ${s.grupo==='Gerencia'?'selected':''}>Gerencia</option>
                     </select>
                     <input type="text" value="${s.nombre}" oninput="updateStaffName(${idx}, this.value)" class="flex-1 px-2 py-1 bg-crearDark border border-crearBorder rounded text-[11px] text-white" placeholder="Nombre completo">
@@ -1212,7 +1212,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
         function runConsistencyChecks() {
             const warnings = [];
             
-            // 1. Vuelos vacíos
+            // 1. Vuelos vacÃ­os
             if (!appData.vuelo_llegada.fecha || !appData.vuelo_llegada.hora) {
                 warnings.push("Falta programar el Vuelo de Llegada o su hora de arribo.");
             }
@@ -1228,23 +1228,23 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 
             // 3. Nomenclatura del staff
             appData.soporte.forEach(s => {
-                if (appData.tipo_entrenamiento !== 'El Viaje' && (s.rol.toLowerCase().includes('servicio') || s.rol.toLowerCase().includes('capitán de servicio'))) {
-                    warnings.push(`Advertencia de nomenclatura: El cargo '${s.rol}' para '${s.nombre}' tiene la palabra 'Servicio', lo cual está restringido solo para 'El Viaje'. Para ${appData.tipo_entrenamiento} debe ser simplemente 'Capitán' o 'Capitana'.`);
+                if (appData.tipo_entrenamiento !== 'El Viaje' && (s.rol.toLowerCase().includes('servicio') || s.rol.toLowerCase().includes('capitÃ¡n de servicio'))) {
+                    warnings.push(`Advertencia de nomenclatura: El cargo '${s.rol}' para '${s.nombre}' tiene la palabra 'Servicio', lo cual estÃ¡ restringido solo para 'El Viaje'. Para ${appData.tipo_entrenamiento} debe ser simplemente 'CapitÃ¡n' o 'Capitana'.`);
                 }
             });
 
-            // 4. Grounding de Maestría en Salón de Creación
+            // 4. Grounding de MaestrÃ­a en SalÃ³n de CreaciÃ³n
             if (appData.tipo_entrenamiento === 'MJ') {
                 let hasCreacionSaloon = false;
                 appData.misiones.forEach(m => {
                     m.eventos.forEach(e => {
-                        if (e.descripcion.toLowerCase().includes('grounding') && (e.descripcion.toLowerCase().includes('salón de creación') || e.descripcion.toLowerCase().includes('salon de creacion'))) {
+                        if (e.descripcion.toLowerCase().includes('grounding') && (e.descripcion.toLowerCase().includes('salÃ³n de creaciÃ³n') || e.descripcion.toLowerCase().includes('salon de creacion'))) {
                             hasCreacionSaloon = true;
                         }
                     });
                 });
                 if (!hasCreacionSaloon) {
-                    warnings.push("Regla MJ: Para Maestría del Juego (MJ), el Grounding de entrenadores siempre debe indicar que es en el 'Salón de Creación'.");
+                    warnings.push("Regla MJ: Para MaestrÃ­a del Juego (MJ), el Grounding de entrenadores siempre debe indicar que es en el 'SalÃ³n de CreaciÃ³n'.");
                 }
             }
 
@@ -1315,7 +1315,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             if (appData.firewalk_location) {
                 firewalkHtml = `
                         <div class="mt-4 bg-crearDark/50 p-4 rounded-xl border border-crearBorder/80">
-                            <p class="text-white font-bold mb-1">🏡 Lugar de Caminata sobre Fuego: ${appData.firewalk_location.name}</p>
+                            <p class="text-white font-bold mb-1">ðŸ¡ Lugar de Caminata sobre Fuego: ${appData.firewalk_location.name}</p>
                             <p class="text-gray-500 text-xs">${appData.firewalk_location.address} &middot; Telf. Lugar: <a href="tel:${appData.firewalk_location.phone.replace(/\s+/g, '')}" class="text-crearBlue hover:underline">${appData.firewalk_location.phone}</a></p>
                         </div>`;
             }
@@ -1324,7 +1324,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             let climateTipsHtml = "";
             appData.clima_consejos.forEach(tip => {
                 climateTipsHtml += `
-                            <li class="flex items-start space-x-2"><span class="text-crearBlue">•</span><span>${tip}</span></li>`;
+                            <li class="flex items-start space-x-2"><span class="text-crearBlue">â€¢</span><span>${tip}</span></li>`;
             });
 
             // Build Rules
@@ -1373,7 +1373,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 staffColumnsHtml += `
                     <div class="bg-gradient-to-br from-crearBlue/10 to-crearCard rounded-2xl border border-crearBlue/30 p-8 flex flex-col justify-between">
                         <div>
-                            <p class="text-crearBlue text-xs font-bold uppercase tracking-[0.2em] mb-6">👥 Managers Líderes ${appData.equipo}</p>
+                            <p class="text-crearBlue text-xs font-bold uppercase tracking-[0.2em] mb-6">ðŸ‘¥ Managers LÃ­deres ${appData.equipo}</p>
                             <div class="space-y-4">${managersHtml}</div>
                         </div>
                     </div>`;
@@ -1382,7 +1382,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 staffColumnsHtml += `
                     <div class="bg-crearCard rounded-2xl border border-crearBorder p-8 flex flex-col justify-between">
                         <div>
-                            <p class="text-crearCyan text-xs font-bold uppercase tracking-[0.2em] mb-6">👥 Coordinación de Oficinas</p>
+                            <p class="text-crearCyan text-xs font-bold uppercase tracking-[0.2em] mb-6">ðŸ‘¥ CoordinaciÃ³n de Oficinas</p>
                             <div class="space-y-4">${coordinationHtml}</div>
                         </div>
                     </div>`;
@@ -1391,7 +1391,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 staffColumnsHtml += `
                     <div class="bg-crearCard rounded-2xl border border-crearBorder p-8 flex flex-col justify-between">
                         <div>
-                            <p class="text-crearCyan text-xs font-bold uppercase tracking-[0.2em] mb-6">💼 Soporte Operativo y Gerencia</p>
+                            <p class="text-crearCyan text-xs font-bold uppercase tracking-[0.2em] mb-6">ðŸ’¼ Soporte Operativo y Gerencia</p>
                             <div class="space-y-4">${gerenciaHtml}</div>
                         </div>
                     </div>`;
@@ -1415,8 +1415,8 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREAR PSL Lima | Radar Logístico – ${appData.nombre_entrenador}</title>
-    <meta name="description" content="Carta de bienvenida y radar logístico para ${appData.nombre_entrenador} – ${appData.tipo_entrenamiento} ${appData.equipo} en CREAR PSL Lima.">
+    <title>CREAR PSL Lima | Radar LogÃ­stico â€“ ${appData.nombre_entrenador}</title>
+    <meta name="description" content="Carta de bienvenida y radar logÃ­stico para ${appData.nombre_entrenador} â€“ ${appData.tipo_entrenamiento} ${appData.equipo} en CREAR PSL Lima.">
     <meta name="robots" content="noindex, nofollow">
     <script src="https://cdn.tailwindcss.com"><\/script>
     <script>
@@ -1476,55 +1476,55 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 </head>
 <body class="bg-crearDarker antialiased">
 
-    <!-- PANTALLA DE EXPIRACIÓN -->
+    <!-- PANTALLA DE EXPIRACIÃ“N -->
     <div id="expiredScreen" class="expired-overlay" style="display:none;">
         <img src="logo_crear_blanco.png" alt="CREAR" class="h-16 mb-8 opacity-50">
         <svg class="w-16 h-16 text-crearBlue/50 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-        <h1 class="text-2xl font-bold text-white mb-3">Radar Logístico Expirado</h1>
-        <p class="text-gray-500 max-w-md text-sm leading-relaxed">Este enlace fue válido exclusivamente para el período de entrenamiento asignado. Por seguridad, su contenido ha sido bloqueado automáticamente.</p>
-        <p class="text-gray-700 text-xs mt-6 uppercase tracking-widest">CREAR PSL Lima — Información Clasificada</p>
+        <h1 class="text-2xl font-bold text-white mb-3">Radar LogÃ­stico Expirado</h1>
+        <p class="text-gray-500 max-w-md text-sm leading-relaxed">Este enlace fue vÃ¡lido exclusivamente para el perÃ­odo de entrenamiento asignado. Por seguridad, su contenido ha sido bloqueado automÃ¡ticamente.</p>
+        <p class="text-gray-700 text-xs mt-6 uppercase tracking-widest">CREAR PSL Lima â€” InformaciÃ³n Clasificada</p>
     </div>
 
-    <!-- MODAL DOCUMENTO MIGRACIÓN -->
+    <!-- MODAL DOCUMENTO MIGRACIÃ“N -->
     <div id="migracionModal" class="modal-overlay" onclick="if(event.target===this)closeMigracion()">
         <div class="modal-content text-left">
             <button onclick="closeMigracion()" class="absolute top-4 right-4 text-gray-400 hover:text-black text-2xl leading-none">&times;</button>
             
             <div class="text-center mb-6">
                 <img src="logo_crear_oficial.png" alt="CREAR" class="mx-auto h-16 mb-4">
-                <h2 class="text-xl font-black uppercase tracking-wide">Constancia de Participación</h2>
-                <p class="text-gray-500 text-sm">Documento para presentar en Migración</p>
+                <h2 class="text-xl font-black uppercase tracking-wide">Constancia de ParticipaciÃ³n</h2>
+                <p class="text-gray-500 text-sm">Documento para presentar en MigraciÃ³n</p>
             </div>
             
             <div class="border-t border-b border-gray-200 py-6 space-y-4 text-sm text-gray-700">
-                <p><strong>Fecha de emisión:</strong> ${appData.migracion.fecha_emision || appData.fecha_emision}</p>
+                <p><strong>Fecha de emisiÃ³n:</strong> ${appData.migracion.fecha_emision || appData.fecha_emision}</p>
                 <p><strong>A quien corresponda:</strong></p>
                 <p class="leading-relaxed">
-                    Por medio de la presente, CREAR PODER SIN LÍMITES — Sede Perú, con domicilio en la ciudad de Lima, 
-                    hace constar que el/la señor(a) <strong>${appData.migracion.nombres || appData.nombre_completo}</strong>, de nacionalidad ${appData.migracion.nacionalidad || appData.nacionalidad}, 
+                    Por medio de la presente, CREAR PODER SIN LÃMITES â€” Sede PerÃº, con domicilio en la ciudad de Lima, 
+                    hace constar que el/la seÃ±or(a) <strong>${appData.migracion.nombres || appData.nombre_completo}</strong>, de nacionalidad ${appData.migracion.nacionalidad || appData.nacionalidad}, 
                     ha sido invitado(a) a <strong>participar como asistente</strong> en nuestro programa de entrenamiento 
                     en liderazgo y desarrollo personal denominado <strong>"${appData.migracion.programa_completo}"</strong>, 
-                    el cual se llevará a cabo del <strong>${appData.migracion.fechas_evento}</strong> en las instalaciones 
+                    el cual se llevarÃ¡ a cabo del <strong>${appData.migracion.fechas_evento}</strong> en las instalaciones 
                     del ${appData.migracion.hotel_nombre || appData.hotel_nombre}, ${appData.migracion.hotel_distrito}.
                 </p>
                 <p class="leading-relaxed">
-                    El/La señor(a) asiste en calidad de <strong>participante invitado</strong> a dicho evento de formación. 
-                    Su estadía en el país es de carácter temporal y con fines exclusivamente educativos y de desarrollo personal.
+                    El/La seÃ±or(a) asiste en calidad de <strong>participante invitado</strong> a dicho evento de formaciÃ³n. 
+                    Su estadÃ­a en el paÃ­s es de carÃ¡cter temporal y con fines exclusivamente educativos y de desarrollo personal.
                 </p>
                 <p class="leading-relaxed">
                     Se expide la presente constancia a solicitud del interesado, para los fines migratorios que considere pertinentes.
                 </p>
                 
                 <div class="mt-6 pt-4 border-t border-gray-200">
-                    <p class="font-bold text-gray-900">CREAR PODER SIN LÍMITES — Sede Perú</p>
+                    <p class="font-bold text-gray-900">CREAR PODER SIN LÃMITES â€” Sede PerÃº</p>
                     <p class="text-gray-500">Gerencia Lima</p>
-                    <p class="text-gray-500">Contacto: ${appData.migracion.contacto_nombre} · ${appData.migracion.contacto_telefono}</p>
+                    <p class="text-gray-500">Contacto: ${appData.migracion.contacto_nombre} Â· ${appData.migracion.contacto_telefono}</p>
                     <p class="text-gray-500">Web: crearglobal.com</p>
                 </div>
             </div>
             
             <div class="mt-4 text-center text-xs text-gray-400">
-                Muestra este documento en la pantalla de tu teléfono al oficial de migración.
+                Muestra este documento en la pantalla de tu telÃ©fono al oficial de migraciÃ³n.
             </div>
         </div>
     </div>
@@ -1539,7 +1539,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             </div>
             <div>
                 <h4 class="font-semibold text-xs text-crearBlue uppercase tracking-wider">Radar Activo</h4>
-                <p id="toastMessage" class="text-xs text-gray-400 mt-0.5">Sección desbloqueada.</p>
+                <p id="toastMessage" class="text-xs text-gray-400 mt-0.5">SecciÃ³n desbloqueada.</p>
             </div>
         </div>
 
@@ -1552,14 +1552,14 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                     <img src="logo_crear_blanco.png" alt="CREAR" class="mx-auto h-20 md:h-28 object-contain drop-shadow-[0_0_25px_rgba(26,117,188,0.3)]">
                 </div>
                 <div class="reveal active delay-100">
-                    <p class="text-crearBlue font-medium tracking-[0.25em] uppercase mb-2 text-xs md:text-sm"><svg class='inline-block w-5 h-3.5 align-middle mr-2 -mt-0.5 shadow-sm' viewBox='0 0 9 6' xmlns='http://www.w3.org/2000/svg'><rect width='3' height='6' fill='#D91414'/><rect x='3' width='3' height='6' fill='#FFF'/><rect x='6' width='3' height='6' fill='#D91414'/></svg> P E R Ú &nbsp;&middot;&nbsp; CREAR PSL LIMA</p>
+                    <p class="text-crearBlue font-medium tracking-[0.25em] uppercase mb-2 text-xs md:text-sm"><svg class='inline-block w-5 h-3.5 align-middle mr-2 -mt-0.5 shadow-sm' viewBox='0 0 9 6' xmlns='http://www.w3.org/2000/svg'><rect width='3' height='6' fill='#D91414'/><rect x='3' width='3' height='6' fill='#FFF'/><rect x='6' width='3' height='6' fill='#D91414'/></svg> P E R Ãš &nbsp;&middot;&nbsp; CREAR PSL LIMA</p>
                     <p class="text-gray-500 tracking-[0.15em] uppercase mb-6 text-xs">${appData.fecha_emision} &middot; Documento Exclusivo</p>
                 </div>
                 <div class="reveal active delay-200">
                     <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight">
-                        ¡${appData.nombre_entrenador}, qué felicidad<br>tenerte de vuelta! <svg class='inline-block w-8 h-5.5 md:w-12 md:h-8 lg:w-14 lg:h-9.5 align-middle ml-2 -mt-1.5 shadow-sm' viewBox='0 0 9 6' xmlns='http://www.w3.org/2000/svg'><rect width='3' height='6' fill='#D91414'/><rect x='3' width='3' height='6' fill='#FFF'/><rect x='6' width='3' height='6' fill='#D91414'/></svg>
+                        Â¡${appData.nombre_entrenador}, quÃ© felicidad<br>tenerte de vuelta! <svg class='inline-block w-8 h-5.5 md:w-12 md:h-8 lg:w-14 lg:h-9.5 align-middle ml-2 -mt-1.5 shadow-sm' viewBox='0 0 9 6' xmlns='http://www.w3.org/2000/svg'><rect width='3' height='6' fill='#D91414'/><rect x='3' width='3' height='6' fill='#FFF'/><rect x='6' width='3' height='6' fill='#D91414'/></svg>
                     </h1>
-                    <p class="text-lg md:text-xl text-crearBlueLight font-light mb-4">Tu radar logístico &middot; ${appData.tipo_entrenamiento} ${appData.equipo} 💥</p>
+                    <p class="text-lg md:text-xl text-crearBlueLight font-light mb-4">Tu radar logÃ­stico &middot; ${appData.tipo_entrenamiento} ${appData.equipo} ðŸ’¥</p>
                 </div>
                 <div class="reveal active delay-300">
                     <p class="text-base md:text-lg text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
@@ -1568,12 +1568,12 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 </div>
                 <div class="reveal active delay-400 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a href="#mision" class="inline-flex items-center space-x-2 bg-crearBlue hover:bg-crearBlueDark text-white font-bold py-4 px-10 rounded-full transition-all glow-blue hover:scale-105 uppercase tracking-widest text-sm">
-                        <span>Desplegar Logística</span>
+                        <span>Desplegar LogÃ­stica</span>
                         <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                     </a>
                     <button onclick="openMigracion()" class="inline-flex items-center space-x-2 bg-transparent border border-crearBorder hover:border-crearBlue/50 text-gray-400 hover:text-white font-medium py-4 px-8 rounded-full transition-all text-sm">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        <span>Documento Migración</span>
+                        <span>Documento MigraciÃ³n</span>
                     </button>
                 </div>
             </div>
@@ -1581,13 +1581,13 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 
         <main class="max-w-5xl mx-auto px-6 py-24 space-y-36">
             
-            <!-- 1. TU MISIÓN -->
-            <section id="mision" class="reveal" data-alert="Misión Confirmada">
+            <!-- 1. TU MISIÃ“N -->
+            <section id="mision" class="reveal" data-alert="MisiÃ³n Confirmada">
                 <div class="flex items-center space-x-4 mb-8">
                     <div class="w-12 h-12 rounded-xl bg-crearBlue/10 border border-crearBlue/30 flex items-center justify-center">
                         <span class="text-crearBlue font-black text-lg">01</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Tu Misión</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Tu MisiÃ³n</h2>
                 </div>
                 <div class="space-y-6">
                     ${missionsHtml}
@@ -1602,7 +1602,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                     </div>
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Vuelos Confirmados</h2>
                 </div>
-                <p class="text-crearCyan mb-2 font-semibold text-sm uppercase tracking-[0.2em]">✈️ Reserva: ${appData.pnr}</p>
+                <p class="text-crearCyan mb-2 font-semibold text-sm uppercase tracking-[0.2em]">âœˆï¸ Reserva: ${appData.pnr}</p>
                 <p class="text-gray-500 text-xs mb-8">Boleto emitido a nombre de: <strong class="text-white">${appData.boleto_nombre}</strong></p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1642,7 +1642,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             </section>
 
             <!-- 3. MOVILIDAD Y SEDE -->
-            <section class="reveal" data-alert="Sede y Ubicación GPS Cargadas">
+            <section class="reveal" data-alert="Sede y UbicaciÃ³n GPS Cargadas">
                 <div class="flex items-center space-x-4 mb-8">
                     <div class="w-12 h-12 rounded-xl bg-crearBlue/10 border border-crearBlue/30 flex items-center justify-center">
                         <span class="text-crearBlue font-black text-lg">03</span>
@@ -1680,7 +1680,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                     <div class="bg-crearCard rounded-2xl border border-crearBorder p-8">
                         <p class="text-gray-500 text-xs uppercase tracking-widest mb-3">${appData.clima_temporada}</p>
                         <div class="flex items-center space-x-4 mb-6">
-                            <span class="text-5xl">🌥️</span>
+                            <span class="text-5xl">ðŸŒ¥ï¸</span>
                             <div>
                                 <p class="text-white text-2xl font-black">${appData.clima_temperatura}</p>
                                 <p class="text-gray-400 text-xs font-light">${appData.clima_condicion}</p>
@@ -1694,7 +1694,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                     <!-- Reglas -->
                     <div class="bg-gradient-to-br from-amber-500/5 to-transparent rounded-2xl border border-amber-500/20 p-8 space-y-4">
                         <h4 class="text-amber-400 font-bold text-lg mb-2 flex items-center space-x-2">
-                            <span class="text-xl">⚠️</span>
+                            <span class="text-xl">âš ï¸</span>
                             <span>Cuidado de la Sede</span>
                         </h4>
                         ${rulesHtml}
@@ -1703,7 +1703,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             </section>
 
             <!-- 5. TUS HONORARIOS -->
-            <section class="reveal" data-alert="Módulo de Gastos y Honorarios">
+            <section class="reveal" data-alert="MÃ³dulo de Gastos y Honorarios">
                 <div class="flex items-center space-x-4 mb-8">
                     <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center">
                         <span class="text-green-400 font-black text-lg">05</span>
@@ -1715,15 +1715,15 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                         ${appData.honorarios_texto}
                     </p>
                     <div class="bg-crearDark/50 p-5 rounded-xl border border-crearBorder text-xs text-gray-400 mb-6 space-y-2">
-                        <p class="text-white font-bold">Datos de facturación para gastos locales (alimentación, traslados extras):</p>
+                        <p class="text-white font-bold">Datos de facturaciÃ³n para gastos locales (alimentaciÃ³n, traslados extras):</p>
                         <ul class="space-y-1">
-                            <li><strong>Razón Social:</strong> ${appData.facturacion_razon_social}</li>
+                            <li><strong>RazÃ³n Social:</strong> ${appData.facturacion_razon_social}</li>
                             <li><strong>RUC:</strong> ${appData.facturacion_ruc}</li>
-                            <li><strong>Dirección:</strong> ${appData.facturacion_direccion}</li>
+                            <li><strong>DirecciÃ³n:</strong> ${appData.facturacion_direccion}</li>
                         </ul>
                     </div>
                     ${appData.whatsapp_contacto ? `
-                    <a href="https://wa.me/${appData.whatsapp_contacto.replace('+', '')}?text=${encodeURIComponent(appData.whatsapp_mensaje || 'Hola José, te escribo por el tema de honorarios.')}" target="_blank"
+                    <a href="https://wa.me/${appData.whatsapp_contacto.replace('+', '')}?text=${encodeURIComponent(appData.whatsapp_mensaje || 'Hola JosÃ©, te escribo por el tema de honorarios.')}" target="_blank"
                        class="inline-flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-5 py-3.5 rounded-xl text-sm font-semibold transition-all hover:scale-[1.03]">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 00-5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         <span>Enviar Datos de Pago</span>
@@ -1732,12 +1732,12 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             </section>
 
             <!-- 6. TU EQUIPO DE SOPORTE -->
-            <section class="reveal" data-alert="Escuadrón de Soporte Conectado">
+            <section class="reveal" data-alert="EscuadrÃ³n de Soporte Conectado">
                 <div class="flex items-center space-x-4 mb-8">
                     <div class="w-12 h-12 rounded-xl bg-crearBlue/10 border border-crearBlue/30 flex items-center justify-center">
                         <span class="text-crearBlue font-black text-lg">06</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Tu Escuadrón de Soporte</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Tu EscuadrÃ³n de Soporte</h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1750,7 +1750,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-crearBlueLight to-crearBlue mb-8 leading-tight">
                     ${appData.cierre_empoderamiento}
                 </h2>
-                <p class="text-crearBlue font-semibold tracking-[0.3em] uppercase mb-2 text-sm">Con mucho cariño y respeto,</p>
+                <p class="text-crearBlue font-semibold tracking-[0.3em] uppercase mb-2 text-sm">Con mucho cariÃ±o y respeto,</p>
                 <p class="text-white text-xl font-light mb-10">La Sede Lima junto a todos sus miembros</p>
                 <div class="flex items-center justify-center space-x-4">
                     <a href="https://www.instagram.com/crearpslperu/" target="_blank" class="w-10 h-10 rounded-full bg-crearCard border border-crearBorder flex items-center justify-center hover:border-crearBlue/50 transition-colors group">
@@ -1766,7 +1766,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
         <footer class="bg-crearDark py-8 text-center border-t border-crearBorder">
             <img src="logo_crear_blanco.png" alt="CREAR" class="mx-auto h-8 mb-3 opacity-30">
             <p class="text-gray-600 text-xs uppercase tracking-widest">&copy; 2026 CREAR PSL Lima &middot; Gerencia</p>
-            <p class="text-gray-700 text-[10px] mt-2">Documento confidencial &middot; Acceso exclusivo período de entrenamiento</p>
+            <p class="text-gray-700 text-[10px] mt-2">Documento confidencial &middot; Acceso exclusivo perÃ­odo de entrenamiento</p>
         </footer>
     </div>
 
@@ -1820,7 +1820,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
         function copyCode() {
             sourceCode.select();
             document.execCommand('copy');
-            alert("✓ Código HTML copiado al portapapeles.");
+            alert("âœ“ CÃ³digo HTML copiado al portapapeles.");
         }
 
         // Export data to JSON file
@@ -1850,7 +1850,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
 
                     syncFormFromData();
                     updatePreview();
-                    alert("✓ Datos importados con éxito.");
+                    alert("âœ“ Datos importados con Ã©xito.");
                 } catch (e) {
                     alert("Error parsing JSON file: " + e.message);
                 }
@@ -1945,7 +1945,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 
                 resCard.className = "p-4 bg-green-950/20 border border-green-500/30 rounded-xl text-xs text-green-400 space-y-2";
                 resCard.innerHTML = `
-                    <p class="font-bold">✓ ¡Publicación exitosa en la nube (GitHub Pages)!</p>
+                    <p class="font-bold">âœ“ Â¡PublicaciÃ³n exitosa en la nube (GitHub Pages)!</p>
                     <p>Archivo: <strong>${filename}</strong></p>
                     <p>Url oficial: <a href="${pagesUrl}" target="_blank" class="underline text-crearCyan font-semibold">${pagesUrl}</a></p>
                     <button onclick="closePublishModal()" class="w-full mt-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded font-bold transition-all">Listo</button>
@@ -1956,7 +1956,7 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
                 resCard.classList.remove('hidden');
                 resCard.className = "p-4 bg-red-950/20 border border-red-500/30 rounded-xl text-xs text-red-400 space-y-2";
                 resCard.innerHTML = `
-                    <p class="font-bold">✕ Error de red / comunicación</p>
+                    <p class="font-bold">âœ• Error de red / comunicaciÃ³n</p>
                     <p class="text-gray-300">${err.message}</p>
                     <button onclick="resetPublishModal()" class="w-full mt-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded font-bold transition-all">Reintentar</button>
                 `;
@@ -1973,17 +1973,11 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
         async function parseWithIA() {
             const rawText = rawTextarea.value.trim();
             if (!rawText) {
-                alert("Por favor pega información de texto antes de procesar.");
+                alert("Por favor pega informaciÃ³n de texto antes de procesar.");
                 return;
             }
 
-            const apiKey = document.getElementById('geminiApiKey').value.trim();
-            if (!apiKey) {
-                alert("Por favor ingresa una API Key de Gemini válida.");
-                switchTab('tab-ia');
-                document.getElementById('geminiApiKey').focus();
-                return;
-            }
+            const apiKey = document.getElementById('geminiApiKey') ? document.getElementById('geminiApiKey').value.trim() : "";
 
             // UI loading state
             btnParse.disabled = true;
@@ -1991,27 +1985,27 @@ Vuelos: Llegada Miercoles 22 Vuelo LATAM 2393 a las 21:25..."></textarea>
             textIA.textContent = "Analizando con IA...";
 
             const systemPrompt = `
-Actúa como: El Analista de Logística y Operaciones de CREAR PSL LIMA. Eres un profesional altamente estructurado, cálido pero que va directo al grano ("sin palabrería"). Tu objetivo es dar la bienvenida a los entrenadores internacionales y darles su radar logístico exacto para que viajen ligeros de mente.
+ActÃºa como: El Analista de LogÃ­stica y Operaciones de CREAR PSL LIMA. Eres un profesional altamente estructurado, cÃ¡lido pero que va directo al grano ("sin palabrerÃ­a"). Tu objetivo es dar la bienvenida a los entrenadores internacionales y darles su radar logÃ­stico exacto para que viajen ligeros de mente.
 
-Instrucción:
-Redacta una "Carta de Bienvenida y Logística" para un entrenador basándote en los datos proporcionados y estructúrala en el formato JSON requerido.
+InstrucciÃ³n:
+Redacta una "Carta de Bienvenida y LogÃ­stica" para un entrenador basÃ¡ndote en los datos proporcionados y estructÃºrala en el formato JSON requerido.
 
 Tono y Estilo:
-- Cálido en la apertura y cierre.
-- Extremadamente directo y estructurado en la logística. Usa viñetas y negritas para resaltar fechas, horas, reservas y nombres.
-- Lenguaje propio de la organización: "Grounding", "Tu Escuadrón de Soporte", "Impactos", "Detonar la sala", "Capítulo Uno (C1)", "Capítulo Dos (C2)", "El Viaje", "Maestría del Juego (MJ)".
+- CÃ¡lido en la apertura y cierre.
+- Extremadamente directo y estructurado en la logÃ­stica. Usa viÃ±etas y negritas para resaltar fechas, horas, reservas y nombres.
+- Lenguaje propio de la organizaciÃ³n: "Grounding", "Tu EscuadrÃ³n de Soporte", "Impactos", "Detonar la sala", "CapÃ­tulo Uno (C1)", "CapÃ­tulo Dos (C2)", "El Viaje", "MaestrÃ­a del Juego (MJ)".
 
-Reglas de Oro (Pensamiento Crítico):
-1. Revisa si hay contradicciones lógicas en los datos provistos (ej. el vuelo de llegada aterriza después de la hora del Grounding, faltan fechas de regreso, la estadía del hotel no cuadra con el vuelo). Si hay inconsistencias, descríbelas en el campo "alertas".
-2. REGLA DE NOMENCLATURA DE STAFF: El término "Capitán de Servicio" o "Capitana de Servicio" SOLO se usa para el entrenamiento "El Viaje". Para cualquier otro entrenamiento (C1, C2, MJ, Caminata), el cargo es simplemente "Capitán" o "Capitana".
-3. REGLA DE GROUNDING Y PUNTO DE ENCUENTRO MAESTRÍA (MJ): Para cualquier nivel de Maestría, el Grounding de entrenadores siempre es en el Salón de Creación.
+Reglas de Oro (Pensamiento CrÃ­tico):
+1. Revisa si hay contradicciones lÃ³gicas en los datos provistos (ej. el vuelo de llegada aterriza despuÃ©s de la hora del Grounding, faltan fechas de regreso, la estadÃ­a del hotel no cuadra con el vuelo). Si hay inconsistencias, descrÃ­belas en el campo "alertas".
+2. REGLA DE NOMENCLATURA DE STAFF: El tÃ©rmino "CapitÃ¡n de Servicio" o "Capitana de Servicio" SOLO se usa para el entrenamiento "El Viaje". Para cualquier otro entrenamiento (C1, C2, MJ, Caminata), el cargo es simplemente "CapitÃ¡n" o "Capitana".
+3. REGLA DE GROUNDING Y PUNTO DE ENCUENTRO MAESTRÃA (MJ): Para cualquier nivel de MaestrÃ­a, el Grounding de entrenadores siempre es en el SalÃ³n de CreaciÃ³n.
 4. REGLA MATRIZ DE HORARIOS DE ARRANQUE:
-   - Para Capítulo Uno (C1): Inicia el Viernes. Grounding con Aliados a las 09:00 AM y Apertura de puertas a las 10:00 AM.
-   - Para Capítulo Dos (C2): Inicia el Jueves. Grounding con Aliados a las 12:00 PM, Registro a las 13:00 PM y Apertura de puertas a las 14:00 PM.
-   - Para Maestría (MJ): Inicia el Viernes. Grounding Entrenadores a las 16:30 PM (4:30 PM), Mesa de Registro y Grounding de Managers a las 17:00 PM (5:00 PM) y Apertura de puertas e inicio a las 18:00 PM (6:00 PM).
-5. REGLA DE TRASLADOS Y RECOJOS (lobby_pickups y traslados): NO resumas ni acortes la información. Para el vuelo de regreso (ida al aeropuerto), debes calcular e indicar explícitamente que la hora de recojo en el hotel será 3 horas y media (3h 30m) antes de la hora del vuelo de salida. Explica que esto se debe a que el tráfico en Lima es variable y deben estar 3 horas antes en el aeropuerto. Además, indica obligatoriamente que la empresa los contactará una hora antes para darles los detalles de su recogida, tanto a la llegada como a la ida.
+   - Para CapÃ­tulo Uno (C1): Inicia el Viernes. Grounding con Aliados a las 09:00 AM y Apertura de puertas a las 10:00 AM.
+   - Para CapÃ­tulo Dos (C2): Inicia el Jueves. Grounding con Aliados a las 12:00 PM, Registro a las 13:00 PM y Apertura de puertas a las 14:00 PM.
+   - Para MaestrÃ­a (MJ): Inicia el Viernes. Grounding Entrenadores a las 16:30 PM (4:30 PM), Mesa de Registro y Grounding de Managers a las 17:00 PM (5:00 PM) y Apertura de puertas e inicio a las 18:00 PM (6:00 PM).
+5. REGLA DE TRASLADOS Y RECOJOS (lobby_pickups y traslados): NO resumas ni acortes la informaciÃ³n. Para el vuelo de regreso (ida al aeropuerto), debes calcular e indicar explÃ­citamente que la hora de recojo en el hotel serÃ¡ 3 horas y media (3h 30m) antes de la hora del vuelo de salida. Explica que esto se debe a que el trÃ¡fico en Lima es variable y deben estar 3 horas antes en el aeropuerto. AdemÃ¡s, indica obligatoriamente que la empresa los contactarÃ¡ una hora antes para darles los detalles de su recogida, tanto a la llegada como a la ida.
 
-Regresa exactamente el esquema JSON solicitado sin ningún formato markdown adicional (no pongas \`\`\`json ni nada de eso, solo el JSON puro).
+Regresa exactamente el esquema JSON solicitado sin ningÃºn formato markdown adicional (no pongas \`\`\`json ni nada de eso, solo el JSON puro).
 `;
 
             const responseSchema = {
@@ -2190,7 +2184,7 @@ Regresa exactamente el esquema JSON solicitado sin ningún formato markdown adic
                     contents: [{
                         parts: [
                             { text: systemPrompt },
-                            { text: `TEXTO DE LOGÍSTICA PROPORCIONADO:\n${rawText}` }
+                            { text: `TEXTO DE LOGÃSTICA PROPORCIONADO:\n${rawText}` }
                         ]
                     }],
                     generationConfig: {
@@ -2205,7 +2199,7 @@ Regresa exactamente el esquema JSON solicitado sin ningún formato markdown adic
                     model: 'llama-3.3-70b-versatile',
                     messages: [
                         { role: 'system', content: systemPrompt + "\n\nResponde UNICAMENTE con un objeto JSON (sin markdown) que siga estrictamente la estructura solicitada. No incluyas comentarios adicionales." },
-                        { role: 'user', content: `TEXTO DE LOGÍSTICA PROPORCIONADO:\n${rawText}` }
+                        { role: 'user', content: `TEXTO DE LOGÃSTICA PROPORCIONADO:\n${rawText}` }
                     ],
                     response_format: { type: "json_object" },
                     temperature: 0.1
@@ -2241,7 +2235,7 @@ Regresa exactamente el esquema JSON solicitado sin ningún formato markdown adic
                 // Set default values if not parsed cleanly
                 if (!appData.facturacion_razon_social) appData.facturacion_razon_social = "CREACION CUANTICA E.I.R.L.";
                 if (!appData.facturacion_ruc) appData.facturacion_ruc = "20612592811";
-                if (!appData.facturacion_direccion) appData.facturacion_direccion = "Calle Berlín 965, Int. 302, Miraflores, Lima, Perú";
+                if (!appData.facturacion_direccion) appData.facturacion_direccion = "Calle BerlÃ­n 965, Int. 302, Miraflores, Lima, PerÃº";
                 if (!appData.whatsapp_contacto) appData.whatsapp_contacto = "51919563284";
 
                 // Update UI state
@@ -2252,16 +2246,17 @@ Regresa exactamente el esquema JSON solicitado sin ningún formato markdown adic
                 updatePreview();
                 switchTab('tab-general');
                 
-                alert("✓ Texto analizado e importado con éxito por la Inteligencia Artificial. Revisa los datos en las pestañas.");
+                alert("âœ“ Texto analizado e importado con Ã©xito por la Inteligencia Artificial. Revisa los datos en las pestaÃ±as.");
             } catch (err) {
                 console.error(err);
-                alert(`Error al procesar con la IA: ${err.message}\nVerifica tu API Key y tu conexión a internet.`);
+                alert(`Error al procesar con la IA: ${err.message}\nVerifica tu API Key y tu conexiÃ³n a internet.`);
             } finally {
                 btnParse.disabled = false;
                 spinnerIA.classList.add('hidden');
-                textIA.textContent = "Procesar con IA ⚡";
+                textIA.textContent = "Procesar con IA âš¡";
             }
         }
     </script>
 </body>
 </html>
+

@@ -91,6 +91,19 @@ textarea.field-input{resize:vertical;min-height:80px}
         <!-- TAB IA -->
         <div id="tab-ia" class="space-y-4">
           <div class="card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <p class="text-xs font-bold text-white">Manual y Prompt Maestro (IA)</p>
+              <a href="file:///C:/Users/josem/Downloads/Guía%20IA%20para%20Gerentes%20-%20Creación%20de%20Cartas.pdf" target="_blank" class="btn-ghost flex items-center gap-2 text-[10px]" title="Abrir Manual">
+                📄 Ver Manual PDF
+              </a>
+            </div>
+            <p class="text-[11px] text-gray-500">Copia el Prompt Maestro y úsalo en Gemini junto con el PDF de vuelos. Luego, pega el texto resultante abajo para generar la carta final.</p>
+            <div class="relative">
+              <textarea id="promptMaestro" class="field-input text-[10px] font-mono custom-scrollbar" rows="3" readonly>Cargando prompt...</textarea>
+              <button onclick="navigator.clipboard.writeText(document.getElementById('promptMaestro').value).then(()=>alert('¡Prompt copiado al portapapeles!'))" class="absolute top-2 right-2 bg-crearBlue/20 text-crearCyan text-[9px] px-2 py-1 rounded hover:bg-crearBlue/40 transition-colors">Copiar Prompt</button>
+            </div>
+          </div>
+          <div class="card p-4 space-y-3">
             <p class="text-xs font-bold text-white">Pegar Texto de Logistica</p>
             <p class="text-[11px] text-gray-500">Pega el correo o WhatsApp. La IA estructurara automaticamente vuelos, misiones y traslados.</p>
             <textarea id="rawTextarea" class="field-input" rows="10" placeholder="Para: Maria Patino&#10;Vuelos: Llegada Jueves 30 de Julio..."></textarea>
@@ -135,6 +148,7 @@ textarea.field-input{resize:vertical;min-height:80px}
             <p class="text-[10px] font-bold text-gray-500 uppercase">Carta</p>
             <div><label class="field-label">Asunto</label><input id="asunto" class="field-input" type="text" oninput="uf(this)"></div>
             <div><label class="field-label">Mensaje de Bienvenida</label><textarea id="mensaje_bienvenida" class="field-input" rows="5" oninput="uf(this)"></textarea></div>
+            <div><label class="field-label">Link Espacio FDS (Google Chat)</label><input id="fds_link" class="field-input" type="url" placeholder="https://chat.google.com/room/..." oninput="uf(this)"></div>
             <div><label class="field-label">Cierre de Empoderamiento</label><textarea id="cierre_empoderamiento" class="field-input" rows="3" oninput="uf(this)"></textarea></div>
           </div>
           <div class="card p-4 space-y-3">
@@ -371,6 +385,70 @@ function safe(v){ return fixMojibake((v || "").toString()).replace(/"/g, '&quot;
 
 
 // =====================================================================
+// PROMPT MAESTRO
+// =====================================================================
+const PROMPT_MAESTRO = `Actúa como: El Analista de Logística y Operaciones de CREAR PSL SEDE [ESCRIBE TU SEDE AQUÍ]. Eres un profesional altamente estructurado, cálido pero directo al grano. Tu objetivo es dar la bienvenida a los entrenadores y su radar logístico exacto.
+
+Tono y Estilo:
+● Cálido en la apertura ("Querido/a [Nombre]", "Qué alegría recibirte").
+● Usa negritas para fechas, horas, reservas y nombres.
+● El contenido y el tono de la carta deben adaptarse al tipo de entrenamiento:
+  ○ Si es Capítulo Uno (C1): Habla de encender la primera chispa, despertar al equipo.
+  ○ Si es Capítulo Dos (C2): Habla de enfrentar quiebres, pararse en su poder.
+  ○ Si es Maestría (MJ Creación, Relación, Gratitud): Habla de expandir el juego, materializar visión (Creación), construir relaciones extraordinarias y ecología pura (Relación) o celebrar y coronar el proceso (Gratitud).
+  ○ Si es El Viaje: Habla de inmersión total, cruzar el puente, futuros imposibles.
+
+Reglas de Oro Innegociables (Coherencia Total):
+1. Extracción de Vuelos y Locales: Te indicaré si el entrenador es LOCAL o FORÁNEO. Si es foráneo, te enviaré un archivo PDF con los vuelos: extrae el Código de Reserva (6 letras), Fechas, Horarios de Llegada/Salida, Aerolínea/Vuelo, y nombre legal. Si el entrenador es LOCAL, OMITE toda la sección de vuelos y aeropuertos, no inventes datos.
+2. Nomenclatura Staff: "Capitana de Servicio" SOLO se usa en "El Viaje". Para C1, C2 y MJ, se dice simplemente "Capitán" o "Capitana". Si el equipo NO tiene capitán y solo tiene Managers, indícalo claramente y pon sus nombres.
+3. Regla de Horarios Base (Debe ser estricto y congruente):
+  ○ Capítulo Uno (C1): Viernes - Grounding 09:00 AM | Puertas 10:00 AM.
+  ○ Capítulo Dos (C2): Jueves - Grounding 12:00 PM | Registro 13:00 PM | Puertas 14:00 PM.
+  ○ Maestría (MJ Creación/Relación/Gratitud): Viernes - Grounding Entrenadores con Coordinación 16:30 PM | Registro 17:00 PM | Puertas 18:00 PM.
+  ○ El Viaje: Viernes - Grounding Noche de Confianza 18:15 PM.
+4. Transporte:
+  ○ Si viaja en avión y nosotros lo recogemos: PON LITERAL "Nuestro equipo de transporte te escribirá antes de que aterrices para coordinar tu recojo exacto, contemplando tus tiempos de migración y espera de maletas".
+  ○ Si es LOCAL o no requiere recojo: Pon "Como juegas de local / manejas tus tiempos, nos vemos directamente en la sede en los horarios de arranque".
+
+Estructura Obligatoria de la Carta:
+
+CREAR PODER SIN LÍMITES - SEDE [ESCRIBE TU SEDE AQUÍ]
+¡Tierra de líderes y transformación!
+
+Fecha: [Fecha actual]
+Para: [Nombre del Entrenador]
+De: Equipo CREAR PSL [TU SEDE]
+
+Asunto: ¡Bienvenido a casa, [Apodo]! – Tu radar para el [Entrenamiento] del [Equipo] 💥
+
+[Párrafo cálido adaptado al tipo de entrenamiento].
+Para que viajes ligero de mente, aquí tienes tu logística exacta:
+
+1. Tu Misión ([Entrenamiento] - [Equipo])
+● Fechas y Horarios exactos aplicando la Regla 3 de forma estricta.
+
+2. Vuelos Confirmados
+● Solo si aplica (Regla 1). Detalles leídos del PDF. (Omitir si es local).
+
+3. Movilidad y Sedes
+● Tus traslados: Aplicando Regla 4.
+● Hotel de descanso: [Nombre del Hotel].
+● Sede del entrenamiento: [Lugar del entrenamiento]. (Añadir nota si son el mismo lugar o si están separados).
+
+4. Clima y Reglas de Oro
+● Clima de la ciudad y reglas: 11:00 PM hora límite de salón, cero comida adentro.
+
+5. Tus Honorarios
+● Acuerdo estándar. Avisar actualización de banco a la Gerencia.
+
+6. Tu Escuadrón de Soporte
+● Lista de contactos (Capitán/Managers, Oficina, Gerente).
+
+[Frase de cierre de empoderamiento puro].
+Un abrazo,
+El Equipo de CREAR PSL [TU SEDE]\`;
+
+// =====================================================================
 // FULL OFFICIAL DATABASE FOR ALL 7 SEDES AND ENTIRE OFFICE STAFF
 // =====================================================================
 const SD={
@@ -381,6 +459,7 @@ const SD={
     ct:"Lima - Temporada de Invierno", ctemp:"13° - 17°C", ccond:"Nublado y humedad alta",
     ccons:["Dias grises y frios. Trae abrigos comodos para el salon y salidas.","En Lima no llueve, pero la humedad aumenta de noche."],
     reg:[{n:1,t:"Hora limite 11:00 PM",d:"Hora de salida innegociable los 3 dias por normas de la sede."},{n:2,t:"El Espacio",d:"Cero comida dentro de los salones y manejo prudente de decibeles."}],
+    fds_link:"https://chat.google.com/room/AAQAj8M5Q-8?cls=7",
     frs:"CREACION CUANTICA E.I.R.L.", fruc:"20612592811", fdir:"Calle Berlin 965, Int. 302, Miraflores, Lima, Peru", wa:"51919563284",
     cnom:"Jose Sanchez", ctel:"+51 919 563 284", cemail:"jose.sanchez@crearpsl.net", mdist:"Miraflores, Lima, Peru",
     sop:[
@@ -494,6 +573,11 @@ const SD={
 
 let cSede="lima", appData=mkDef("lima");
 
+document.addEventListener("DOMContentLoaded", function() {
+  const pTextArea = document.getElementById('promptMaestro');
+  if(pTextArea) pTextArea.value = PROMPT_MAESTRO;
+});
+
 // Fetch Real-time weather from Open-Meteo API
 async function fetchLiveWeather(sk){
   const s = SD[sk]; if(!s || !s.lat) return;
@@ -598,6 +682,7 @@ function mkDef(sk){
     whatsapp_contacto: s.wa, whatsapp_mensaje: "Hola, te envio mis datos bancarios para el pago de honorarios.",
     soporte: sops,
     cierre_empoderamiento: "Parate en tu poder absoluto. Nos vemos en sala.",
+    fds_link: s.fds_link || "",
     firewalk_location: null,
     migracion: {
       fecha_emision:"", nombres:"", nacionalidad:"", programa_completo:"", fechas_evento:"",
@@ -623,6 +708,7 @@ function selectSede(sk){
   document.getElementById("si_telefono").textContent = s.ctel;
 
   const d = appData;
+  d.fds_link = s.fds_link || "";
   d.hotel_nombre = s.hotel; d.hotel_direccion = s.hdir; d.hotel_maps_url = s.hmaps;
   d.clima_temporada = s.ct; d.clima_temperatura = s.ctemp; d.clima_condicion = s.ccond;
   d.clima_consejos = [...s.ccons]; d.reglas = (s.reg || []).map(normReg);
@@ -819,9 +905,14 @@ function addStaff(){ appData.soporte.push({grupo:"Gerencia", nombre:"", rol:"", 
 function saveToHistory(){
   const h = JSON.parse(localStorage.getItem("cpsl_cartas") || "[]");
   const s = SD[cSede] || SD.lima;
+  const nom = appData.nombre_entrenador || "Sin nombre";
+  const extIdx = h.findIndex(x => x.nom === nom && x.ti === appData.tipo_entrenamiento && x.eq === appData.equipo && x.sk === cSede);
+  if (extIdx !== -1) {
+    h.splice(extIdx, 1);
+  }
   h.unshift({
     id: Date.now(), sk: cSede, sn: s.n, se: s.e,
-    nom: appData.nombre_entrenador || "Sin nombre", ti: appData.tipo_entrenamiento, eq: appData.equipo,
+    nom: nom, ti: appData.tipo_entrenamiento, eq: appData.equipo,
     f: new Date().toLocaleDateString("es-PE"), html: genHTML(), snap: JSON.parse(JSON.stringify(appData))
   });
   if(h.length > 50) h.splice(50);
@@ -1036,6 +1127,16 @@ function genHTML(){
   var bvH = d.mensaje_bienvenida ? '<div class="section"><p class="section-label" style="color:#29abe2"><span style="background:#29abe2"></span>Bienvenida</p><div class="card" style="background:linear-gradient(135deg,#111820 0%,#0d1627 100%)"><p style="font-size:16px;line-height:2;color:#d1d5db;white-space:pre-wrap;font-weight:400">'+d.mensaje_bienvenida+'</p></div></div>' : '';
   var misH2 = mH ? '<div class="section"><p class="section-label" style="color:#f59e0b"><span style="background:#f59e0b"></span>Tu Misión</p>'+mH+'</div>' : '';
 
+  var fdsH = "";
+  if(d.fds_link){
+    fdsH = '<div class="section"><p class="section-label" style="color:#10b981"><span style="background:#10b981"></span>Espacio de Coordinación FDS</p>'
+         + '<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(16,185,129,0.02));border-color:rgba(16,185,129,0.3);flex-wrap:wrap">'
+         + '<div><p style="color:white;font-weight:700;font-size:15px;margin:0 0 4px">Google Chat (Fin de Semana)</p>'
+         + '<p style="color:#9ca3af;font-size:13px;margin:0">Únete a este espacio para la comunicación oficial de coordinación durante el evento.</p></div>'
+         + '<a href="'+d.fds_link+'" target="_blank" style="display:inline-block;background:#10b981;color:white;padding:12px 24px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 12px rgba(16,185,129,0.3)">Unirse al Chat &rarr;</a>'
+         + '</div></div>';
+  }
+
   return '<!DOCTYPE html>'
     + '<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
     + '<title>CREAR PSL '+sd.c+' | Radar Logístico &middot; '+d.nombre_entrenador+'<\/title>'
@@ -1133,7 +1234,8 @@ function genHTML(){
     + '<a href="https://wa.me/'+d.whatsapp_contacto+'?text='+encodeURIComponent(d.whatsapp_mensaje)+'" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:12px 22px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:11px;color:#4ade80;font-weight:700;font-size:14px;text-decoration:none">Enviar datos bancarios por WhatsApp<\/a><\/div><\/div>'
 
     // ESCUADRON
-    + '<div class="section"><p class="section-label" style="color:#29abe2"><span style="background:#29abe2"><\/span>Escuadrón de Soporte y Equipo de Oficina<\/p>'+stH+'<\/div>'
+    + fdsH
+    + '<div class="section"><p class="section-label" style="color:#29abe2"><span style="background:#29abe2"></span>Escuadrón de Soporte y Equipo de Oficina</p>'+stH+'</div>'
 
     // CIERRE
     + '<div class="section"><div style="background:linear-gradient(135deg,#0d1a2e 0%,#111820 60%,#0a1628 100%);border:1px solid rgba(26,117,188,0.2);border-radius:20px;padding:56px 40px;text-align:center;position:relative;overflow:hidden">'

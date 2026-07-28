@@ -446,7 +446,7 @@ Para que viajes ligero de mente, aquí tienes tu logística exacta:
 
 [Frase de cierre de empoderamiento puro].
 Un abrazo,
-El Equipo de CREAR PSL [TU SEDE]\`;
+El Equipo de CREAR PSL [TU SEDE]`;
 
 // =====================================================================
 // FULL OFFICIAL DATABASE FOR ALL 7 SEDES AND ENTIRE OFFICE STAFF
@@ -929,7 +929,13 @@ function saveToHistory(){
 }
 
 function updBadge(){
-  const h = JSON.parse(localStorage.geasync function renderHistory(){
+  const h = JSON.parse(localStorage.getItem("cpsl_cartas") || "[]");
+  const b = document.getElementById("hCount");
+  if(h.length > 0){ b.textContent = h.length; b.classList.remove("hidden"); }
+  else b.classList.add("hidden");
+}
+
+async function renderHistory(){
   const h = JSON.parse(localStorage.getItem("cpsl_cartas") || "[]");
   const list = document.getElementById("historyList");
   const empty = document.getElementById("historyEmpty");

@@ -419,8 +419,74 @@
             }, 100);
         });
     </script>
+    <!-- Floating Music Button -->
+    <button id="musicToggleBtn" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full glass border border-gray-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:scale-110 transition-transform duration-300">
+        <i class="fa-solid fa-music"></i>
+    </button>
+    <div id="ytplayer" class="hidden"></div>
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var isPlaying = false;
+        var userInteracted = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: '0',
+                width: '0',
+                videoId: 's5R-d5hT32c',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 's5R-d5hT32c'
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            const btn = document.getElementById('musicToggleBtn');
+            const icon = btn.querySelector('i');
+            
+            const toggleMusic = () => {
+                if (isPlaying) {
+                    player.pauseVideo();
+                    icon.classList.remove('fa-pause', 'text-crear-accent', 'fa-beat-fade');
+                    icon.classList.add('fa-music');
+                    isPlaying = false;
+                } else {
+                    player.playVideo();
+                    icon.classList.remove('fa-music');
+                    icon.classList.add('fa-pause', 'text-crear-accent', 'fa-beat-fade');
+                    isPlaying = true;
+                }
+            };
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userInteracted = true;
+                toggleMusic();
+            });
+
+            document.body.addEventListener('click', () => {
+                if (!userInteracted) {
+                    userInteracted = true;
+                    toggleMusic();
+                }
+            }, { once: true });
+        }
+    </script>
 </body>
 </html>
+
 
 
 

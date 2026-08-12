@@ -125,6 +125,32 @@
                 <p class="text-[#f59e0b] font-black text-xl md:text-2xl italic tracking-wider">"¡¡¡Se Puso Buena!!!"</p>
             </div>
 
+            <!-- CUENTA REGRESIVA PREMIUM -->
+            <div class="reveal mb-12 flex flex-col md:flex-row gap-8 justify-center items-center" style="transition-delay: 275ms;">
+                <!-- Cuenta Regresiva Viaje -->
+                <div class="glass p-6 rounded-2xl border border-[#f59e0b]/20 shadow-[0_0_20px_rgba(251,191,36,0.2)] w-full max-w-sm">
+                    <h3 class="text-[#f59e0b] text-sm uppercase tracking-widest font-bold mb-4">✈️ Tiempo para tu Viaje</h3>
+                    <div id="countdown-flight" class="grid grid-cols-4 gap-2 text-center">
+                        <div><div class="text-3xl font-black text-white" id="fly-d">00</div><div class="text-[10px] text-gray-500 uppercase">Días</div></div>
+                        <div><div class="text-3xl font-black text-white" id="fly-h">00</div><div class="text-[10px] text-gray-500 uppercase">Hrs</div></div>
+                        <div><div class="text-3xl font-black text-white" id="fly-m">00</div><div class="text-[10px] text-gray-500 uppercase">Min</div></div>
+                        <div><div class="text-3xl font-black text-white" id="fly-s">00</div><div class="text-[10px] text-gray-500 uppercase">Seg</div></div>
+                    </div>
+                </div>
+                
+                <!-- Cuenta Regresiva Entrenamiento -->
+                <div class="glass p-6 rounded-2xl border border-[#f59e0b]/20 shadow-[0_0_20px_rgba(251,191,36,0.2)] w-full max-w-sm">
+                    <h3 class="text-[#f59e0b] text-sm uppercase tracking-widest font-bold mb-4">🔥 Inicio del C1 E30</h3>
+                    <div id="countdown-training" class="grid grid-cols-4 gap-2 text-center">
+                        <div><div class="text-3xl font-black text-white" id="trn-d">00</div><div class="text-[10px] text-gray-500 uppercase">Días</div></div>
+                        <div><div class="text-3xl font-black text-white" id="trn-h">00</div><div class="text-[10px] text-gray-500 uppercase">Hrs</div></div>
+                        <div><div class="text-3xl font-black text-white" id="trn-m">00</div><div class="text-[10px] text-gray-500 uppercase">Min</div></div>
+                        <div><div class="text-3xl font-black text-white" id="trn-s">00</div><div class="text-[10px] text-gray-500 uppercase">Seg</div></div>
+                    </div>
+                </div>
+            </div>
+            <p id="timezone-indicator" class="text-xs text-gray-500 mb-8 tracking-widest uppercase reveal" style="transition-delay: 285ms;">Calculando huso horario local...</p>
+
             <div class="glass p-8 rounded-2xl text-left reveal border border-gray-800 hover:border-crear-accent transition-colors duration-500 shadow-2xl" style="transition-delay: 300ms;">
                 <p class="text-gray-300 text-lg leading-relaxed mb-4">
                     <strong>Querido Fer,</strong><br/><br/>
@@ -528,11 +554,41 @@
                       toggleMusic();
                   });
               }
+              
+              // Cuenta Regresiva (Logica Huso Horario)
+              const trainingDateLima = new Date("2026-08-14T10:00:00-05:00").getTime();
+              const flightDateLima = new Date("2026-08-13T12:15:00-05:00").getTime();
+              const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+              const indicator = document.getElementById('timezone-indicator');
+              if(indicator) indicator.innerText = `Mostrando cuenta regresiva detectando tu zona local: ${timeZone}`;
+              
+              function updateCountdowns() {
+                  const now = new Date().getTime();
+                  let distanceTrn = trainingDateLima - now;
+                  if (distanceTrn > 0) {
+                      document.getElementById("trn-d").innerText = String(Math.floor(distanceTrn / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                      document.getElementById("trn-h").innerText = String(Math.floor((distanceTrn % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                      document.getElementById("trn-m").innerText = String(Math.floor((distanceTrn % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                      document.getElementById("trn-s").innerText = String(Math.floor((distanceTrn % (1000 * 60)) / 1000)).padStart(2, '0');
+                  } else {
+                      document.getElementById("countdown-training").innerHTML = "<div class='col-span-4 text-white font-bold tracking-widest uppercase'>¡El entrenamiento ha comenzado!</div>";
+                  }
+                  
+                  let distanceFly = flightDateLima - now;
+                  if (distanceFly > 0) {
+                      document.getElementById("fly-d").innerText = String(Math.floor(distanceFly / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                      document.getElementById("fly-h").innerText = String(Math.floor((distanceFly % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                      document.getElementById("fly-m").innerText = String(Math.floor((distanceFly % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                      document.getElementById("fly-s").innerText = String(Math.floor((distanceFly % (1000 * 60)) / 1000)).padStart(2, '0');
+                  } else {
+                      document.getElementById("countdown-flight").innerHTML = "<div class='col-span-4 text-white font-bold tracking-widest uppercase'>¡Buen viaje!</div>";
+                  }
+              }
+              setInterval(updateCountdowns, 1000);
+              updateCountdowns();
           });
       </script>
 </body>
-</html>
-
 
 
 

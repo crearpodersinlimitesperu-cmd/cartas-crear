@@ -1317,7 +1317,12 @@ function openPublishModal(){
   const n = (appData.nombre_entrenador || "entrenador").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"-");
   const eq = (appData.equipo || "").toLowerCase().replace(/\s+/g,"-");
   const ti = (appData.tipo_entrenamiento || "carta").toLowerCase().replace(/\s+/g,"-");
-  document.getElementById("publishFilename").value = "carta-" + n + "-" + ti + "-" + eq;
+  
+  let filename = n + "-" + ti;
+  if (eq) {
+      filename += "-" + eq;
+  }
+  document.getElementById("publishFilename").value = filename;
   document.getElementById("pubResult").classList.add("hidden");
   document.getElementById("pubLoader").classList.add("hidden");
   document.getElementById("pubActions").classList.remove("hidden");

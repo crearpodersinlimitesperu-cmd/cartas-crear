@@ -433,7 +433,7 @@
     <button id="musicToggleBtn" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full glass border border-gray-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:scale-110 transition-transform duration-300">
         <i class="fa-solid fa-music"></i>
     </button>
-    <div id="ytplayer" class="hidden"></div>
+    <div id="ytplayer" class="absolute -left-[9999px] w-10 h-10 opacity-0 pointer-events-none"></div>
 
     <script>
         var tag = document.createElement('script');
@@ -447,8 +447,8 @@
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('ytplayer', {
-                height: '0',
-                width: '0',
+                height: '10',
+                width: '10',
                 videoId: 's5R-d5hT32c',
                 playerVars: {
                     'autoplay': 0,
@@ -501,6 +501,7 @@
     </script>
 </body>
 </html>
+
 
 
 

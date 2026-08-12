@@ -436,69 +436,87 @@
     <div id="ytplayer" class="absolute -left-[9999px] w-10 h-10 opacity-0 pointer-events-none"></div>
 
     <script>
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        var isPlaying = false;
-        var userInteracted = false;
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('ytplayer', {
-                height: '10',
-                width: '10',
-                videoId: 's5R-d5hT32c',
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 's5R-d5hT32c'
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            const btn = document.getElementById('musicToggleBtn');
-            const icon = btn.querySelector('i');
-            
-            const toggleMusic = () => {
-                if (isPlaying) {
-                    player.pauseVideo();
-                    icon.classList.remove('fa-pause', 'text-crear-accent', 'fa-beat-fade');
-                    icon.classList.add('fa-music');
-                    isPlaying = false;
-                } else {
-                    player.playVideo();
-                    icon.classList.remove('fa-music');
-                    icon.classList.add('fa-pause', 'text-crear-accent', 'fa-beat-fade');
-                    isPlaying = true;
-                }
-            };
-
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                userInteracted = true;
-                toggleMusic();
-            });
-
-            
-            const overlay = document.getElementById('welcomeOverlay');
-            const openBtn = document.getElementById('openLetterBtn');
-            if(openBtn) {
-                openBtn.addEventListener('click', () => {
-                    overlay.style.opacity = '0';
-                    setTimeout(() => overlay.remove(), 1000);
-                    if (!isPlaying) toggleMusic();
-                });
-            }
-    
-        }
-    </script>
+          var tag = document.createElement('script');
+          tag.src = "https://www.youtube.com/iframe_api";
+          var firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  
+          var player;
+          var isPlaying = false;
+          var userInteracted = false;
+          var playerReady = false;
+  
+          function onYouTubeIframeAPIReady() {
+              player = new YT.Player('ytplayer', {
+                  height: '10',
+                  width: '10',
+                  videoId: 's5R-d5hT32c',
+                  playerVars: {
+                      'autoplay': 1,
+                      'controls': 0,
+                      'loop': 1,
+                      'playlist': 's5R-d5hT32c',
+                      'playsinline': 1
+                  },
+                  events: {
+                      'onReady': onPlayerReady
+                  }
+              });
+          }
+  
+          function toggleMusic() {
+              if (!playerReady) return;
+              const btn = document.getElementById('musicToggleBtn');
+              const icon = btn.querySelector('i');
+              if (isPlaying) {
+                  player.pauseVideo();
+                  if(icon) {
+                      icon.classList.remove('fa-pause', 'text-crear-accent', 'fa-beat-fade');
+                      icon.classList.add('fa-music');
+                  }
+                  isPlaying = false;
+              } else {
+                  player.playVideo();
+                  if(icon) {
+                      icon.classList.remove('fa-music');
+                      icon.classList.add('fa-pause', 'text-crear-accent', 'fa-beat-fade');
+                  }
+                  isPlaying = true;
+              }
+          }
+  
+          function onPlayerReady(event) {
+              playerReady = true;
+              if (userInteracted && !isPlaying) {
+                  toggleMusic();
+              }
+          }
+  
+          document.addEventListener('DOMContentLoaded', () => {
+              const overlay = document.getElementById('welcomeOverlay');
+              const openBtn = document.getElementById('openLetterBtn');
+              const musicBtn = document.getElementById('musicToggleBtn');
+  
+              if(openBtn && overlay) {
+                  openBtn.addEventListener('click', () => {
+                      userInteracted = true;
+                      overlay.style.opacity = '0';
+                      setTimeout(() => overlay.remove(), 1000);
+                      if (playerReady && !isPlaying) {
+                          toggleMusic();
+                      }
+                  });
+              }
+  
+              if(musicBtn) {
+                  musicBtn.addEventListener('click', (e) => {
+                      e.stopPropagation();
+                      userInteracted = true;
+                      toggleMusic();
+                  });
+              }
+          });
+      </script>
 </body>
 </html>
 

@@ -8,7 +8,7 @@
     <!-- Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -98,6 +98,16 @@
     </style>
 </head>
 <body class="antialiased selection:bg-crear-accent selection:text-white">
+
+    <!-- Welcome Overlay for Autoplay -->
+    <div id="welcomeOverlay" class="fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <img src="logo_crear_blanco.png" alt="CREAR" class="h-28 md:h-40 mb-10 drop-shadow-[0_0_25px_rgba(251,191,36,0.5)] animate-pulse">
+        <button id="openLetterBtn" class="px-10 py-5 bg-[#f59e0b] text-black font-black text-xl rounded-full hover:scale-110 transition-transform shadow-[0_0_30px_rgba(251,191,36,0.6)] flex items-center gap-3">
+            <i class="fa-solid fa-envelope-open-text"></i> ABRIR CARTA
+        </button>
+        <p class="mt-6 text-gray-500 text-sm font-light">Enciende el volumen para la experiencia completa</p>
+    </div>
+    
 
     <!-- GLOBAL NAVBAR -->
     <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
@@ -414,7 +424,7 @@
                             </li>
                             <li class="flex gap-4">
                                 <div class="min-w-24 text-sm font-bold text-blue-400 mt-1">Domingo 16 (Regreso)</div>
-                                <div>Al terminar la inmersión, regresas con el equipo al Hotel Jose Antonio Deluxe (Miraflores) para la graduación de C1. Al finalizar el cierre, te desplazas por tu cuenta hacia tu hotel de descanso (San Blas).</div>
+                                <div>Al terminar la inmersión, regresas con el equipo al <a href="https://maps.app.goo.gl/C7K8aFz6s9aYwT6q6" target="_blank" class="text-blue-400 hover:text-blue-300 underline decoration-blue-400/30 underline-offset-2 transition-colors">Hotel Jose Antonio Deluxe</a> (Miraflores) para la graduación de C1. Al finalizar el cierre, te desplazas por tu cuenta hacia tu hotel de descanso (San Blas).</div>
                             </li>
                             <li class="flex gap-4">
                                 <div class="min-w-24 text-sm font-bold text-blue-400 mt-1">Lunes 17 (Salida)</div>
@@ -429,7 +439,7 @@
                             </div>
                             <div class="bg-gray-800/30 p-4 rounded-lg border border-gray-700">
                                 <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-campground text-green-400 mr-2"></i>Sede de Inmersión</h4>
-                                <p class="text-sm"><strong>Hostal Sol y Luna</strong> (Calle 15, Mz. K Lt. 2, Etapa 3, Cieneguilla). El sábado nos trasladamos a la sede de campo. Tú viajas, te hospedas y sostienes la inmersión total con el equipo.</p>
+                                <p class="text-sm"><strong><a href="https://maps.app.goo.gl/C7K8aFz6s9aYwT6q6" target="_blank" class="text-blue-400 hover:text-blue-300 underline decoration-blue-400/30 underline-offset-2 transition-colors">Hostal Sol y Luna</a></strong> (Calle 15, Mz. K Lt. 2, Etapa 3, Cieneguilla). El sábado nos trasladamos a la sede de campo. Tú viajas, te hospedas y sostienes la inmersión total con el equipo.</p>
                             </div>
                         </div>
                     </div>
@@ -526,7 +536,7 @@
     <footer class="bg-[#050505] py-16 border-t border-gray-900 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="flex items-center justify-center gap-3 mb-10">
-                <img src="logo_crear_blanco.png" alt="CREAR" class="h-24 md:h-32 object-contain drop-shadow-[0_0_20px_rgba(251,191,36,0.6)] hover:drop-shadow-[0_0_35px_rgba(251,191,36,1)] hover:scale-105 transition-all duration-500" />
+                <img src="logo_crear_blanco.png" alt="CREAR" class="h-40 md:h-56 object-contain drop-shadow-[0_0_20px_rgba(251,191,36,0.6)] hover:drop-shadow-[0_0_35px_rgba(251,191,36,1)] hover:scale-105 transition-all duration-500" />
                 <span class="font-black text-xl tracking-tighter text-white">CREAR <span class="text-crear-accent">PSL</span></span>
             </div>
             <div class="text-gray-600 text-sm">
@@ -709,12 +719,17 @@
                 toggleMusic();
             });
 
-            document.body.addEventListener('click', () => {
-                if (!userInteracted) {
-                    userInteracted = true;
-                    toggleMusic();
-                }
-            }, { once: true });
+            
+            const overlay = document.getElementById('welcomeOverlay');
+            const openBtn = document.getElementById('openLetterBtn');
+            if(openBtn) {
+                openBtn.addEventListener('click', () => {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.remove(), 1000);
+                    if (!isPlaying) toggleMusic();
+                });
+            }
+    
         }
     </script>
 </body>

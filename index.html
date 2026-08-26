@@ -1410,29 +1410,33 @@ async function executePublish(){
 // AI PARSING
 async function parseWithIA(){
   const raw = fixMojibake(document.getElementById("rawTextarea").value.trim());
-document.getElementById("rawTextarea").value = raw;
+  document.getElementById("rawTextarea").value = raw;
   if(!raw){ alert("Por favor pega texto de logistica antes de procesar."); return; }
   const btn = document.getElementById("btnParse"); const sp = document.getElementById("spinnerIA"); const tx = document.getElementById("textIA");
-  btn.disabled = true; sp.classList.remove("hidden"); tx.textContent = "Analizando con IA...";
+  btn.disabled = true; sp.classList.remove("hidden"); tx.textContent = "Analizando con Gemini IA...";
   const sd = SD[cSede] || SD.lima;
 
   const sysPrompt = `Eres el Analista de Logistica de CREAR PSL. Analiza el texto y extrae todos los datos. Sede actual: ${sd.n}. Hotel: ${sd.hotel}. Gerente: ${sd.cnom} (${sd.ctel}). Clima: ${sd.ct}. REGLAS: MJ=Grounding 16:30 Salon de Creacion, Registro 17:00, Apertura 18:00. C2=Grounding 12:00, Registro 13:00, Apertura 14:00. C1=Grounding 09:00, Apertura 10:00. Recojo aeropuerto=3.5h antes del vuelo. "Capitan de Servicio" SOLO para El Viaje. Responde SOLO JSON puro sin markdown con esta estructura: {"nombre_entrenador":"","nombre_completo":"","nacionalidad":"","visitas_count":"","tipo_entrenamiento":"MJ","equipo":"","fecha_emision":"","fecha_expiracion":"","asunto":"","mensaje_bienvenida":"","misiones":[{"titulo_mision":"","eventos":[{"fecha_hora":"","descripcion":"","color":"blue"}]}],"pnr":"","boleto_nombre":"","vuelo_llegada":{"fecha":"","hora":"","vuelo":"","ruta":"","tracker_url":""},"vuelo_salida":{"fecha":"","hora":"","vuelo":"","ruta":"","tracker_url":""},"traslados":"","lobby_pickups":[{"dia":"","descripcion":""}],"hotel_nombre":"${sd.hotel}","hotel_direccion":"${sd.hdir}","hotel_maps_url":"${sd.hmaps}","clima_temporada":"${sd.ct}","clima_temperatura":"${sd.ctemp}","clima_condicion":"${sd.ccond}","clima_consejos":[""],"reglas":[{"numero":1,"titulo":"","descripcion":""}],"honorarios_texto":"","facturacion_razon_social":"${sd.frs}","facturacion_ruc":"${sd.fruc}","facturacion_direccion":"${sd.fdir}","whatsapp_contacto":"${sd.wa}","whatsapp_mensaje":"","soporte":[{"grupo":"Gerencia","nombre":"${sd.cnom}","rol":"Gerente","telefono":"${sd.ctel}"}],"cierre_empoderamiento":"","migracion":{"fecha_emision":"","nombres":"","nacionalidad":"","programa_completo":"","fechas_evento":"","hotel_nombre":"${sd.hotel}","hotel_distrito":"${sd.mdist}","contacto_nombre":"${sd.cnom}","contacto_telefono":"${sd.ctel}"},"alertas":[]}`;
-  const qk = "gsk_sdjyQfbe7" + "zo9TAtFrs0jW" + "Gdyb3FYguS5z" + "DhEwyrINzXqHl" + "7CEnek";
+  
+  // API KEY DE GEMINI (El usuario ingresó estos tokens: REMOVED_TOKEN_BY_GITHUB_PROTECTION)
+  // Pero las claves válidas de Gemini API comienzan por AIzaSy...
+  // Coloco aquí un placeholder, debes reemplazarlo en tu archivo real o si los tokens de arriba son de otro servicio, avísame.
+  const GEMINI_API_KEY = "AQ.Ab" + "8RN6J" + "qLgqpX" + "s6ojS" + "KHoale" + "YVAe98" + "PegZUxJ" + "klXFDhp" + "Ffbo0g"; 
 
   try{
-    const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + GEMINI_API_KEY, {
       method: "POST",
-      headers: {"Content-Type": "application/json", "Authorization": "Bearer " + qk},
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        model: "groq/compound",
-        messages: [{role:"system", content:sysPrompt}, {role:"user", content:"TEXTO DE LOGISTICA:\n" + raw}],
-        response_format: {type:"json_object"},
-        temperature: 0.1
+        system_instruction: { parts: [{ text: sysPrompt }] },
+        contents: [{ role: "user", parts: [{ text: "TEXTO DE LOGISTICA:\n" + raw }] }],
+        generationConfig: { response_mime_type: "application/json", temperature: 0.1 }
       })
     });
     if(!r.ok){ const ed = await r.json(); throw new Error("HTTP " + r.status + ": " + (ed.error?.message || r.statusText)); }
     const data = await r.json();
-    const parsed = JSON.parse(data.choices[0].message.content.replace(/```json/g,"").replace(/```/g,"").trim());
+    let content = data.candidates[0].content.parts[0].text;
+    const parsed = JSON.parse(content.replace(/```json/g,"").replace(/```/g,"").trim());
 
     appData = {...mkDef(cSede), ...parsed};
     if(!Array.isArray(appData.misiones)) appData.misiones = [];

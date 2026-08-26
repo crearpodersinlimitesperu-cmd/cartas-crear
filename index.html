@@ -1424,7 +1424,7 @@ document.getElementById("rawTextarea").value = raw;
       method: "POST",
       headers: {"Content-Type": "application/json", "Authorization": "Bearer " + qk},
       body: JSON.stringify({
-        model: "llama-3.1-70b-versatile",
+        model: "llama-3.3-70b-versatile",
         messages: [{role:"system", content:sysPrompt}, {role:"user", content:"TEXTO DE LOGISTICA:\n" + raw}],
         response_format: {type:"json_object"},
         temperature: 0.1

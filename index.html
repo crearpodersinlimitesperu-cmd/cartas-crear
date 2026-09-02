@@ -655,18 +655,26 @@ function parseCountdownDate(dateStr, timeStr, fallbackDays) {
     return fb.toISOString();
   }
   var isoMatch = dateStr.match(/(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+  var dmyMatch = dateStr.match(/(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})/);
   var d, m, y;
   if (isoMatch) {
     y = parseInt(isoMatch[1], 10);
     m = parseInt(isoMatch[2], 10) - 1;
     d = parseInt(isoMatch[3], 10);
+  } else if (dmyMatch) {
+    d = parseInt(dmyMatch[1], 10);
+    m = parseInt(dmyMatch[2], 10) - 1;
+    var yr = parseInt(dmyMatch[3], 10);
+    y = yr < 100 ? 2000 + yr : yr;
   } else {
     var months = {
       enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5,
       julio: 6, agosto: 7, septiembre: 8, setiembre: 8, octubre: 9, noviembre: 10, diciembre: 11
     };
-    var dayMatch = dateStr.match(/\b(\d{1,2})\b/);
-    d = dayMatch ? parseInt(dayMatch[1], 10) : now.getDate() + (fallbackDays || 5);
+    // Strip out times like 16:30 PM so hours aren't mistaken for days of month
+    var dateWithoutTime = dateStr.replace(/\b\d{1,2}:\d{2}(\s*(am|pm))?\b/gi, "");
+    var dayMatch = dateWithoutTime.match(/\b(\d{1,2})\b/);
+    d = dayMatch ? parseInt(dayMatch[1], 10) : now.getDate() + (fallbackDays || 2);
     
     var lower = dateStr.toLowerCase();
     m = -1;

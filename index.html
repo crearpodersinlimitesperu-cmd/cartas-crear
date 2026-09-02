@@ -1678,7 +1678,7 @@ function genHTML(){
     + '                        { text: "La transformación no es un evento futuro. Es una actividad actual.", author: "Jillian Michaels" }\n'
     + '                    ];\n'
     + '                var rq = quotesList[Math.floor(Math.random() * quotesList.length)];\n'
-    + '                quoteEl.innerText = "\"" + (rq.text || rq.quote) + "\"";\n'
+    + '                quoteEl.innerText = (rq.text || rq.quote);\n'
     + '                authorEl.innerText = "— " + (rq.author || rq.autor);\n'
     + '            }\n'
     + '        });\n'
@@ -1693,7 +1693,14 @@ function genHTML(){
 function up(){
   const html = genHTML();
   const f = document.getElementById("previewIframe");
-  if(f){ const doc = f.contentDocument || f.contentWindow.document; doc.open(); doc.write(html); doc.close(); }
+  if(f){
+    try {
+      f.srcdoc = html;
+    } catch(e) {
+      const doc = f.contentDocument || f.contentWindow.document;
+      doc.open(); doc.write(html); doc.close();
+    }
+  }
   const sc = document.getElementById("sourceCode"); if(sc) sc.textContent = html;
 }
 

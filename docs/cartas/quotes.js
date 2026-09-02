@@ -1,4 +1,4 @@
-const transformationQuotes = [
+var transformationQuotes = window.transformationQuotes || [
     { text: "Tú y yo poseemos dentro de nosotros mismos en cada momento de nuestras vidas, bajo todas las circunstancias, el poder de transformar la calidad de nuestras vidas.", author: "Werner Erhard" },
     { text: "La transformación no es un evento futuro. Es una actividad actual.", author: "Jillian Michaels" },
     { text: "Cada experiencia negativa contiene la semilla de la transformación.", author: "Alan Cohen" },

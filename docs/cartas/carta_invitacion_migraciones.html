@@ -57,7 +57,7 @@
 
             <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 my-6 mx-2 md:mx-6 shadow-sm">
                 <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Nombre Completo:</span><br> <span class="text-lg font-bold text-gray-900" id="field-name">[Nombre]</span></p>
-                <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Nacionalidad:</span><br> <span class="text-lg font-bold text-crearBlue" id="field-nacionalidad">ECUATORIANA</span></p>
+                <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Nacionalidad:</span><br> <span class="text-lg font-bold text-crearBlue" id="field-nacionalidad">[NACIONALIDAD PENDIENTE]</span></p>
                 <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Documento de Identidad / Pasaporte:</span><br> <span class="text-lg font-bold text-gray-900 font-mono" id="field-doc">[Documento]</span></p>
                 <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Calidad de Participación:</span><br> <span class="text-base font-bold text-crearBlue" id="field-role">Invitado Especial Internacional (Invitado Internacional Ad-Honorem)</span></p>
                 <p><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Hospedaje Reservado:</span><br> <span class="text-base font-bold text-gray-900" id="field-hotel">Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)</span></p>
@@ -161,22 +161,9 @@
             document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-PE', options);
 
             const params = new URLSearchParams(window.location.search);
-            const rawNombre = (params.get('nombre') || '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-
-            let master = null;
-            if (rawNombre.includes('ALEJANDRO') || rawNombre.includes('DIAZ PABON')) {
-                master = TRAINERS_MASTER['ERNESTO ALEJANDRO DIAZ PABON'];
-            } else if (rawNombre.includes('IDROBO') || (rawNombre.includes('ELMER') && rawNombre.includes('ANDRES'))) {
-                master = TRAINERS_MASTER['ELMER ANDRES IDROBO ANDRADE'];
-            } else if (rawNombre.includes('LOURDES') || rawNombre.includes('PATINO') || rawNombre.includes('PATIÑO')) {
-                master = TRAINERS_MASTER['MARIA DE LOURDES PATIÑO GALARRAGA'];
-            } else if (rawNombre.includes('GOMEZ') && rawNombre.includes('ANDRES')) {
-                master = TRAINERS_MASTER['CARLOS ANDRES GOMEZ GOMEZ'];
-            } else if (rawNombre.includes('ARAGON') || rawNombre.includes('FERNANDO')) {
-                master = TRAINERS_MASTER['FERNANDO ARAGON'];
-            } else if (rawNombre.includes('BRAVO') || rawNombre.includes('DIEGO')) {
-                master = TRAINERS_MASTER['DIEGO DAVID BRAVO FIGUEROA'];
-            }
+            const normalizeName = value => value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ');
+            const rawNombre = normalizeName(params.get('nombre') || '');
+            const master = Object.values(TRAINERS_MASTER).find(person => normalizeName(person.name) === rawNombre);
 
             if (master) {
                 document.getElementById('field-name').textContent = master.name;
@@ -189,7 +176,7 @@
                 const nombreParam = params.get('nombre') ? params.get('nombre').toUpperCase() : '[NOMBRE COMPLETO]';
                 document.getElementById('field-name').textContent = nombreParam;
                 
-                let nac = params.get('nacionalidad') ? params.get('nacionalidad').toUpperCase() : 'ECUATORIANA';
+                let nac = params.get('nacionalidad') ? params.get('nacionalidad').toUpperCase() : '[NACIONALIDAD PENDIENTE]';
                 document.getElementById('field-nacionalidad').textContent = nac;
 
                 let doc = params.get('doc') ? params.get('doc').toUpperCase() : '[DOCUMENTO / PASAPORTE]';
@@ -200,16 +187,14 @@
                 if (params.get('hotel')) document.getElementById('field-hotel').textContent = params.get('hotel');
             }
 
-            // Fallback safety to never allow 'COLOMBIANA' for Alejandro or Elmer Idrobo
-            const displayedName = document.getElementById('field-name').textContent.toUpperCase();
-            if (displayedName.includes('DIAZ PABON') || displayedName.includes('ALEJANDRO') || displayedName.includes('IDROBO')) {
-                document.getElementById('field-nacionalidad').textContent = 'ECUATORIANA';
-                if (displayedName.includes('ALEJANDRO') || displayedName.includes('DIAZ PABON')) {
-                    document.getElementById('field-doc').textContent = 'PASAPORTE ECUATORIANO Nº A4152916 (C.I. 1727274928)';
-                } else if (displayedName.includes('IDROBO')) {
-                    document.getElementById('field-doc').textContent = 'PASAPORTE ECUATORIANO Nº A9919241 (C.I. 1712332350)';
-                }
+            // Explicit form values take priority over saved records.
+            if (params.has('nacionalidad')) {
+                document.getElementById('field-nacionalidad').textContent = params.get('nacionalidad').trim().toUpperCase() || '[NACIONALIDAD PENDIENTE]';
             }
+            if (params.has('doc')) {
+                document.getElementById('field-doc').textContent = params.get('doc').trim().toUpperCase() || '[DOCUMENTO / PASAPORTE]';
+            }
+
         });
     </script>
 </body>

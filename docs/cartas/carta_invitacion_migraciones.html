@@ -163,6 +163,12 @@
             const params = new URLSearchParams(window.location.search);
             const normalizeName = value => value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ');
             const rawNombre = normalizeName(params.get('nombre') || '');
+            // Nationality checked against the identity document on 2026-09-27.
+            // Keep passport scans and identification numbers out of this public registry.
+            const verifiedNationalities = {
+                'MILDRED MUNOZ VASQUEZ': { nacionalidad: 'COLOMBIANA', documento: 'PASAPORTE COLOMBIANO' }
+            };
+            const verifiedIdentity = verifiedNationalities[rawNombre];
             const master = Object.values(TRAINERS_MASTER).find(person => normalizeName(person.name) === rawNombre);
 
             if (master) {
@@ -193,6 +199,12 @@
             }
             if (params.has('doc')) {
                 document.getElementById('field-doc').textContent = params.get('doc').trim().toUpperCase() || '[DOCUMENTO / PASAPORTE]';
+            }
+
+            // Verified identity takes precedence over stale or incorrect URL values.
+            if (verifiedIdentity) {
+                document.getElementById('field-nacionalidad').textContent = verifiedIdentity.nacionalidad;
+                document.getElementById('field-doc').textContent = verifiedIdentity.documento;
             }
 
         });

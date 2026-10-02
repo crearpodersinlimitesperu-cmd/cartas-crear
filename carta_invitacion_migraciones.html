@@ -50,28 +50,26 @@
         <main class="text-gray-700 leading-relaxed space-y-6 text-justify">
             <h1 class="text-xl font-bold uppercase tracking-wide text-gray-900 mb-8">Carta de Invitación Oficial</h1>
             
-            <p class="font-semibold text-gray-900">A las Autoridades de la Superintendencia Nacional de Migraciones de la República del Perú:</p>
+            <p class="font-semibold text-gray-900" id="sede-authority">A las autoridades migratorias:</p>
             
             <p>A quien corresponda,</p>
 
-            <p>
-                Por medio de la presente carta formal, la empresa <strong>CREACIÓN CUÁNTICA E.I.R.L.</strong> (con RUC activo <strong>20612592811</strong> y domicilio fiscal en Lima, Perú), comercialmente conocida como <strong>CREAR Poder Sin Límites</strong>, dedicada al rubro de consultoría, desarrollo personal y formación de liderazgo, emite una invitación oficial a favor del ciudadano extranjero:
-            </p>
+            <p id="sede-invitation"></p>
 
             <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 my-6 mx-2 md:mx-6 shadow-sm">
                 <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Nombre Completo:</span><br> <span class="text-lg font-bold text-gray-900" id="field-name">[Nombre]</span></p>
                 <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Nacionalidad:</span><br> <span class="text-lg font-bold text-crearBlue" id="field-nacionalidad">[NACIONALIDAD PENDIENTE]</span></p>
                 <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Documento de Identidad / Pasaporte:</span><br> <span class="text-lg font-bold text-gray-900 font-mono" id="field-doc">[Documento]</span></p>
                 <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Calidad de Participación:</span><br> <span class="text-base font-bold text-crearBlue" id="field-role">Invitado Especial Internacional (Invitado Internacional Ad-Honorem)</span></p>
-                <p><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Hospedaje Reservado:</span><br> <span class="text-base font-bold text-gray-900" id="field-hotel">Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)</span></p>
+                <p><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Hospedaje Reservado:</span><br> <span class="text-base font-bold text-gray-900" id="field-hotel">[HOSPEDAJE PENDIENTE]</span></p>
             </div>
 
             <p>
-                El motivo de su viaje y estadía en nuestro país obedece a su asistencia como <strong>invitado especial y participante observador</strong> en nuestro evento corporativo denominado <strong>"Entrenamiento de Liderazgo Transformacional"</strong>, el cual se llevará a cabo durante los días <strong id="field-dates">Del 3 al 7 de Septiembre de 2026</strong> en la ciudad de Lima. Cabe resaltar que su visita tiene fines netamente de intercambio vivencial y no contempla ninguna relación laboral, subordinación ni remuneración económica dentro del territorio nacional.
+                El motivo de su viaje y estadía en nuestro país obedece a su asistencia como <strong>invitado especial y participante observador</strong> en nuestro evento corporativo denominado <strong>"Entrenamiento de Liderazgo Transformacional"</strong>, el cual se llevará a cabo durante los días <strong id="field-dates">[FECHAS PENDIENTES]</strong> en <span id="sede-city">la sede de destino</span>. Cabe resaltar que su visita tiene fines netamente de intercambio vivencial y no contempla ninguna relación laboral, subordinación ni remuneración económica dentro del territorio nacional.
             </p>
 
             <p>
-                Dejamos constancia legal y financiera de que <strong>todos los gastos derivados de su estadía en el territorio peruano</strong> —incluyendo hospedaje, transporte interno, alimentación y cualquier viático necesario— <strong>serán asumidos en su totalidad por nuestra organización</strong>. El ciudadano invitado no representará carga económica alguna para el Estado Peruano.
+                Dejamos constancia legal y financiera de que <strong>todos los gastos derivados de su estadía en el país de destino</strong> —incluyendo hospedaje, transporte interno, alimentación y cualquier viático necesario— <strong>serán asumidos en su totalidad por nuestra organización</strong>. El ciudadano invitado no representará carga económica alguna para el país de destino.
             </p>
 
             <p>
@@ -84,29 +82,21 @@
 
             <p class="mt-8">Atentamente,</p>
 
-            <!-- Signature -->
-            <div class="mt-16 mb-4 flex flex-col items-center text-center">
-                <div class="relative w-80 flex flex-col items-center justify-end">
-                    <img src="firma_jose_sanchez.png" alt="Firma José Sánchez" class="h-32 w-auto object-contain -mb-6" style="mix-blend-mode: multiply;">
-                    <div class="w-full border-b-2 border-gray-400 mb-3"></div>
-                </div>
-                <p class="font-bold text-gray-900 uppercase tracking-wide text-lg mt-2">José Sánchez</p>
-                <p class="text-sm text-gray-800 font-semibold">Gerente Administrativo / Apoderado</p>
-                <p class="text-sm text-gray-600">CREACIÓN CUÁNTICA E.I.R.L.</p>
-                <p class="text-sm text-gray-500 mt-1">Lima, Perú | jose.sanchez@crearpsl.com | +51919563284</p>
-            </div>
+            <!-- Sin imagen de firma hasta contar con una firma autorizada de esta sede. -->
+            <div id="sede-signature" class="mt-12 mb-4 text-center"></div>
         </main>
 
         <!-- No Print Controls -->
         <div class="no-print mt-12 pt-6 border-t border-gray-200 flex flex-col md:flex-row gap-4 justify-center items-center">
-            <button onclick="window.print()" class="bg-crearGold hover:bg-yellow-500 text-crearDark font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
+            <button id="print-letter" disabled onclick="window.print()" class="bg-crearGold hover:bg-yellow-500 text-crearDark font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" /></svg>
                 Imprimir o PDF
             </button>
-            <p class="text-xs text-gray-400 text-center max-w-sm">Nota: Esta zona de botones y el fondo gris no aparecerán en la impresión. Datos validados automáticamente desde el registro consular oficial.</p>
+            <p class="text-xs text-gray-400 text-center max-w-sm">Nota: Esta zona de botones y el fondo gris no aparecerán en la impresión. Revisa los datos de la invitación antes de imprimir.</p>
         </div>
     </div>
 
+    <script src="carta-sedes.js" defer></script>
     <script>
         const TRAINERS_MASTER = {
             'ERNESTO ALEJANDRO DIAZ PABON': {
@@ -195,6 +185,9 @@
                 if (params.get('rol')) document.getElementById('field-role').textContent = params.get('rol') + ' (Invitado Internacional Ad-Honorem)';
                 if (params.get('hotel')) document.getElementById('field-hotel').textContent = params.get('hotel');
             }
+
+            document.getElementById('field-dates').textContent = params.get('fechas')?.trim() || '[FECHAS PENDIENTES]';
+            document.getElementById('field-hotel').textContent = params.get('hotel')?.trim() || '[HOSPEDAJE PENDIENTE]';
 
             // Explicit form values take priority over saved records.
             if (params.has('nacionalidad')) {

@@ -18,12 +18,34 @@ for (const file of ['carta_invitacion_migraciones.html', 'docs/carta_invitacion_
   assert.equal(unrelated['field-name'], 'FERNANDO PEREZ');
   assert.equal(unrelated['field-doc'], '[DOCUMENTO / PASAPORTE]');
   assert.equal(render({nombre:'Fernando Aragon', nacionalidad:'CHILENA'})['field-nacionalidad'], 'CHILENA');
-  assert.equal(render({nombre:'Fernando Aragon', nacionalidad:''})['field-nacionalidad'], '[NACIONALIDAD PENDIENTE]');
-  assert.equal(render({nombre:'Fernando Aragon', doc:''})['field-doc'], '[DOCUMENTO / PASAPORTE]');
+  const aragon = render({nombre:'Fernando Aragon'});
+  const aragonWithBlankValues = render({nombre:'Fernando Aragon', nacionalidad:'', doc:''});
+  assert.equal(aragonWithBlankValues['field-nacionalidad'], aragon['field-nacionalidad']);
+  assert.equal(aragonWithBlankValues['field-doc'], aragon['field-doc']);
   const verified = render({nombre:'Mildred Muñoz Vasquez', nacionalidad:'ECUATORIANA', doc:'PASAPORTE ECUATORIANO'});
   assert.equal(verified['field-nacionalidad'], 'COLOMBIANA');
   assert.equal(verified['field-doc'], 'PASAPORTE COLOMBIANO');
   assert.equal(render({nombre:' mildred   munoz vasquez ', nacionalidad:''})['field-nacionalidad'], 'COLOMBIANA');
+  const elmer = render({
+    nombre:'ELMER IDROBO ANDRADE',
+    nacionalidad:'',
+    doc:'',
+    fechas:'Del 10 al 12 de octubre de 2026',
+    hotel:'Hotel de prueba'
+  });
+  assert.equal(elmer['field-name'], 'ELMER ANDRES IDROBO ANDRADE');
+  assert.equal(elmer['field-nacionalidad'], 'ECUATORIANA');
+  assert.equal(elmer['field-doc'], 'PASAPORTE ECUATORIANO');
+  assert.doesNotMatch(elmer['field-doc'], /\d/);
+  assert.equal(elmer['field-dates'], 'Del 10 al 12 de octubre de 2026');
+  assert.equal(elmer['field-hotel'], 'Hotel de prueba');
+  const elmerWithStaleIdentity = render({
+    nombre:'ELMER IDROBO ANDRADE',
+    nacionalidad:'PERUANA',
+    doc:'DNI 12345678'
+  });
+  assert.equal(elmerWithStaleIdentity['field-nacionalidad'], 'ECUATORIANA');
+  assert.equal(elmerWithStaleIdentity['field-doc'], 'PASAPORTE ECUATORIANO');
   console.log('PASS', file);
 }
 const source = fs.readFileSync('index.html', 'utf8');

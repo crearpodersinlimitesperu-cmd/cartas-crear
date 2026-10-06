@@ -110,7 +110,7 @@
             'ELMER ANDRES IDROBO ANDRADE': {
                 name: 'ELMER ANDRES IDROBO ANDRADE',
                 nacionalidad: 'ECUATORIANA',
-                doc: 'PASAPORTE ECUATORIANO Nº A9919241 (C.I. 1712332350)',
+                doc: 'PASAPORTE ECUATORIANO',
                 fechas: 'Del 4 al 6 de Septiembre de 2026',
                 rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
                 hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
@@ -156,13 +156,18 @@
             const params = new URLSearchParams(window.location.search);
             const normalizeName = value => value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ');
             const rawNombre = normalizeName(params.get('nombre') || '');
+            const nameAliases = {
+                'ELMER IDROBO ANDRADE': 'ELMER ANDRES IDROBO ANDRADE'
+            };
+            const canonicalNombre = nameAliases[rawNombre] || rawNombre;
             // Nationality checked against the identity document on 2026-09-27.
             // Keep passport scans and identification numbers out of this public registry.
             const verifiedNationalities = {
-                'MILDRED MUNOZ VASQUEZ': { nacionalidad: 'COLOMBIANA', documento: 'PASAPORTE COLOMBIANO' }
+                'MILDRED MUNOZ VASQUEZ': { nacionalidad: 'COLOMBIANA', documento: 'PASAPORTE COLOMBIANO' },
+                'ELMER ANDRES IDROBO ANDRADE': { nacionalidad: 'ECUATORIANA', documento: 'PASAPORTE ECUATORIANO' }
             };
-            const verifiedIdentity = verifiedNationalities[rawNombre];
-            const master = Object.values(TRAINERS_MASTER).find(person => normalizeName(person.name) === rawNombre);
+            const verifiedIdentity = verifiedNationalities[canonicalNombre];
+            const master = Object.values(TRAINERS_MASTER).find(person => normalizeName(person.name) === canonicalNombre);
 
             if (master) {
                 document.getElementById('field-name').textContent = master.name;
@@ -181,21 +186,19 @@
                 let doc = params.get('doc') ? params.get('doc').toUpperCase() : '[DOCUMENTO / PASAPORTE]';
                 document.getElementById('field-doc').textContent = doc;
 
-                if (params.get('fechas')) document.getElementById('field-dates').textContent = params.get('fechas');
                 if (params.get('rol')) document.getElementById('field-role').textContent = params.get('rol') + ' (Invitado Internacional Ad-Honorem)';
-                if (params.get('hotel')) document.getElementById('field-hotel').textContent = params.get('hotel');
             }
 
-            document.getElementById('field-dates').textContent = params.get('fechas')?.trim() || '[FECHAS PENDIENTES]';
-            document.getElementById('field-hotel').textContent = params.get('hotel')?.trim() || '[HOSPEDAJE PENDIENTE]';
+            const requestedDates = params.get('fechas')?.trim();
+            if (requestedDates) document.getElementById('field-dates').textContent = requestedDates;
+            const requestedHotel = params.get('hotel')?.trim();
+            if (requestedHotel) document.getElementById('field-hotel').textContent = requestedHotel;
 
             // Explicit form values take priority over saved records.
-            if (params.has('nacionalidad')) {
-                document.getElementById('field-nacionalidad').textContent = params.get('nacionalidad').trim().toUpperCase() || '[NACIONALIDAD PENDIENTE]';
-            }
-            if (params.has('doc')) {
-                document.getElementById('field-doc').textContent = params.get('doc').trim().toUpperCase() || '[DOCUMENTO / PASAPORTE]';
-            }
+            const requestedNationality = params.get('nacionalidad')?.trim();
+            if (requestedNationality) document.getElementById('field-nacionalidad').textContent = requestedNationality.toUpperCase();
+            const requestedDocument = params.get('doc')?.trim();
+            if (requestedDocument) document.getElementById('field-doc').textContent = requestedDocument.toUpperCase();
 
             // Verified identity takes precedence over stale or incorrect URL values.
             if (verifiedIdentity) {

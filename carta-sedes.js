@@ -53,9 +53,11 @@
       seed.gerentes.forEach(manager=>{const name=document.createElement('p');name.className='font-bold text-gray-900 text-lg';name.textContent=manager.nombre;signature.append(name);});
       if(complete) [data.razonSocial, data.identificacionFiscal, data.direccionFiscal, [data.correoContacto,data.telefonoContacto].join(' | ')].forEach(text=>{const line=document.createElement('p');line.className='text-sm text-gray-600';line.textContent=text;signature.append(line);});
       status.textContent=(complete?'Datos institucionales registrados.':'Datos institucionales pendientes: por ahora figuran únicamente los nombres de los gerentes.')+(unavailable?' No se pudo consultar Causa OS; se muestran los datos base disponibles.':'');
-      document.getElementById('print-letter').disabled=false;
       const params=new URLSearchParams(location.search);params.set('sede',id);history.replaceState(null,'','?'+params.toString());
       const hotel=document.getElementById('field-hotel');if(/^Hotel Sede /i.test(hotel.textContent))hotel.textContent='[HOSPEDAJE PENDIENTE]';
+      const missing=['field-name','field-nacionalidad','field-doc','field-hotel','field-dates'].filter(f=>{const el=document.getElementById(f);return !el||/\[[^\]]*\]/.test(el.textContent);});
+      document.getElementById('print-letter').disabled=missing.length>0;
+      if(missing.length)status.textContent+=' Faltan datos obligatorios en la carta (campos entre corchetes); completa los datos antes de imprimir como carta final.';
     }
     select.value=sedeId(new URLSearchParams(location.search).get('sede'));
     select.addEventListener('change',render); await render();

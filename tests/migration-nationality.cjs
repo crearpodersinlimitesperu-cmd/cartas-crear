@@ -46,6 +46,25 @@ for (const file of ['carta_invitacion_migraciones.html', 'docs/carta_invitacion_
   });
   assert.equal(elmerWithStaleIdentity['field-nacionalidad'], 'ECUATORIANA');
   assert.equal(elmerWithStaleIdentity['field-doc'], 'PASAPORTE ECUATORIANO');
+
+  const leandroWithBlankDoc = render({
+    nombre: 'LEANDRO BRUNIS AVILES',
+    nacionalidad: 'ECUATORIANA',
+    doc: ''
+  });
+  assert.equal(leandroWithBlankDoc['field-name'], 'LEANDRO EMILIO BRUNIS AVILES');
+  assert.equal(leandroWithBlankDoc['field-nacionalidad'], 'ECUATORIANA');
+  assert.equal(leandroWithBlankDoc['field-doc'], 'PASAPORTE ECUATORIANO Nº A8243780 (C.I. 1718426560)');
+
+  const carlosWithBlankDoc = render({
+    nombre: 'CARLOS BRUNIS VILLACIS',
+    nacionalidad: '',
+    doc: ''
+  });
+  assert.equal(carlosWithBlankDoc['field-name'], 'CARLOS EMILIO BRUNIS VILLACIS');
+  assert.equal(carlosWithBlankDoc['field-nacionalidad'], 'ECUATORIANA');
+  assert.equal(carlosWithBlankDoc['field-doc'], 'PASAPORTE ECUATORIANO Nº A8885265 (C.I. 1201916986)');
+
   console.log('PASS', file);
 }
 const source = fs.readFileSync('index.html', 'utf8');

@@ -146,6 +146,22 @@
                 fechas: 'Del 14 al 16 de Agosto de 2026',
                 rol: 'Líder El Viaje (Invitado Internacional Ad-Honorem)',
                 hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'LEANDRO EMILIO BRUNIS AVILES': {
+                name: 'LEANDRO EMILIO BRUNIS AVILES',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO Nº A8243780 (C.I. 1718426560)',
+                fechas: 'Del Viernes 23 al Domingo 25 de Octubre, 2026',
+                rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'CARLOS EMILIO BRUNIS VILLACIS': {
+                name: 'CARLOS EMILIO BRUNIS VILLACIS',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO Nº A8885265 (C.I. 1201916986)',
+                fechas: 'Del Viernes 23 al Domingo 25 de Octubre, 2026',
+                rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel San Blas (Avenida Arequipa 3940, Miraflores, Lima)'
             }
         };
 
@@ -157,7 +173,11 @@
             const normalizeName = value => value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ');
             const rawNombre = normalizeName(params.get('nombre') || '');
             const nameAliases = {
-                'ELMER IDROBO ANDRADE': 'ELMER ANDRES IDROBO ANDRADE'
+                'ELMER IDROBO ANDRADE': 'ELMER ANDRES IDROBO ANDRADE',
+                'LEANDRO BRUNIS': 'LEANDRO EMILIO BRUNIS AVILES',
+                'LEANDRO BRUNIS AVILES': 'LEANDRO EMILIO BRUNIS AVILES',
+                'CARLOS BRUNIS': 'CARLOS EMILIO BRUNIS VILLACIS',
+                'CARLOS BRUNIS VILLACIS': 'CARLOS EMILIO BRUNIS VILLACIS'
             };
             const canonicalNombre = nameAliases[rawNombre] || rawNombre;
             // Nationality checked against the identity document on 2026-09-27.

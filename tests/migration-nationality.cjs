@@ -24,7 +24,7 @@ for (const file of ['carta_invitacion_migraciones.html', 'docs/carta_invitacion_
   assert.equal(aragonWithBlankValues['field-doc'], aragon['field-doc']);
   const verified = render({nombre:'Mildred Muñoz Vasquez', nacionalidad:'ECUATORIANA', doc:'PASAPORTE ECUATORIANO'});
   assert.equal(verified['field-nacionalidad'], 'COLOMBIANA');
-  assert.equal(verified['field-doc'], 'PASAPORTE COLOMBIANO');
+  assert.equal(verified['field-doc'], 'PASAPORTE COLOMBIANO Nº BE596036 (C.C. 1036598062)');
   assert.equal(render({nombre:' mildred   munoz vasquez ', nacionalidad:''})['field-nacionalidad'], 'COLOMBIANA');
   const elmer = render({
     nombre:'ELMER IDROBO ANDRADE',

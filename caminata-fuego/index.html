@@ -407,6 +407,10 @@
             code: { stringValue: payload.code || '' },
             sede: { stringValue: 'Lima' },
             source: { stringValue: 'cartas.crearpsl.net' },
+            ip: { stringValue: payload.ip || 'Registrada' },
+            geoLocation: { stringValue: payload.geoLocation || 'Lima, Perú 🇵🇪' },
+            coordinates: { stringValue: payload.coordinates || '' },
+            dispositivo: { stringValue: payload.dispositivo || 'Web' },
             aceptoImagen: { booleanValue: !!payload.aceptoImagen }
           }
         })
@@ -417,8 +421,108 @@
       });
     }
 
-    function handleSubmit(e) {
+    let cachedClientGeo = {
+      ip: 'Detectando IP...',
+      geoLocation: 'Lima, Perú 🇵🇪',
+      coordinates: '',
+      dispositivo: /iPhone|iPad|Android/i.test(navigator.userAgent || '') ? 'Móvil' : 'Escritorio'
+    };
+
+    async function fetchClientGeo() {
+      try {
+        const res = await fetch('https://ipwho.is/');
+        const data = await res.json();
+        if (data && data.success !== false && data.ip) {
+          cachedClientGeo = {
+            ip: data.ip,
+            geoLocation: `${data.city || 'Lima'}, ${data.country || 'Perú'} ${data.flag?.emoji || '🇵🇪'}`,
+            coordinates: data.latitude && data.longitude ? `${Number(data.latitude).toFixed(5)}, ${Number(data.longitude).toFixed(5)}` : '',
+            dispositivo: /iPhone|iPad|Android/i.test(navigator.userAgent || '') ? 'Móvil' : 'Escritorio'
+          };
+          return cachedClientGeo;
+        }
+      } catch (e) {}
+      try {
+        const res2 = await fetch('https://get.geojs.io/v1/ip/geo.json');
+        const data2 = await res2.json();
+        if (data2 && data2.ip) {
+          cachedClientGeo = {
+            ip: data2.ip,
+            geoLocation: `${data2.city || 'Lima'}, ${data2.country || 'Perú'}`,
+            coordinates: data2.latitude && data2.longitude ? `${Number(data2.latitude).toFixed(5)}, ${Number(data2.longitude).toFixed(5)}` : '',
+            dispositivo: /iPhone|iPad|Android/i.test(navigator.userAgent || '') ? 'Móvil' : 'Escritorio'
+          };
+          return cachedClientGeo;
+        }
+      } catch (e) {}
+      return cachedClientGeo;
+    }
+    fetchClientGeo();
+
+    function sendFirewalkEmailImmediate(signatureData, passDataUrl) {
+      if (!db || !signatureData.email) return;
+      try {
+        const base64Data = passDataUrl ? passDataUrl.replace(/^data:image\/png;base64,/, '') : null;
+        const emailHtml = `
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; max-width: 650px; margin: 0 auto; border: 1px solid #cbd5e1; border-radius: 14px; overflow: hidden; background-color: #ffffff; color: #1e293b;">
+            <div style="background: linear-gradient(135deg, #120702 0%, #431407 100%); color: #ffffff; padding: 30px 24px; text-align: center; border-bottom: 4px solid #ea580c;">
+              <span style="display: inline-block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #fbbf24; font-weight: 800; margin-bottom: 8px;">CREACIÓN CUÁNTICA E.I.R.L. · RUC 20612592811</span>
+              <h1 style="margin: 0; font-size: 24px; font-weight: 900; color: #ffffff;">🔥 SÍ VOY A CAMINAR SOBRE FUEGO</h1>
+              <p style="margin: 8px 0 0 0; font-size: 14px; color: #fdba74; font-weight: 600;">Confirmación Oficial de Acreditación y Firma Electrónica · Sede Lima</p>
+            </div>
+            <div style="padding: 28px 24px;">
+              <p style="font-size: 16px; line-height: 1.6; color: #1e293b; margin-top: 0;">Hola <strong>${signatureData.nombre}</strong>,</p>
+              <p style="font-size: 14px; line-height: 1.6; color: #334155;">
+                Tu asistencia y firma electrónica para la <strong>Caminata sobre Fuego (Firewalk Lima)</strong> ha sido registrada de manera exitosa. Adjuntamos tu <strong>Imagen Oficial de Confirmación</strong>.
+              </p>
+              <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 20px; margin: 20px 0; font-size: 13.5px;">
+                <p style="margin: 4px 0;"><strong>Titular:</strong> ${signatureData.nombre} (${signatureData.doc})</p>
+                <p style="margin: 4px 0;"><strong>Rol:</strong> ${signatureData.rol}</p>
+                <p style="margin: 4px 0;"><strong>Locación:</strong> Casona Blanca · Calle Las Perdices 1126, Huachipa (Lima)</p>
+                <p style="margin: 4px 0;"><strong>Código Digital:</strong> <span style="font-family: monospace; color: #ea580c; font-weight: 800;">${signatureData.code}</span></p>
+                <p style="margin: 4px 0;"><strong>Fecha y Hora:</strong> ${signatureData.timestamp} (Lima)</p>
+                <p style="margin: 4px 0;"><strong>IP Pública:</strong> <span style="font-family: monospace;">${signatureData.ip}</span></p>
+                <p style="margin: 4px 0;"><strong>Geolocalización:</strong> ${signatureData.geoLocation} ${signatureData.coordinates ? '(' + signatureData.coordinates + ')' : ''}</p>
+              </div>
+              <div style="text-align: center; margin: 24px 0;">
+                ${base64Data ? '<img src="cid:pase_fuego_oficial" alt="Pase Oficial Caminata sobre Fuego" style="max-width: 340px; width: 100%; height: auto; border-radius: 12px; border: 2px solid #ea580c;" />' : ''}
+              </div>
+            </div>
+          </div>
+        `;
+        db.collection('mail').add({
+          to: [signatureData.email],
+          robot_token: 'NODUS_ROBOT_CPSL_2026_SECRET',
+          created_at: new Date().toISOString(),
+          type: 'contrato_fuego_confirmacion',
+          recipientEmail: signatureData.email,
+          recipientName: signatureData.nombre,
+          codigoRegistro: signatureData.code,
+          ip: signatureData.ip,
+          geoLocation: signatureData.geoLocation,
+          message: {
+            subject: `🔥 PASE OFICIAL DE CONFIRMACIÓN: Caminata sobre Fuego (Sede Lima) — ${signatureData.code}`,
+            html: emailHtml,
+            attachments: base64Data ? [{
+              filename: `PASE_CAMINATA_FUEGO_${signatureData.code}.png`,
+              content: base64Data,
+              encoding: 'base64',
+              cid: 'pase_fuego_oficial'
+            }] : []
+          }
+        }).then(() => {
+          console.log('✅ Correo de confirmación con imagen enviado a:', signatureData.email);
+        }).catch(err => {
+          console.warn('⚠️ Advertencia enviando correo:', err);
+        });
+      } catch (e) {
+        console.warn('Error preparando correo:', e);
+      }
+    }
+
+    async function handleSubmit(e) {
       e.preventDefault();
+      const geo = await fetchClientGeo();
       
       const nombre = document.getElementById('nombreCompleto').value.trim();
       const tipoDoc = document.getElementById('tipoDocumento').value;
@@ -433,20 +537,31 @@
       const code = 'CQ-FIRE-' + Math.random().toString(36).substring(2, 8).toUpperCase() + '-' + Date.now().toString().slice(-4);
       const timestamp = new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' });
 
-      // Guardar localmente
+      // Guardar localmente con IP y Geolocalización
       const signatureData = {
         nombre,
+        nombreCompleto: nombre,
         tipoDocumento: tipoDoc,
         numeroDocumento: numeroDoc,
         doc,
         email,
+        telefono: tel,
         tel,
         rol,
+        rolActividad: rol,
+        lugar: 'Lima - Casona Blanca (Calle Las Perdices 1126, Huachipa)',
+        fecha: timestamp,
         aceptoImagen,
         firma,
         code,
+        verificationCode: code,
         timestamp,
-        controlVersion: 'V1.0-2026-FIREWALK-LIMA',
+        ip: geo.ip || 'Registrada',
+        geoLocation: geo.geoLocation || 'Lima, Perú 🇵🇪',
+        coordinates: geo.coordinates || '',
+        dispositivo: geo.dispositivo || 'Web',
+        userAgent: navigator.userAgent || '',
+        controlVersion: 'V2.0-2026-FIREWALK-LIMA-FORENSE',
         razonSocial: 'Creación Cuántica E.I.R.L.',
         ruc: '20612592811'
       };
@@ -694,16 +809,21 @@
       // SEDE Y LOCACIÓN
       ctx.fillStyle = '#94a3b8';
       ctx.font = '600 18px Montserrat, system-ui, sans-serif';
-      ctx.fillText('LOCACIÓN CONFIRMADA:', boxX + 35, boxY + 415);
+      ctx.fillText('LOCACIÓN CONFIRMADA:', boxX + 35, boxY + 405);
 
       ctx.fillStyle = '#f8fafc';
       ctx.font = '700 24px Montserrat, system-ui, sans-serif';
-      ctx.fillText('Casona Blanca · Calle Las Perdices 1126, Huachipa (Lima)', boxX + 35, boxY + 452);
+      ctx.fillText('Casona Blanca · Calle Las Perdices 1126, Huachipa (Lima)', boxX + 35, boxY + 442);
+
+      // IP Y GEOLOCALIZACIÓN FORENSE
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 16px "Courier New", monospace';
+      ctx.fillText(`IP: ${data.ip || 'Registrada'} | GEO: ${data.geoLocation || 'Lima, Perú'}`, boxX + 35, boxY + 485);
 
       // ESTADO Y JURAMENTO
       ctx.fillStyle = '#10b981';
       ctx.font = '800 20px Montserrat, system-ui, sans-serif';
-      ctx.fillText('✓ Instrumento Legal Firmado · Responsabilidad y Salud Aceptadas', boxX + 35, boxY + 530);
+      ctx.fillText('✓ Instrumento Legal Firmado · Responsabilidad y Salud Aceptadas', boxX + 35, boxY + 535);
 
       // 8. FRANJA INFERIOR DE SEGURIDAD Y VALIDACIÓN CRIPTOGRÁFICA
       ctx.textAlign = 'center';
@@ -734,6 +854,9 @@
         const safeName = (data.nombre || 'Participante').replace(/[^a-zA-Z0-9]/g, '_');
         btnDl.download = `Pase_Fuego_${safeName}.png`;
       }
+
+      // 10. Enviar imagen de confirmación y contrato inmediatamente por correo
+      sendFirewalkEmailImmediate(data, dataUrl);
     }
 
     async function sharePass() {

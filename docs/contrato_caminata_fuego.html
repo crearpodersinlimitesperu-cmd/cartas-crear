@@ -57,12 +57,14 @@
     <header class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-orange-500/30 p-6 md:p-8 shadow-2xl shadow-orange-950/20">
       <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-600"></div>
       
-            <!-- Branding Oficial CREAR -->
+      <!-- Branding Oficial CREAR -->
       <div class="flex items-center gap-3.5 mb-5 pb-4 border-b border-slate-800/80">
-        <img src="/logo_crear_blanco.png" alt="CREAR Poder Sin Límites" class="h-10 sm:h-12 w-auto object-contain" onerror="this.src='/logo_crear_oficial.png'">
+        <div class="bg-white px-3 py-1.5 rounded-lg border border-amber-500/40 shadow-md inline-flex items-center justify-center">
+          <img src="/logo-crear.png" alt="CREAR Poder Sin Límites" class="h-8 sm:h-9 w-auto object-contain block" onerror="this.src='/logo_crear_oficial.png'">
+        </div>
         <div>
-          <span class="text-xs font-black uppercase tracking-widest text-amber-400 block">CREAR PODER SIN LÍMITES</span>
-          <span class="text-[11px] font-bold text-slate-400 block">Centro de Formación y Liderazgo Transformacional</span>
+          <span class="text-xs font-black uppercase tracking-widest text-amber-400 block">CREAR PODER SIN LÍMITES · CREACIÓN CUÁNTICA E.I.R.L.</span>
+          <span class="text-[11px] font-bold text-slate-200 block">Centro de Formación y Liderazgo Transformacional</span>
         </div>
       </div>
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -140,7 +142,7 @@
       <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
         <p><strong>1. Declaración Jurada de Salud:</strong> EL/LA DECLARANTE manifiesta bajo juramento no encontrarse bajo el efecto de sustancias estupefacientes, alcohol o medicamentos que alteren su coordinación motriz o juicio crítico; no presentar neuropatías periféricas o insensibilidad en las extremidades inferiores; no padecer afecciones cardíacas graves o hipertensión no controlada que impidan la gestión del estrés agudo; y, en el caso de mujeres, no encontrarse en estado de gestación avanzada que contraindique la actividad.</p>
         <p><strong>2. Tratamiento de Datos Personales y Sensibles (Ley N° 29733 y D.S. N° 016-2024-JUS):</strong> En cumplimiento de la Ley de Protección de Datos Personales (Ley N° 29733) y su Reglamento aprobado por D.S. N° 016-2024-JUS, EL/LA DECLARANTE otorga su consentimiento libre, previo, expreso, inequívoco e informado para que Creación Cuántica E.I.R.L., en calidad de Titular del Banco de Datos Personales, recopile y trate sus datos personales generales y de salud (datos sensibles).</p>
-        <p><strong>3. Finalidad y Transferencia:</strong> Dichos datos serán tratados exclusivamente con la finalidad de: a) evaluar la compatibilidad de salud para la realización segura de la dinámica, y b) coordinar asistencia médica o primeros auxilios en caso de emergencia. Los datos sensibles serán alojados de manera confidencial en infraestructura de servidores seguros (NODUS / Google Cloud Platform con cifrado SSL/TLS) y no serán comercializados ni transferidos a terceros con fines publicitarios.</p>
+        <p><strong>3. Finalidad y Transferencia:</strong> Dichos datos serán tratados exclusivamente con la finalidad de: a) evaluar la compatibilidad de salud para la realización segura de la dinámica, y b) coordinar asistencia médica o primeros auxilios en caso de emergencia. Los datos sensibles serán alojados de manera confidencial en infraestructura de servidores seguros en la nube con cifrado SSL/TLS y no serán comercializados ni transferidos a terceros con fines publicitarios.</p>
         <p><strong>4. Derechos ARCO:</strong> Se informa al titular de los datos que puede ejercer sus derechos de Acceso, Rectificación, Cancelación y Oposición (ARCO), así como revocar el presente consentimiento, dirigiendo una comunicación formal al correo oficial de protección de datos: <strong class="text-cyan-400">protecciondedatos@crearpsl.net</strong>.</p>
       </div>
     </section>
@@ -536,6 +538,50 @@
 
       const code = 'CQ-FIRE-' + Math.random().toString(36).substring(2, 8).toUpperCase() + '-' + Date.now().toString().slice(-4);
       const timestamp = new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' });
+      const normDocInput = numeroDoc.replace(/\s+/g, '').toUpperCase();
+      const normEmailInput = email.toLowerCase();
+
+      // Anti-duplicados: Verificar si ya existe un registro previo con el mismo N° Documento o Correo
+      if (db) {
+        try {
+          const snap = await db.collection('contratos_caminata_fuego').get();
+          let existingRecord = null;
+          snap.forEach((docSnap) => {
+            const d = docSnap.data() || {};
+            const dDoc = String(d.numeroDocumento || '').trim().replace(/\s+/g, '').toUpperCase();
+            const dEmail = String(d.email || '').trim().toLowerCase();
+            if ((normDocInput && dDoc && dDoc === normDocInput) || (normEmailInput && dEmail && dEmail === normEmailInput)) {
+              existingRecord = d;
+            }
+          });
+          if (existingRecord) {
+            const existingCode = existingRecord.code || existingRecord.verificationCode || code;
+            const existingTime = existingRecord.timestamp || existingRecord.fecha || timestamp;
+            document.getElementById('certCode').innerText = existingCode;
+            document.getElementById('certTimestamp').innerText = existingTime;
+            document.getElementById('successSummary').innerHTML =
+              '<strong style="color:#fde68a;">⚠️ Ya cuentas con un registro firmado previamente (' + normDocInput + '). No es posible registrarse dos veces.</strong><br><br>A continuación tienes tu pase oficial vigente para <strong>' + (existingRecord.nombre || nombre) + '</strong>. Si necesitas corregir algún dato erróneo, solicita al equipo de coordinación u oficina que elimine tu registro anterior.';
+            generateFirewalkPass({
+              ...existingRecord,
+              nombre: existingRecord.nombre || nombre,
+              tipoDocumento: existingRecord.tipoDocumento || tipoDoc,
+              numeroDocumento: existingRecord.numeroDocumento || numeroDoc,
+              rol: existingRecord.rol || rol,
+              code: existingCode,
+              timestamp: existingTime,
+              ip: existingRecord.ip || geo.ip || 'Registrada',
+              geoLocation: existingRecord.geoLocation || geo.geoLocation || 'Lima, Perú 🇵🇪',
+              email: '' // Evitar reenvío duplicado automático
+            });
+            document.getElementById('firewalkForm').style.display = 'none';
+            document.getElementById('successCard').style.display = 'block';
+            document.getElementById('successCard').scrollIntoView({ behavior: 'smooth' });
+            return;
+          }
+        } catch (dupErr) {
+          console.warn('Verificación anti-duplicados omitida:', dupErr);
+        }
+      }
 
       // Guardar localmente con IP y Geolocalización
       const signatureData = {

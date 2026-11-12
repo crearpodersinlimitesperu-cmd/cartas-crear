@@ -424,9 +424,60 @@
       if (modal) modal.style.display = show ? 'flex' : 'none';
     }
 
-    // Fallback REST API por si el SDK de Firestore experimenta bloqueo de red
+    function normalizeFirewalkDoc(raw) {
+      const noPrefix = String(raw || '')
+        .trim()
+        .replace(/^(?:DNI|C\.?E\.?|CARNE\s*DE\s*EXTRANJERIA|PASAPORTE|PASS|PTP|RUC|DOC(?:UMENTO)?)[\s:.\-#]*/i, '');
+      return noPrefix.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 24);
+    }
+
+    function normalizeFirewalkName(raw) {
+      return String(raw || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function isSameFirewalkDoc(a, b) {
+      if (!a || !b) return false;
+      if (a === b) return true;
+      if (/^\d{7,15}$/.test(a) && /^\d{7,15}$/.test(b)) {
+        const ca = a.replace(/^0+/, '') || '0';
+        const cb = b.replace(/^0+/, '') || '0';
+        return ca.length >= 6 && ca === cb;
+      }
+      return false;
+    }
+
+    function parseRestFirewalkDoc(item) {
+      if (!item || !item.fields) return null;
+      const f = item.fields;
+      const s = (k) => (f[k] && f[k].stringValue) || '';
+      return {
+        nombre: s('nombre') || s('nombreCompleto'),
+        nombreCompleto: s('nombreCompleto') || s('nombre'),
+        tipoDocumento: s('tipoDocumento') || 'DNI',
+        numeroDocumento: s('numeroDocumentoNorm') || s('numeroDocumento'),
+        doc: s('doc'),
+        email: s('email'),
+        rol: s('rol') || s('rolActividad') || 'Participante',
+        code: s('code') || s('verificationCode'),
+        verificationCode: s('verificationCode') || s('code'),
+        timestamp: s('timestamp') || s('fecha'),
+        fecha: s('fecha') || s('timestamp'),
+        ip: s('ip') || 'Registrada',
+        geoLocation: s('geoLocation') || 'Lima, Perú 🇵🇪'
+      };
+    }
+
+    // Fallback REST API atómico (createDocument con documentId=doc_<NORM>, jamás duplica ni sobrescribe)
     async function saveViaRest(payload) {
-      const res = await fetch('https://firestore.googleapis.com/v1/projects/centro-operativo-cpsl/databases/(default)/documents/contratos_caminata_fuego', {
+      const deterministicId = 'doc_' + payload.numeroDocumentoNorm.slice(0, 24);
+      const baseUrl = 'https://firestore.googleapis.com/v1/projects/centro-operativo-cpsl/databases/(default)/documents/contratos_caminata_fuego';
+      const res = await fetch(baseUrl + '?documentId=' + encodeURIComponent(deterministicId), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -434,9 +485,10 @@
             nombre: { stringValue: payload.nombre || '' },
             nombreCompleto: { stringValue: payload.nombreCompleto || payload.nombre || '' },
             tipoDocumento: { stringValue: payload.tipoDocumento || 'DNI' },
-            numeroDocumento: { stringValue: payload.numeroDocumento || '' },
+            numeroDocumento: { stringValue: payload.numeroDocumentoNorm || payload.numeroDocumento || '' },
+            numeroDocumentoNorm: { stringValue: payload.numeroDocumentoNorm || '' },
             doc: { stringValue: payload.doc || '' },
-            email: { stringValue: payload.email || '' },
+            email: { stringValue: (payload.email || '').trim().toLowerCase() },
             telefono: { stringValue: payload.telefono || payload.tel || '' },
             rol: { stringValue: payload.rol || 'Participante' },
             rolActividad: { stringValue: payload.rolActividad || payload.rol || 'Participante' },
@@ -457,16 +509,24 @@
             aceptoImagen: { booleanValue: !!payload.aceptoImagen },
             controlVersion: { stringValue: payload.controlVersion || 'V2.0-2026-FIREWALK-LIMA-FORENSE' },
             razonSocial: { stringValue: 'Creación Cuántica E.I.R.L.' },
-            ruc: { stringValue: '20612592811' }
+            ruc: { stringValue: '20612592811' },
+            createdAt: { timestampValue: new Date().toISOString() }
           }
         })
       });
+      if (res.status === 409 || res.status === 403) {
+        const getRes = await fetch(baseUrl + '/' + encodeURIComponent(deterministicId));
+        if (getRes.ok) {
+          const existingJson = await getRes.json();
+          return { duplicate: true, record: parseRestFirewalkDoc(existingJson) };
+        }
+      }
       if (!res.ok) {
         throw new Error('REST save HTTP ' + res.status);
       }
       const data = await res.json();
-      console.log('✅ Contrato persistido exitosamente vía REST API:', data.name);
-      return data;
+      console.log('✅ Contrato único persistido vía REST API:', data.name);
+      return { duplicate: false, data };
     }
 
     async function sendMailViaRest(mailDoc) {
@@ -649,50 +709,94 @@
       }
     }
 
-    async function checkExistingFirewalkRecord(normDocInput, normEmailInput) {
-      if (db) {
-        const snap = await withTimeout(db.collection('contratos_caminata_fuego').get(), 4500);
-        let found = null;
-        snap.forEach((docSnap) => {
-          const d = docSnap.data() || {};
-          const dDoc = String(d.numeroDocumento || '').trim().replace(/\s+/g, '').toUpperCase();
-          const dEmail = String(d.email || '').trim().toLowerCase();
-          if ((normDocInput && dDoc && dDoc === normDocInput) || (normEmailInput && dEmail && dEmail === normEmailInput)) {
-            found = d;
-          }
-        });
-        return found;
+    let isSubmittingFirewalk = false;
+
+    function matchCandidateAgainstRecord(d, normDocInput, normEmailInput, normNameInput) {
+      if (!d) return null;
+      let rawDbDoc = d.numeroDocumentoNorm || d.numeroDocumento || '';
+      if (!rawDbDoc && d.doc) {
+        rawDbDoc = String(d.doc).indexOf(':') >= 0 ? String(d.doc).split(':').slice(1).join(':') : String(d.doc);
       }
-      const res = await fetchWithTimeout('https://firestore.googleapis.com/v1/projects/centro-operativo-cpsl/databases/(default)/documents/contratos_caminata_fuego?pageSize=300', 4500);
-      const docs = (res && res.documents) || [];
-      for (const item of docs) {
-        const f = item.fields || {};
-        const dDoc = String((f.numeroDocumento && f.numeroDocumento.stringValue) || '').trim().replace(/\s+/g, '').toUpperCase();
-        const dEmail = String((f.email && f.email.stringValue) || '').trim().toLowerCase();
-        if ((normDocInput && dDoc && dDoc === normDocInput) || (normEmailInput && dEmail && dEmail === normEmailInput)) {
-          return {
-            nombre: (f.nombre && f.nombre.stringValue) || '',
-            tipoDocumento: (f.tipoDocumento && f.tipoDocumento.stringValue) || 'DNI',
-            numeroDocumento: (f.numeroDocumento && f.numeroDocumento.stringValue) || '',
-            rol: (f.rol && f.rol.stringValue) || 'Participante',
-            code: (f.code && f.code.stringValue) || '',
-            timestamp: (f.timestamp && f.timestamp.stringValue) || '',
-            ip: (f.ip && f.ip.stringValue) || 'Registrada',
-            geoLocation: (f.geoLocation && f.geoLocation.stringValue) || 'Lima, Perú 🇵🇪'
-          };
-        }
+      const dDoc = normalizeFirewalkDoc(rawDbDoc);
+      const dEmail = String(d.email || '').trim().toLowerCase();
+      const dName = normalizeFirewalkName(d.nombreCompleto || d.nombre || '');
+      if (normDocInput && dDoc && isSameFirewalkDoc(normDocInput, dDoc)) {
+        return { record: d, reason: 'número de documento' };
+      }
+      if (normEmailInput && dEmail && normEmailInput === dEmail) {
+        return { record: d, reason: 'correo electrónico' };
+      }
+      if (normNameInput && normNameInput.split(' ').length >= 2 && normNameInput.length >= 8 && dName && normNameInput === dName) {
+        return { record: d, reason: 'nombre completo' };
       }
       return null;
     }
 
+    async function checkExistingFirewalkRecord(normDocInput, normEmailInput, normNameInput) {
+      if (db) {
+        try {
+          const snap = await withTimeout(db.collection('contratos_caminata_fuego').get(), 4500);
+          let found = null;
+          snap.forEach((docSnap) => {
+            if (found) return;
+            const match = matchCandidateAgainstRecord(docSnap.data() || {}, normDocInput, normEmailInput, normNameInput);
+            if (match) found = match;
+          });
+          return found;
+        } catch (sdkReadErr) {
+          console.warn('Lectura SDK excedió tiempo; verificando duplicados vía REST paginado:', sdkReadErr);
+        }
+      }
+      let pageToken = '';
+      do {
+        const url = 'https://firestore.googleapis.com/v1/projects/centro-operativo-cpsl/databases/(default)/documents/contratos_caminata_fuego?pageSize=300' +
+          (pageToken ? '&pageToken=' + encodeURIComponent(pageToken) : '');
+        const res = await fetchWithTimeout(url, 6000);
+        const docs = (res && res.documents) || [];
+        for (const item of docs) {
+          const parsed = parseRestFirewalkDoc(item);
+          const match = matchCandidateAgainstRecord(parsed, normDocInput, normEmailInput, normNameInput);
+          if (match) return match;
+        }
+        pageToken = (res && res.nextPageToken) || '';
+      } while (pageToken);
+      return null;
+    }
+
+    function renderDuplicateFirewalkCard(existingRecord, reason, fallbackCtx) {
+      const existingCode = existingRecord.code || existingRecord.verificationCode || fallbackCtx.code;
+      const existingTime = existingRecord.timestamp || existingRecord.fecha || fallbackCtx.timestamp;
+      document.getElementById('certCode').innerText = existingCode;
+      document.getElementById('certTimestamp').innerText = existingTime;
+      document.getElementById('successSummary').innerHTML =
+        '<strong style="color:#fde68a;">⚠️ Ya existe un registro firmado coincidente por ' + (reason || 'documento o correo') + ' (' + fallbackCtx.normDocInput + '). No está permitido registrarse dos veces.</strong><br><br>A continuación tienes tu pase oficial vigente para <strong>' + (existingRecord.nombre || fallbackCtx.nombre) + '</strong>. Si necesitas corregir algún dato erróneo, solicita al equipo de coordinación u oficina que elimine tu registro anterior.';
+      generateFirewalkPass({
+        ...existingRecord,
+        nombre: existingRecord.nombre || fallbackCtx.nombre,
+        tipoDocumento: existingRecord.tipoDocumento || fallbackCtx.tipoDoc,
+        numeroDocumento: existingRecord.numeroDocumento || fallbackCtx.normDocInput,
+        rol: existingRecord.rol || fallbackCtx.rol,
+        code: existingCode,
+        timestamp: existingTime,
+        ip: existingRecord.ip || fallbackCtx.geo.ip || 'Registrada',
+        geoLocation: existingRecord.geoLocation || fallbackCtx.geo.geoLocation || 'Lima, Perú 🇵🇪',
+        email: '' // Evitar reenvío duplicado automático
+      });
+      document.getElementById('firewalkForm').style.display = 'none';
+      document.getElementById('successCard').style.display = 'block';
+      document.getElementById('successCard').scrollIntoView({ behavior: 'smooth' });
+    }
+
     async function handleSubmit(e) {
       e.preventDefault();
+      if (isSubmittingFirewalk) return;
       const errBox = document.getElementById('formValidationError');
       if (errBox) errBox.style.display = 'none';
 
       const nombre = (document.getElementById('nombreCompleto').value || '').trim();
       const tipoDoc = document.getElementById('tipoDocumento').value || 'DNI';
-      const numeroDoc = (document.getElementById('numeroDocumento').value || '').trim();
+      const numeroDocRaw = (document.getElementById('numeroDocumento').value || '').trim();
+      const normDocInput = normalizeFirewalkDoc(numeroDocRaw);
       const email = (document.getElementById('email').value || '').trim();
       const tel = (document.getElementById('telefono').value || '').trim();
       const aceptoRiesgos = document.getElementById('aceptoRiesgos').checked;
@@ -702,13 +806,14 @@
       const rol = document.getElementById('rolActividad').value || 'Participante';
 
       if (!nombre) return showValidationError('Por favor ingresa tu <strong>Nombre y Apellidos Completos</strong> en la parte superior del formulario.', 'nombreCompleto');
-      if (!numeroDoc) return showValidationError('Por favor ingresa tu <strong>N° de Documento</strong> (DNI / CE / Pasaporte).', 'numeroDocumento');
+      if (!normDocInput || normDocInput.length < 4) return showValidationError('Por favor ingresa un <strong>N° de Documento válido</strong> (mínimo 4 caracteres alfanuméricos).', 'numeroDocumento');
       if (!email || !email.includes('@')) return showValidationError('Por favor ingresa un <strong>Correo Electrónico válido</strong> para enviarte tu constancia y pase oficial.', 'email');
       if (!tel) return showValidationError('Por favor ingresa tu <strong>Teléfono / WhatsApp de Contacto y Emergencia</strong>.', 'telefono');
       if (!aceptoRiesgos) return showValidationError('Debes marcar obligatoriamente el <strong>Checkbox 1 (Exoneración de Responsabilidad y Asunción de Riesgos)</strong>.', 'aceptoRiesgos');
       if (!aceptoSalud) return showValidationError('Debes marcar obligatoriamente el <strong>Checkbox 2 (Declaración Jurada de Salud y Datos Sensibles)</strong>.', 'aceptoSalud');
       if (!firma) return showValidationError('Escribe tu <strong>Nombre y Apellidos Completos</strong> en el recuadro de Firma Digital Vinculante.', 'firmaTexto');
 
+      isSubmittingFirewalk = true;
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
       if (submitBtn) {
@@ -718,50 +823,28 @@
 
       try {
         const geo = await fetchClientGeo();
-        const doc = `${tipoDoc}: ${numeroDoc}`;
+        const doc = `${tipoDoc}: ${normDocInput}`;
         const code = 'CQ-FIRE-' + Math.random().toString(36).substring(2, 8).toUpperCase() + '-' + Date.now().toString().slice(-4);
         const timestamp = new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' });
-        const normDocInput = numeroDoc.replace(/\s+/g, '').toUpperCase();
         const normEmailInput = email.toLowerCase();
+        const normNameInput = normalizeFirewalkName(nombre);
+        const fallbackCtx = { code, timestamp, normDocInput, nombre, tipoDoc, rol, geo };
 
-        // Anti-duplicados: Verificar si ya existe un registro previo con el mismo N° Documento o Correo
-        try {
-          const existingRecord = await checkExistingFirewalkRecord(normDocInput, normEmailInput);
-          if (existingRecord) {
-            const existingCode = existingRecord.code || existingRecord.verificationCode || code;
-            const existingTime = existingRecord.timestamp || existingRecord.fecha || timestamp;
-            document.getElementById('certCode').innerText = existingCode;
-            document.getElementById('certTimestamp').innerText = existingTime;
-            document.getElementById('successSummary').innerHTML =
-              '<strong style="color:#fde68a;">⚠️ Ya cuentas con un registro firmado previamente (' + normDocInput + '). No es posible registrarse dos veces.</strong><br><br>A continuación tienes tu pase oficial vigente para <strong>' + (existingRecord.nombre || nombre) + '</strong>. Si necesitas corregir algún dato erróneo, solicita al equipo de coordinación u oficina que elimine tu registro anterior.';
-            generateFirewalkPass({
-              ...existingRecord,
-              nombre: existingRecord.nombre || nombre,
-              tipoDocumento: existingRecord.tipoDocumento || tipoDoc,
-              numeroDocumento: existingRecord.numeroDocumento || numeroDoc,
-              rol: existingRecord.rol || rol,
-              code: existingCode,
-              timestamp: existingTime,
-              ip: existingRecord.ip || geo.ip || 'Registrada',
-              geoLocation: existingRecord.geoLocation || geo.geoLocation || 'Lima, Perú 🇵🇪',
-              email: '' // Evitar reenvío duplicado automático
-            });
-            document.getElementById('firewalkForm').style.display = 'none';
-            document.getElementById('successCard').style.display = 'block';
-            document.getElementById('successCard').scrollIntoView({ behavior: 'smooth' });
-            return;
-          }
-        } catch (dupErr) {
-          console.warn('Verificación anti-duplicados omitida:', dupErr);
+        // 1. Anti-duplicados obligatorio (fail-closed: SDK + respaldo REST paginado)
+        const existingMatch = await checkExistingFirewalkRecord(normDocInput, normEmailInput, normNameInput);
+        if (existingMatch && existingMatch.record) {
+          renderDuplicateFirewalkCard(existingMatch.record, existingMatch.reason, fallbackCtx);
+          return;
         }
 
         const signatureData = {
           nombre,
           nombreCompleto: nombre,
           tipoDocumento: tipoDoc,
-          numeroDocumento: numeroDoc,
+          numeroDocumento: normDocInput,
+          numeroDocumentoNorm: normDocInput,
           doc,
-          email,
+          email: normEmailInput,
           telefono: tel,
           tel,
           rol,
@@ -791,25 +874,48 @@
           console.warn('LocalStorage warning:', storageErr);
         }
 
-        // Persistir en Firestore Cloud (SDK con timeout + REST fallback garantizado)
+        // 2. Escritura atómica determinística sobre doc_<NORM_DOC> (imposible duplicar en Firestore)
+        const deterministicId = 'doc_' + normDocInput.slice(0, 24);
         if (db) {
           try {
-            const ref = await withTimeout(
-              db.collection('contratos_caminata_fuego').add({
-                ...signatureData,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                source: 'cartas.crearpsl.net',
-                sede: 'Lima'
+            const docRef = db.collection('contratos_caminata_fuego').doc(deterministicId);
+            await withTimeout(
+              db.runTransaction(async (tx) => {
+                const snap = await tx.get(docRef);
+                if (snap.exists) {
+                  const err = new Error('ALREADY_EXISTS');
+                  err.code = 'already-exists';
+                  err.existingData = snap.data();
+                  throw err;
+                }
+                tx.set(docRef, {
+                  ...signatureData,
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  source: 'cartas.crearpsl.net',
+                  sede: 'Lima'
+                });
               }),
-              5000
+              5500
             );
-            console.log('✅ Contrato persistido en Firestore:', ref.id);
+            console.log('✅ Contrato único persistido en Firestore:', deterministicId);
           } catch (sdkErr) {
-            console.warn('⚠️ Error guardando vía SDK, ejecutando REST fallback:', sdkErr);
-            await saveViaRest(signatureData);
+            if (sdkErr && sdkErr.code === 'already-exists' && sdkErr.existingData) {
+              renderDuplicateFirewalkCard(sdkErr.existingData, 'número de documento', fallbackCtx);
+              return;
+            }
+            console.warn('⚠️ Transacción SDK no completada, ejecutando createDocument REST atómico:', sdkErr);
+            const restOut = await saveViaRest(signatureData);
+            if (restOut && restOut.duplicate && restOut.record) {
+              renderDuplicateFirewalkCard(restOut.record, 'número de documento', fallbackCtx);
+              return;
+            }
           }
         } else {
-          await saveViaRest(signatureData);
+          const restOut = await saveViaRest(signatureData);
+          if (restOut && restOut.duplicate && restOut.record) {
+            renderDuplicateFirewalkCard(restOut.record, 'número de documento', fallbackCtx);
+            return;
+          }
         }
 
         // Mostrar resumen de éxito
@@ -827,6 +933,7 @@
         console.error('Error al procesar firma:', submitErr);
         showValidationError('No se pudo completar el registro en la nube. Verifica tu conexión a internet e intenta nuevamente (' + (submitErr.message || 'Error de red') + ').', 'submitBtn');
       } finally {
+        isSubmittingFirewalk = false;
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnHtml || '🔥 Firmar y Validar Instrumento Legal';

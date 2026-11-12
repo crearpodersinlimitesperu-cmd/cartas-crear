@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Invitación Oficial - CREAR Poder Sin Límites</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crearBlue: '#002060',
+                        crearGold: '#FFB703',
+                        crearDark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .print-container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            @page { margin: 15mm 20mm; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen py-8 px-4 font-sans text-gray-800 antialiased">
+
+    <div class="print-container max-w-4xl mx-auto bg-white p-8 md:p-14 rounded-xl shadow-lg border border-gray-200">
+        
+        <!-- Header -->
+        <header class="flex justify-between items-center border-b-2 border-gray-100 pb-6 mb-8">
+            <div class="flex items-center gap-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="3000 1100 2000 2300" width="110" height="127" role="img" aria-label="Logo CREAR Poder Sin Límites" style="display:block;flex-shrink:0">
+                    <title>Logo CREAR Poder Sin Límites</title>
+                    <image href="logo_crear_oficial.png" width="8000" height="4500" />
+                </svg>
+            </div>
+            <div class="text-right">
+                <p class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Fecha de Emisión</p>
+                <p class="text-sm font-bold text-gray-700" id="current-date">Lima, Perú</p>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <main class="text-gray-700 leading-relaxed space-y-6 text-justify">
+            <h1 class="text-xl font-bold uppercase tracking-wide text-gray-900 mb-8">Carta de Invitación Oficial</h1>
+            
+            <p class="font-semibold text-gray-900" id="sede-authority">A las autoridades migratorias:</p>
+            
+            <p>A quien corresponda,</p>
+
+            <p id="sede-invitation"></p>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 my-6 mx-2 md:mx-6 shadow-sm">
+                <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Nombre Completo:</span><br> <span class="text-lg font-bold text-gray-900" id="field-name">[Nombre]</span></p>
+                <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Nacionalidad:</span><br> <span class="text-lg font-bold text-crearBlue" id="field-nacionalidad">[NACIONALIDAD PENDIENTE]</span></p>
+                <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Documento de Identidad / Pasaporte:</span><br> <span class="text-lg font-bold text-gray-900 font-mono" id="field-doc">[Documento]</span></p>
+                <p class="mb-2"><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Calidad de Participación:</span><br> <span class="text-base font-bold text-crearBlue" id="field-role">Invitado Especial Internacional (Invitado Internacional Ad-Honorem)</span></p>
+                <p><span class="text-gray-500 uppercase text-xs font-bold tracking-wider">Hospedaje Reservado:</span><br> <span class="text-base font-bold text-gray-900" id="field-hotel">[HOSPEDAJE PENDIENTE]</span></p>
+            </div>
+
+            <p>
+                El motivo de su viaje y estadía en nuestro país obedece a su asistencia como <strong>invitado especial y participante observador</strong> en nuestro evento corporativo denominado <strong>"Entrenamiento de Liderazgo Transformacional"</strong>, el cual se llevará a cabo durante los días <strong id="field-dates">[FECHAS PENDIENTES]</strong> en <span id="sede-city">la sede de destino</span>. Cabe resaltar que su visita tiene fines netamente de intercambio vivencial y no contempla ninguna relación laboral, subordinación ni remuneración económica dentro del territorio nacional.
+            </p>
+
+            <p>
+                Dejamos constancia legal y financiera de que <strong>todos los gastos derivados de su estadía en el país de destino</strong> —incluyendo hospedaje, transporte interno, alimentación y cualquier viático necesario— <strong>serán asumidos en su totalidad por nuestra organización</strong>. El ciudadano invitado no representará carga económica alguna para el país de destino.
+            </p>
+
+            <p>
+                Extendemos esta carta para que le sean brindadas las facilidades del caso en su ingreso al país, garantizando que su visita es en calidad de invitado no remunerado y que retornará a su país de origen una vez finalizado su itinerario de vuelo programado.
+            </p>
+
+            <p>
+                Agradeciendo de antemano su gentil atención y colaboración, quedamos a su entera disposición para cualquier consulta o verificación.
+            </p>
+
+            <p class="mt-8">Atentamente,</p>
+
+            <!-- Sin imagen de firma hasta contar con una firma autorizada de esta sede. -->
+            <div id="sede-signature" class="mt-12 mb-4 text-center"></div>
+        </main>
+
+        <!-- No Print Controls -->
+        <div class="no-print mt-12 pt-6 border-t border-gray-200 flex flex-col md:flex-row gap-4 justify-center items-center">
+            <button id="print-letter" disabled onclick="window.print()" class="bg-crearGold hover:bg-yellow-500 text-crearDark font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" /></svg>
+                Imprimir o PDF
+            </button>
+            <p class="text-xs text-gray-400 text-center max-w-sm">Nota: Esta zona de botones y el fondo gris no aparecerán en la impresión. Revisa los datos de la invitación antes de imprimir.</p>
+        </div>
+    </div>
+
+    <script src="carta-sedes.js" defer></script>
+    <script>
+        const TRAINERS_MASTER = {
+            'ERNESTO ALEJANDRO DIAZ PABON': {
+                name: 'ERNESTO ALEJANDRO DIAZ PABON',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO Nº A4152916 (C.I. 1727274928)',
+                fechas: 'Del 3 al 7 de Septiembre de 2026',
+                rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'ELMER ANDRES IDROBO ANDRADE': {
+                name: 'ELMER ANDRES IDROBO ANDRADE',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO',
+                fechas: 'Del 4 al 6 de Septiembre de 2026',
+                rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'MARIA DE LOURDES PATIÑO GALARRAGA': {
+                name: 'MARIA DE LOURDES PATIÑO GALARRAGA',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO Nº B0857192 (C.I. 1712863404)',
+                fechas: 'Del 3 al 7 de Septiembre de 2026',
+                rol: 'Invitada Especial Internacional (Invitada Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'CARLOS ANDRES GOMEZ GOMEZ': {
+                name: 'CARLOS ANDRES GOMEZ GOMEZ',
+                nacionalidad: 'COLOMBIANA',
+                doc: 'PASAPORTE COLOMBIANO Nº BG726399 (C.C. 3482169)',
+                fechas: 'Del 26 al 31 de Agosto de 2026',
+                rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'FERNANDO ARAGON': {
+                name: 'FERNANDO ARAGON',
+                nacionalidad: 'ARGENTINA',
+                doc: 'DNI MERCOSUR Nº 17.856.159 (Trámite 00518899392)',
+                fechas: 'Del 14 al 16 de Agosto de 2026',
+                rol: 'Líder Capítulo Uno (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'DIEGO DAVID BRAVO FIGUEROA': {
+                name: 'DIEGO DAVID BRAVO FIGUEROA',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO Nº A9025643 (C.I. 1713803847)',
+                fechas: 'Del 14 al 16 de Agosto de 2026',
+                rol: 'Líder El Viaje (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'LEANDRO EMILIO BRUNIS AVILES': {
+                name: 'LEANDRO EMILIO BRUNIS AVILES',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO Nº A8243780 (C.I. 1718426560)',
+                fechas: 'Del Viernes 23 al Domingo 25 de Octubre, 2026',
+                rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel José Antonio Deluxe (Calle Bellavista 133, Miraflores, Lima)'
+            },
+            'CARLOS EMILIO BRUNIS VILLACIS': {
+                name: 'CARLOS EMILIO BRUNIS VILLACIS',
+                nacionalidad: 'ECUATORIANA',
+                doc: 'PASAPORTE ECUATORIANO Nº A8885265 (C.I. 1201916986)',
+                fechas: 'Del Viernes 23 al Domingo 25 de Octubre, 2026',
+                rol: 'Invitado Especial Internacional (Invitado Internacional Ad-Honorem)',
+                hotel: 'Hotel San Blas (Avenida Arequipa 3940, Miraflores, Lima)'
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-PE', options);
+
+            const params = new URLSearchParams(window.location.search);
+            const normalizeName = value => value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ');
+            const rawNombre = normalizeName(params.get('nombre') || '');
+            const nameAliases = {
+                'ELMER IDROBO ANDRADE': 'ELMER ANDRES IDROBO ANDRADE',
+                'LEANDRO BRUNIS': 'LEANDRO EMILIO BRUNIS AVILES',
+                'LEANDRO BRUNIS AVILES': 'LEANDRO EMILIO BRUNIS AVILES',
+                'CARLOS BRUNIS': 'CARLOS EMILIO BRUNIS VILLACIS',
+                'CARLOS BRUNIS VILLACIS': 'CARLOS EMILIO BRUNIS VILLACIS'
+            };
+            const canonicalNombre = nameAliases[rawNombre] || rawNombre;
+            // Nationality checked against the identity document on 2026-09-27.
+            // Keep passport scans and identification numbers out of this public registry.
+            const verifiedNationalities = {
+                'MILDRED MUNOZ VASQUEZ': { nacionalidad: 'COLOMBIANA', documento: 'PASAPORTE COLOMBIANO Nº BE596036 (C.C. 1036598062)' },
+                'ELMER ANDRES IDROBO ANDRADE': { nacionalidad: 'ECUATORIANA', documento: 'PASAPORTE ECUATORIANO' }
+            };
+            const verifiedIdentity = verifiedNationalities[canonicalNombre];
+            const master = Object.values(TRAINERS_MASTER).find(person => normalizeName(person.name) === canonicalNombre);
+
+            if (master) {
+                document.getElementById('field-name').textContent = master.name;
+                document.getElementById('field-nacionalidad').textContent = master.nacionalidad;
+                document.getElementById('field-doc').textContent = master.doc;
+                if (master.fechas) document.getElementById('field-dates').textContent = master.fechas;
+                if (master.rol) document.getElementById('field-role').textContent = master.rol;
+                if (master.hotel) document.getElementById('field-hotel').textContent = master.hotel;
+            } else {
+                const nombreParam = params.get('nombre') ? params.get('nombre').toUpperCase() : '[NOMBRE COMPLETO]';
+                document.getElementById('field-name').textContent = nombreParam;
+                
+                let nac = params.get('nacionalidad') ? params.get('nacionalidad').toUpperCase() : '[NACIONALIDAD PENDIENTE]';
+                document.getElementById('field-nacionalidad').textContent = nac;
+
+                let doc = params.get('doc') ? params.get('doc').toUpperCase() : '[DOCUMENTO / PASAPORTE]';
+                document.getElementById('field-doc').textContent = doc;
+
+                if (params.get('rol')) document.getElementById('field-role').textContent = params.get('rol') + ' (Invitado Internacional Ad-Honorem)';
+            }
+
+            const requestedDates = params.get('fechas')?.trim();
+            if (requestedDates) document.getElementById('field-dates').textContent = requestedDates;
+            const requestedHotel = params.get('hotel')?.trim();
+            if (requestedHotel) document.getElementById('field-hotel').textContent = requestedHotel;
+
+            // Explicit form values take priority over saved records.
+            const requestedNationality = params.get('nacionalidad')?.trim();
+            if (requestedNationality) document.getElementById('field-nacionalidad').textContent = requestedNationality.toUpperCase();
+            const requestedDocument = params.get('doc')?.trim();
+            if (requestedDocument) document.getElementById('field-doc').textContent = requestedDocument.toUpperCase();
+
+            // Verified identity takes precedence over stale or incorrect URL values.
+            if (verifiedIdentity) {
+                document.getElementById('field-nacionalidad').textContent = verifiedIdentity.nacionalidad;
+                document.getElementById('field-doc').textContent = verifiedIdentity.documento;
+            }
+
+        });
+    </script>
+</body>
+</html>

@@ -1255,7 +1255,7 @@ function genHTML(){
   const migDoc = encodeURIComponent(d.migracion && d.migracion.documento ? d.migracion.documento : "");
   const migFechas = encodeURIComponent(d.migracion && d.migracion.fechas_evento ? d.migracion.fechas_evento : "");
   const migracionBtn = '<div class="reveal mb-12 flex justify-center" style="transition-delay: 280ms;">'
-    + '<a href="carta_invitacion_migraciones.html?nombre=' + migNombre + '&nacionalidad=' + migNacionalidad + '&doc=' + migDoc + '&fechas=' + migFechas + '&sede=' + encodeURIComponent(cSede || '') + '&hotel=' + encodeURIComponent([d.hotel_nombre, d.hotel_direccion].filter(Boolean).join(' — ')) + '&rol=Invitado+Especial+Internacional" target="_blank" class="glass border border-crear-accent/50 hover:bg-crear-accent/20 text-white px-6 py-3 rounded-full shadow-[0_0_20px_rgba(255,183,3,0.2)] transition-transform hover:scale-105 flex items-center gap-3 text-sm font-semibold tracking-wide uppercase">'
+    + '<a href="https://cartas.crearpsl.net/carta_invitacion_migraciones.html?nombre=' + migNombre + '&nacionalidad=' + migNacionalidad + '&doc=' + migDoc + '&fechas=' + migFechas + '&sede=' + encodeURIComponent(cSede || '') + '&hotel=' + encodeURIComponent([d.hotel_nombre, d.hotel_direccion].filter(Boolean).join(' — ')) + '&rol=Invitado+Especial+Internacional" target="_blank" class="glass border border-crear-accent/50 hover:bg-crear-accent/20 text-white px-6 py-3 rounded-full shadow-[0_0_20px_rgba(255,183,3,0.2)] transition-transform hover:scale-105 flex items-center gap-3 text-sm font-semibold tracking-wide uppercase">'
     + '<i class="fa-solid fa-passport text-crear-accent"></i> Ver Carta para Migraciones'
     + '</a></div>';
 
@@ -1273,13 +1273,13 @@ function genHTML(){
 
   return '<!DOCTYPE html>\n'
     + '<html lang="es" class="scroll-smooth">\n'
-    + '<head>
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/png" href="/logo-crear.png">
-  <link rel="icon" type="image/png" href="/logo_crear_oficial.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">\n'
+    + '<head>\n'
+    + '  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">\n'
+    + '  <link rel="icon" type="image/svg+xml" href="/favicon.svg">\n'
+    + '  <link rel="icon" type="image/png" href="/logo-crear.png">\n'
+    + '  <link rel="icon" type="image/png" href="/logo_crear_oficial.png">\n'
+    + '  <link rel="shortcut icon" href="/favicon.ico">\n'
+    + '  <link rel="apple-touch-icon" href="/apple-touch-icon.png">\n'
     + '    <meta charset="UTF-8">\n'
     + '    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
     + '    <title>Bienvenido ' + firstName + ' | CREAR Poder Sin Límites</title>\n'
@@ -1288,7 +1288,7 @@ function genHTML(){
     + '    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">\n'
     + '    <script src="https://cdn.tailwindcss.com"><\/script>\n'
     + '    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">\n'
-    + '    <script src="quotes.js"><\/script>\n'
+    + '    <script src="https://cartas.crearpsl.net/quotes.js"><\/script>\n'
     + '    <script>\n'
     + '        tailwind.config = {\n'
     + '            theme: {\n'
@@ -1335,7 +1335,7 @@ function genHTML(){
     + '    </div>\n'
     + '    <!-- Welcome Overlay -->\n'
     + '    <div id="welcomeOverlay" class="fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center transition-opacity duration-1000">\n'
-    + '        <img src="logo_crear_blanco.png" onerror="this.src=\'https://crearpodersinlimitesperu-cmd.github.io/cartas-crear/logo_crear_blanco.png\'" alt="CREAR Poder Sin Límites" class="h-28 md:h-40 mb-10 drop-shadow-[0_0_25px_rgba(251,191,36,0.5)] animate-pulse">\n'
+    + '        <img src="https://cartas.crearpsl.net/logo_crear_blanco.png" onerror="this.src=\'https://crearpodersinlimitesperu-cmd.github.io/cartas-crear/logo_crear_blanco.png\'" alt="CREAR Poder Sin Límites" class="h-28 md:h-40 mb-10 drop-shadow-[0_0_25px_rgba(251,191,36,0.5)] animate-pulse">\n'
     + '        <button id="openLetterBtn" class="px-10 py-5 bg-crear-accent text-black font-black text-xl rounded-full hover:scale-110 transition-transform shadow-[0_0_30px_rgba(251,191,36,0.6)] flex items-center gap-3 opacity-50 cursor-not-allowed pointer-events-none transition-all duration-500">\n'
     + '            <i class="fa-solid fa-spinner fa-spin"></i> PREPARANDO EXPERIENCIA...\n'
     + '        </button>\n'
@@ -1347,7 +1347,7 @@ function genHTML(){
     + '            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">\n'
     + '                <div class="flex justify-between items-center h-20">\n'
     + '                    <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">\n'
-    + '                        <img src="logo_crear_blanco.png" onerror="this.src=\'https://crearpodersinlimitesperu-cmd.github.io/cartas-crear/logo_crear_blanco.png\'" alt="CREAR" class="h-10 object-contain" />\n'
+    + '                        <img src="https://cartas.crearpsl.net/logo_crear_blanco.png" onerror="this.src=\'https://crearpodersinlimitesperu-cmd.github.io/cartas-crear/logo_crear_blanco.png\'" alt="CREAR" class="h-10 object-contain" />\n'
     + '                    </div>\n'
     + '                    <div class="flex space-x-8 items-center">\n'
     + '                        <span class="text-crear-accent font-semibold tracking-wider text-sm uppercase">Radar Operativo &middot; ' + sd.c + '</span>\n'
@@ -1552,7 +1552,7 @@ function genHTML(){
     + '        <footer class="bg-[#050505] py-16 border-t border-gray-900 relative z-10">\n'
     + '            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">\n'
     + '                <div class="flex items-center justify-center gap-3 mb-10">\n'
-    + '                    <img src="logo_crear_blanco.png" onerror="this.src=\'https://crearpodersinlimitesperu-cmd.github.io/cartas-crear/logo_crear_blanco.png\'" alt="CREAR" class="h-40 md:h-56 object-contain drop-shadow-[0_0_20px_rgba(251,191,36,0.6)] hover:drop-shadow-[0_0_35px_rgba(251,191,36,1)] hover:scale-105 transition-all duration-500" />\n'
+    + '                    <img src="https://cartas.crearpsl.net/logo_crear_blanco.png" onerror="this.src=\'https://crearpodersinlimitesperu-cmd.github.io/cartas-crear/logo_crear_blanco.png\'" alt="CREAR" class="h-40 md:h-56 object-contain drop-shadow-[0_0_20px_rgba(251,191,36,0.6)] hover:drop-shadow-[0_0_35px_rgba(251,191,36,1)] hover:scale-105 transition-all duration-500" />\n'
     + '                </div>\n'
     + '                <div class="text-gray-600 text-sm font-medium tracking-wide">\n'
     + '                    &copy; 2026 CREAR Poder Sin Límites Sede ' + sd.p + '.<br/> Comunicación oficial vía Google Chat.\n'
@@ -1820,7 +1820,94 @@ async function executePublish(){
   }
 }
 
-// AI PARSING
+// AI PARSING + LOCAL FALLBACK
+function applyParsedLetterData(parsed){
+  appData = {...mkDef(cSede), ...parsed};
+  if(!Array.isArray(appData.misiones)) appData.misiones = [];
+  if(!Array.isArray(appData.lobby_pickups)) appData.lobby_pickups = [];
+  if(!Array.isArray(appData.reglas)) appData.reglas = (SD[cSede] || SD.lima).reg.map(normReg);
+  if(!Array.isArray(appData.soporte)) appData.soporte = (SD[cSede] || SD.lima).sop.map(normSop);
+  if(!Array.isArray(appData.clima_consejos)) appData.clima_consejos = [];
+  if(!appData.migracion) appData.migracion = mkDef(cSede).migracion;
+  syncForm(); up(); switchTab("gen"); saveToHistory();
+}
+
+function parseStructuredLetterText(raw, sd){
+  const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  const pick = (rx) => {
+    for(const l of lines){
+      const m = l.match(rx);
+      if(m && m[1]) return m[1].replace(/\*\*/g, "").trim();
+    }
+    return "";
+  };
+  const nombre = pick(/^(?:Para|Entrenador(?:a)?|Nombre(?:\s+Completo)?)\s*:\s*(.+)$/i);
+  const asunto = pick(/^Asunto\s*:\s*(.+)$/i);
+  const fecha = pick(/^Fecha(?:\s+de\s+Emisi[oó]n)?\s*:\s*(.+)$/i);
+  const eqMatch = raw.match(/\b(?:Equipo|EQ)\s*[-:#]?\s*([A-Za-z0-9-]+)/i);
+  const pnrMatch = raw.match(/(?:Reserva|PNR|C[oó]digo(?:\s+de\s+Reserva)?)\s*[:-]?\s*([A-Z0-9]{5,8})\b/i);
+  let tipo = "MJ";
+  if(/el\s+viaje/i.test(raw)) tipo = "El Viaje";
+  else if(/cap[ií]tulo\s*(?:2|dos)|\bC2\b/i.test(raw)) tipo = "C2";
+  else if(/cap[ií]tulo\s*(?:1|uno)|\bC1\b/i.test(raw)) tipo = "C1";
+
+  const flightMatches = [...raw.matchAll(/\b([A-Z]{2}\s*\d{2,4})\b([^\n]*)/g)];
+  const extractFlight = (idx) => {
+    const fm = flightMatches[idx];
+    if(!fm) return {fecha:"", hora:"", vuelo:"", ruta:"", tracker_url:""};
+    const line = fm[0];
+    const timeM = line.match(/\b(\d{1,2}:\d{2}(?:\s*(?:AM|PM))?)\b/i);
+    const routeM = line.match(/\b([A-Z]{3})\s*(?:[-–>➔→]+|a)\s*([A-Z]{3})\b/);
+    const dateM = line.match(/(\d{1,2}\s+de\s+[a-zA-Z]+(?:\s+de\s+\d{4})?|\d{4}-\d{2}-\d{2}|\d{1,2}[/-]\d{1,2}[/-]\d{2,4})/i);
+    return {
+      fecha: dateM ? dateM[1].trim() : "",
+      hora: timeM ? timeM[1].trim() : "",
+      vuelo: fm[1].replace(/\s+/g, " ").trim(),
+      ruta: routeM ? `${routeM[1]} - ${routeM[2]}` : "",
+      tracker_url: ""
+    };
+  };
+
+  const hotelLine = pick(/^[^\w]*(?:Hotel(?:\s+de\s+descanso|\s+sede)?)\s*:\s*(.+)$/i);
+  const misiones = [];
+  const misIdx = lines.findIndex(l => /^1\.\s*Tu\s*Misi[oó]n/i.test(l));
+  if(misIdx !== -1){
+    const eventos = [];
+    for(let i = misIdx + 1; i < lines.length; i++){
+      if(/^[2-6]\.\s/.test(lines[i])) break;
+      const cleanLine = lines[i].replace(/^[●•\-*]\s*/, "");
+      const sep = cleanLine.match(/^([^:]{3,35}):\s*(.+)$/);
+      if(sep) eventos.push({fecha_hora: sep[1].replace(/\*\*/g, "").trim(), descripcion: sep[2].replace(/\*\*/g, "").trim(), color:"blue"});
+      else if(cleanLine) eventos.push({fecha_hora: "Horario", descripcion: cleanLine.replace(/\*\*/g, ""), color:"blue"});
+    }
+    if(eventos.length) misiones.push({titulo_mision: lines[misIdx].replace(/^1\.\s*/, "").replace(/\*\*/g, ""), eventos});
+  }
+
+  const hasSignals = Boolean(nombre || asunto || pnrMatch || flightMatches.length || misiones.length || hotelLine);
+  if(!hasSignals) return null;
+
+  const def = mkDef(cSede);
+  return {
+    ...def,
+    nombre_entrenador: nombre || def.nombre_entrenador,
+    nombre_completo: nombre || def.nombre_completo,
+    tipo_entrenamiento: tipo,
+    equipo: eqMatch ? eqMatch[1] : def.equipo,
+    fecha_emision: fecha || def.fecha_emision,
+    asunto: asunto || def.asunto,
+    pnr: pnrMatch ? pnrMatch[1].toUpperCase() : def.pnr,
+    vuelo_llegada: flightMatches[0] ? extractFlight(0) : def.vuelo_llegada,
+    vuelo_salida: flightMatches[1] ? extractFlight(1) : def.vuelo_salida,
+    hotel_nombre: hotelLine || sd.hotel,
+    misiones: misiones.length ? misiones : def.misiones,
+    migracion: {
+      ...def.migracion,
+      nombres: nombre || def.migracion.nombres,
+      hotel_nombre: hotelLine || sd.hotel
+    }
+  };
+}
+
 async function parseWithIA(){
   const raw = fixMojibake(document.getElementById("rawTextarea").value.trim());
   document.getElementById("rawTextarea").value = raw;
@@ -1829,12 +1916,19 @@ async function parseWithIA(){
   btn.disabled = true; sp.classList.remove("hidden"); tx.textContent = "Analizando con Gemini IA...";
   const sd = SD[cSede] || SD.lima;
 
+  const jsonCandidate = raw.replace(/^```json\s*/i, "").replace(/```$/g, "").trim();
+  if(jsonCandidate.startsWith("{")){
+    try{
+      const directJson = JSON.parse(jsonCandidate);
+      applyParsedLetterData(directJson);
+      btn.disabled = false; sp.classList.add("hidden"); tx.textContent = "Procesar con IA";
+      alert("JSON importado con exito! Revisa los datos en las pestanas.");
+      return;
+    }catch(_e){}
+  }
+
   const sysPrompt = `Eres el Analista de Logistica de CREAR PSL. Analiza el texto y extrae todos los datos. Sede actual: ${sd.n}. Hotel: ${sd.hotel}. Gerente: ${sd.cnom} (${sd.ctel}). Clima: ${sd.ct}. REGLAS: MJ=Grounding 16:30 Salon de Creacion, Registro 17:00, Apertura 18:00. C2=INICIA SIEMPRE EL JUEVES (Jueves: Grounding 12:00 PM, Registro 13:00 PM, Apertura 14:00 PM; las fechas de C2 son de Jueves a Domingo, NUNCA inicia en Viernes). C1=Grounding 09:00, Apertura 10:00. Recojo aeropuerto=3.5h antes del vuelo. "Capitan de Servicio" SOLO para El Viaje. Responde SOLO JSON puro sin markdown con esta estructura: {"nombre_entrenador":"","nombre_completo":"","nacionalidad":"","visitas_count":"","tipo_entrenamiento":"MJ","equipo":"","fecha_emision":"","fecha_expiracion":"","asunto":"","mensaje_bienvenida":"","misiones":[{"titulo_mision":"","eventos":[{"fecha_hora":"","descripcion":"","color":"blue"}]}],"pnr":"","boleto_nombre":"","vuelo_llegada":{"fecha":"","hora":"","vuelo":"","ruta":"","tracker_url":""},"vuelo_salida":{"fecha":"","hora":"","vuelo":"","ruta":"","tracker_url":""},"traslados":"","lobby_pickups":[{"dia":"","descripcion":""}],"hotel_nombre":"${sd.hotel}","hotel_direccion":"${sd.hdir}","hotel_maps_url":"${sd.hmaps}","clima_temporada":"${sd.ct}","clima_temperatura":"${sd.ctemp}","clima_condicion":"${sd.ccond}","clima_consejos":[""],"reglas":[{"numero":1,"titulo":"","descripcion":""}],"honorarios_texto":"","facturacion_razon_social":"${sd.frs}","facturacion_ruc":"${sd.fruc}","facturacion_direccion":"${sd.fdir}","whatsapp_contacto":"${sd.wa}","whatsapp_mensaje":"","soporte":[{"grupo":"Gerencia","nombre":"${sd.cnom}","rol":"Gerente","telefono":"${sd.ctel}"}],"cierre_empoderamiento":"","migracion":{"fecha_emision":"","nombres":"","nacionalidad":"","programa_completo":"","fechas_evento":"","hotel_nombre":"${sd.hotel}","hotel_distrito":"${sd.mdist}","contacto_nombre":"${sd.cnom}","contacto_telefono":"${sd.ctel}"},"alertas":[]}`;
-  
-  // API KEY DE GEMINI (El usuario ingresó estos tokens: REMOVED_TOKEN_BY_GITHUB_PROTECTION)
-  // Pero las claves válidas de Gemini API comienzan por AIzaSy...
-  // Coloco aquí un placeholder, debes reemplazarlo en tu archivo real o si los tokens de arriba son de otro servicio, avísame.
-  const GEMINI_API_KEY = "AQ.Ab" + "8RN6J" + "qLgqpX" + "s6ojS" + "KHoale" + "YVAe98" + "PegZUxJ" + "klXFDhp" + "Ffbo0g"; 
+  const GEMINI_API_KEY = "AQ.Ab" + "8RN6J" + "qLgqpX" + "s6ojS" + "KHoale" + "YVAe98" + "PegZUxJ" + "klXFDhp" + "Ffbo0g";
 
   try{
     const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + GEMINI_API_KEY, {
@@ -1846,23 +1940,21 @@ async function parseWithIA(){
         generationConfig: { response_mime_type: "application/json", temperature: 0.1 }
       })
     });
-    if(!r.ok){ const ed = await r.json(); throw new Error("HTTP " + r.status + ": " + (ed.error?.message || r.statusText)); }
+    if(!r.ok){ const ed = await r.json().catch(()=>({})); throw new Error("HTTP " + r.status + ": " + (ed.error?.message || r.statusText)); }
     const data = await r.json();
     let content = data.candidates[0].content.parts[0].text;
     const parsed = JSON.parse(content.replace(/```json/g,"").replace(/```/g,"").trim());
-
-    appData = {...mkDef(cSede), ...parsed};
-    if(!Array.isArray(appData.misiones)) appData.misiones = [];
-    if(!Array.isArray(appData.lobby_pickups)) appData.lobby_pickups = [];
-    if(!Array.isArray(appData.reglas)) appData.reglas = (SD[cSede] || SD.lima).reg.map(normReg);
-    if(!Array.isArray(appData.soporte)) appData.soporte = (SD[cSede] || SD.lima).sop.map(normSop);
-    if(!Array.isArray(appData.clima_consejos)) appData.clima_consejos = [];
-    if(!appData.migracion) appData.migracion = mkDef(cSede).migracion;
-
-    syncForm(); up(); switchTab("gen"); saveToHistory();
+    applyParsedLetterData(parsed);
     alert("Texto analizado e importado con exito! Revisa los datos en las pestanas.");
   }catch(err){
-    console.error(err); alert("Error al procesar con la IA: " + err.message);
+    console.error(err);
+    const localParsed = parseStructuredLetterText(raw, sd);
+    if(localParsed){
+      applyParsedLetterData(localParsed);
+      alert("Se importaron los datos detectados automaticamente en el texto (respaldo local). Revisa las pestanas para confirmar.");
+    } else {
+      alert("Error al procesar con la IA: " + err.message);
+    }
   }finally{
     btn.disabled = false; sp.classList.add("hidden"); tx.textContent = "Procesar con IA";
   }
